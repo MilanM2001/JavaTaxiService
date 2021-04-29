@@ -1,46 +1,30 @@
 
 import java.util.*;
 
-/**
- * 
- */
+
 public class RideStatus {
 
-    /**
-     * Default constructor
-     */
+
     public RideStatus() {
     }
 
-    /**
-     * 
-     */
-    public void created;
 
-    /**
-     * 
-     */
-    public void createdOnWait;
+    public Void created;
 
-    /**
-     * 
-     */
-    public void given;
 
-    /**
-     * 
-     */
-    public void accepted;
+    public Void createdOnWait;
 
-    /**
-     * 
-     */
-    public void finished;
 
-    /**
-     * 
-     */
-    public void denied;
+    public Void given;
+
+
+    public Void accepted;
+
+
+    public Void finished;
+
+
+    public Void denied;
 
 
 }

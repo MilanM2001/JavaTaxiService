@@ -64,7 +64,7 @@
 											"top": 359,
 											"width": 199,
 											"height": 13,
-											"text": "User"
+											"text": "allUsers.User"
 										},
 										{
 											"_type": "LabelView",
@@ -362,7 +362,7 @@
 											"top": 103,
 											"width": 67.9072265625,
 											"height": 13,
-											"text": "Customer"
+											"text": "allUsers.Customer"
 										},
 										{
 											"_type": "LabelView",
@@ -539,7 +539,7 @@
 											"top": 199,
 											"width": 128.248046875,
 											"height": 13,
-											"text": "Driver"
+											"text": "allUsers.Driver"
 										},
 										{
 											"_type": "LabelView",
@@ -645,7 +645,7 @@
 											"top": 252,
 											"width": 128.248046875,
 											"height": 13,
-											"text": "-car: Car",
+											"text": "-car: cars.Car",
 											"horizontalAlignment": 0
 										}
 									],
@@ -769,7 +769,7 @@
 											"top": 79,
 											"width": 183,
 											"height": 13,
-											"text": "Dispatcher"
+											"text": "allUsers.Dispatcher"
 										},
 										{
 											"_type": "LabelView",
@@ -1139,7 +1139,7 @@
 											"top": 681,
 											"width": 137.642578125,
 											"height": 13,
-											"text": "-users: List<User>",
+											"text": "-users: List<allUsers.User>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1156,7 +1156,7 @@
 											"top": 696,
 											"width": 137.642578125,
 											"height": 13,
-											"text": "-vehicles: List<Car>",
+											"text": "-vehicles: List<cars.Car>",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1298,7 +1298,7 @@
 											"top": 324,
 											"width": 63.2353515625,
 											"height": 13,
-											"text": "Gender"
+											"text": "allUsers.Gender"
 										},
 										{
 											"_type": "LabelView",
@@ -1995,7 +1995,7 @@
 											"top": 335,
 											"width": 139.08984375,
 											"height": 13,
-											"text": "Car"
+											"text": "cars.Car"
 										},
 										{
 											"_type": "LabelView",
@@ -2152,7 +2152,7 @@
 											"top": 433,
 											"width": 139.08984375,
 											"height": 13,
-											"text": "-driver: Driver",
+											"text": "-driver: allUsers.Driver",
 											"horizontalAlignment": 0
 										}
 									],
@@ -2277,7 +2277,7 @@
 											"top": 564,
 											"width": 93.9072265625,
 											"height": 13,
-											"text": "VehicleType"
+											"text": "cars.VehicleType"
 										},
 										{
 											"_type": "LabelView",
@@ -2613,7 +2613,7 @@
 											"top": 307,
 											"width": 159.34521484375,
 											"height": 13,
-											"text": "#user: User",
+											"text": "#user: allUsers.User",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2630,7 +2630,7 @@
 											"top": 322,
 											"width": 159.34521484375,
 											"height": 13,
-											"text": "#driver: Driver",
+											"text": "#driver: allUsers.Driver",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5224,7 +5224,7 @@
 										"$ref": "AAAAAAF5GZhSx+d8yr0="
 									},
 									"edgePosition": 2,
-									"text": "+Gender"
+									"text": "+allUsers.Gender"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5495,7 +5495,7 @@
 										"$ref": "AAAAAAF5GZiTEOm+DSE="
 									},
 									"edgePosition": 2,
-									"text": "+VehicleType"
+									"text": "+cars.VehicleType"
 								},
 								{
 									"_type": "EdgeLabelView",
@@ -5681,7 +5681,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "User",
+					"name": "allUsers.User",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5695,7 +5695,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF5GZhSx+d47cA="
 								},
-								"name": "Gender",
+								"name": "allUsers.Gender",
 								"reference": {
 									"$ref": "AAAAAAF46vZE8vWl1lI="
 								}
@@ -5792,7 +5792,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Customer",
+					"name": "allUsers.Customer",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -5815,7 +5815,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Driver",
+					"name": "allUsers.Driver",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -5887,7 +5887,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Dispatcher",
+					"name": "allUsers.Dispatcher",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
@@ -6078,7 +6078,7 @@
 							},
 							"name": "users",
 							"visibility": "private",
-							"type": "List<User>"
+							"type": "List<allUsers.User>"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6088,7 +6088,7 @@
 							},
 							"name": "vehicles",
 							"visibility": "private",
-							"type": "List<Car>"
+							"type": "List<cars.Car>"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6108,7 +6108,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Gender",
+					"name": "allUsers.Gender",
 					"stereotype": "enum",
 					"attributes": [
 						{
@@ -6196,7 +6196,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Car",
+					"name": "cars.Car",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -6210,7 +6210,7 @@
 								"_parent": {
 									"$ref": "AAAAAAF5GZiTEOm6ExY="
 								},
-								"name": "VehicleType",
+								"name": "cars.VehicleType",
 								"reference": {
 									"$ref": "AAAAAAF5CsKfOkQ8XXQ="
 								}
@@ -6298,7 +6298,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "VehicleType",
+					"name": "cars.VehicleType",
 					"stereotype": "enum",
 					"attributes": [
 						{

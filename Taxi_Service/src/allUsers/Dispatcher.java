@@ -1,25 +1,18 @@
+package allUsers;
 
-import java.util.*;
+import allUsers.User;
 
-/**
- * 
- */
+
 public class Dispatcher extends User {
 
-    /**
-     * Default constructor
-     */
+
     public Dispatcher() {
     }
 
-    /**
-     * 
-     */
+
     private double dispatcherPay;
 
-    /**
-     * 
-     */
+
     private int phoneLine;
 
 
