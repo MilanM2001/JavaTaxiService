@@ -982,7 +982,7 @@
 											"top": 583,
 											"width": 137.642578125,
 											"height": 13,
-											"text": "TaxiService"
+											"text": "main.TaxiService"
 										},
 										{
 											"_type": "LabelView",
@@ -5932,7 +5932,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "TaxiService",
+					"name": "main.TaxiService",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",

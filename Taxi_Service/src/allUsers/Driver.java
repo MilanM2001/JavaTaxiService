@@ -66,12 +66,16 @@ public class Driver {
     public Gender getGender() { return gender;}
     public void setGender(Gender gender) { this.gender = gender;}
 
-
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "Driver \nUsername: " + username +
+                "\nPassword: " + password +
+                "\nName: " + name +
+                "\nLast Name: " + lastName +
+                "\nJMBG: " + jmbg +
+                "\nAddress: " + address +
+                "\nPhone Number " + phoneNumber +
+                "\nGender: " + gender;
+    }
 
 }
