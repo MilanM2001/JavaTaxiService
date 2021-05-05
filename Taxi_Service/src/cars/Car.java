@@ -57,7 +57,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Vehicle \nModel " + model +
+        return "Vehicle \nModel: " + model +
         "\nManufacturer: " + manufacturer +
         "\nYear Produced: " + yearProduced +
         "\nRegistration Number: " + registrationNumber +
