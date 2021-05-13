@@ -1,5 +1,8 @@
 package allUsers;
 
+import cars.Car;
+import cars.VehicleType;
+
 import java.util.*;
 
 
@@ -13,7 +16,8 @@ public class Driver {
     private String address;
     private int phoneNumber;
     private Gender gender;
-
+    private int driverPay;
+    private int membershipCard;
 
     public Driver() {
 
@@ -25,10 +29,12 @@ public class Driver {
         this.address = "";
         this.phoneNumber = 0;
         this.gender = Gender.Male;
+        this.driverPay = 0;
+        this.membershipCard = 0;
 
     }
 
-    public Driver(String username, String password, String name, String lastName, int jmbg, String address, int phoneNumber, Gender gender) {
+    public Driver(String username, String password, String name, String lastName, int jmbg, String address, int phoneNumber, Gender gender, int driverPay, int membershipCard) {
 
         super();
         this.username = username;
@@ -39,6 +45,8 @@ public class Driver {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
+        this.driverPay = driverPay;
+        this.membershipCard = membershipCard;
 
     }
 
@@ -65,6 +73,12 @@ public class Driver {
 
     public Gender getGender() {return gender;}
     public void setGender(Gender gender) { this.gender = gender; }
+
+    public int getDriverPay() {return driverPay;}
+    public void setDriverPay(int driverPay) { this.driverPay = driverPay; }
+
+    public int getMembershipCard() {return membershipCard;}
+    public void setMembershipCard(int membershipCard) { this.membershipCard = membershipCard;}
 
     @Override
     public String toString() {

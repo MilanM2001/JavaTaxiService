@@ -82,8 +82,10 @@ public class TaxiService {
                 int phoneNumber = Integer.parseInt(split[6]);
                 int genderInt = Integer.parseInt(split[7]);
                 Gender gender = Gender.values()[genderInt];
+                int driverPay = Integer.parseInt(split[8]);
+                int membershipCard = Integer.parseInt(split[9]);
 
-                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender);
+                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, driverPay, membershipCard);
                 drivers.add(driver);
             }
             br.close();

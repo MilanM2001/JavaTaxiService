@@ -1,5 +1,4 @@
-
-import java.util.*;
+package rides;
 
 
 public class RideStatus {

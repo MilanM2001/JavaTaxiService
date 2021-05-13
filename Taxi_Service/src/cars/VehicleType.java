@@ -4,6 +4,6 @@ import cars.Car;
 
 
 public enum VehicleType {
-    PassengerVehicle,
+    Passenger,
     Van
 }

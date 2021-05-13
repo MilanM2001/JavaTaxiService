@@ -1,7 +1,5 @@
 package cars;
 
-import allUsers.Driver;
-
 
 public class Car {
 
@@ -20,7 +18,7 @@ public class Car {
         this.yearProduced = 0;
         this.registrationNumber = 0;
         this.taxiNumber = 0;
-        this.vehicletype = VehicleType.PassengerVehicle;
+        this.vehicletype = VehicleType.Passenger;
 
     }
 
