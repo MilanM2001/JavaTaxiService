@@ -1,5 +1,9 @@
 package allUsers;
 
+import enums.Department;
+import enums.Gender;
+import enums.Roles;
+
 public class Dispatcher {
 
     private String username;
@@ -13,6 +17,7 @@ public class Dispatcher {
     private int dispatcherPay;
     private int phoneLine;
     private Department department;
+    private boolean deleted;
 
 
     public Dispatcher() {
@@ -27,11 +32,12 @@ public class Dispatcher {
         this.gender = Gender.Male;
         this.dispatcherPay = 0;
         this.phoneLine = 0;
-        this.department = Department.Reception_Department;
+        this.department = Department.Reception;
+        this.deleted = false;
 
     }
 
-    public Dispatcher(String username, String password, String name, String lastName, int jmbg, String address, int phoneNumber, Gender gender, int dispatcherPay, int phoneLine, Department department) {
+    public Dispatcher(String username, String password, String name, String lastName, int jmbg, String address, int phoneNumber, Gender gender, int dispatcherPay, int phoneLine, Department department, boolean deleted) {
 
         super();
         this.username = username;
@@ -45,6 +51,7 @@ public class Dispatcher {
         this.dispatcherPay = dispatcherPay;
         this.phoneLine = phoneLine;
         this.department = department;
+        this.deleted = deleted;
 
     }
 
@@ -81,6 +88,13 @@ public class Dispatcher {
     public Department getDepartment() {return department;}
     public void setDepartment(Department department) { this.department = department; }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "Dispatcher \nUsername: " + username +
@@ -90,7 +104,10 @@ public class Dispatcher {
                 "\nJMBG: " + jmbg +
                 "\nAddress: " + address +
                 "\nPhone Number " + phoneNumber +
-                "\nGender: " + gender;
+                "\nGender: " + gender +
+                "\nPay: " + dispatcherPay +
+                "\nPhone Line: " + phoneLine +
+                "\nDepartment: " + department;
     }
 
 }

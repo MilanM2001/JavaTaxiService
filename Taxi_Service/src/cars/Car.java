@@ -1,6 +1,8 @@
 package cars;
 
 
+import enums.VehicleType;
+
 public class Car {
 
     private String model;
@@ -9,6 +11,7 @@ public class Car {
     private int registrationNumber;
     private int taxiNumber;
     private VehicleType vehicletype;
+    private boolean deleted;
 
 
     public Car() {
@@ -19,10 +22,11 @@ public class Car {
         this.registrationNumber = 0;
         this.taxiNumber = 0;
         this.vehicletype = VehicleType.Passenger;
+        this.deleted = false;
 
     }
 
-    public Car(String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype) {
+    public Car(String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
 
         super();
         this.model = model;
@@ -31,6 +35,7 @@ public class Car {
         this.registrationNumber = registrationNumber;
         this.taxiNumber = taxiNumber;
         this.vehicletype = vehicletype;
+        this.deleted = deleted;
 
     }
 
@@ -51,6 +56,13 @@ public class Car {
 
     public VehicleType getVehicletype() { return vehicletype;}
     public void setVehicletype(VehicleType vehicletype) {this.vehicletype = vehicletype;}
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
 
     @Override

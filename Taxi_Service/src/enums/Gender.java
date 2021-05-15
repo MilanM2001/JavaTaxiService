@@ -1,4 +1,4 @@
-package allUsers;
+package enums;
 
 import allUsers.User;
 

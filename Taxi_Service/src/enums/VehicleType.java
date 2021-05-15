@@ -1,4 +1,4 @@
-package cars;
+package enums;
 
 import cars.Car;
 

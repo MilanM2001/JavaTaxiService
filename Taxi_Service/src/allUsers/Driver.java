@@ -1,10 +1,7 @@
 package allUsers;
 
-import cars.Car;
-import cars.VehicleType;
-
-import java.util.*;
-
+import enums.Gender;
+import enums.Roles;
 
 public class Driver {
 
@@ -18,6 +15,7 @@ public class Driver {
     private Gender gender;
     private int driverPay;
     private int membershipCard;
+    private boolean deleted;
 
     public Driver() {
 
@@ -31,10 +29,11 @@ public class Driver {
         this.gender = Gender.Male;
         this.driverPay = 0;
         this.membershipCard = 0;
+        this.deleted = false;
 
     }
 
-    public Driver(String username, String password, String name, String lastName, int jmbg, String address, int phoneNumber, Gender gender, int driverPay, int membershipCard) {
+    public Driver(String username, String password, String name, String lastName, int jmbg, String address, int phoneNumber, Gender gender, int driverPay, int membershipCard, boolean deleted) {
 
         super();
         this.username = username;
@@ -47,6 +46,7 @@ public class Driver {
         this.gender = gender;
         this.driverPay = driverPay;
         this.membershipCard = membershipCard;
+        this.deleted = deleted;
 
     }
 
@@ -80,6 +80,14 @@ public class Driver {
     public int getMembershipCard() {return membershipCard;}
     public void setMembershipCard(int membershipCard) { this.membershipCard = membershipCard;}
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+
     @Override
     public String toString() {
         return "Driver \nUsername: " + username +
@@ -89,7 +97,9 @@ public class Driver {
                 "\nJMBG: " + jmbg +
                 "\nAddress: " + address +
                 "\nPhone Number " + phoneNumber +
-                "\nGender: " + gender;
+                "\nGender: " + gender +
+                "\nPay: " + driverPay +
+                "\nMembership card: " + membershipCard;
     }
 
 }
