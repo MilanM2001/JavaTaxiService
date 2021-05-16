@@ -38,6 +38,16 @@ public class TaxiService {
     public ArrayList<Car> getCars() {return cars;}
     public void addCar(Car car) { this.cars.add(car); }
 
+    public Driver login(String username, String password) {
+        for(Driver driver : drivers) {
+            if(driver.getUsername().equalsIgnoreCase(username) &&
+                    driver.getPassword().equals(password) && !driver.isDeleted()) {
+                return driver;
+            }
+        }
+        return null;
+    }
+
     public void loadDrivers(String fileName) {
         try {
             File usersFile = new File("src/txtFiles/" + fileName);
@@ -74,7 +84,7 @@ public class TaxiService {
             String content = "";
             for (Driver driver: drivers) {
                 content += driver.getUsername() + "|" + driver.getPassword() + "|" + driver.getName() + "|"
-                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "\n";
+                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "|" + driver.isDeleted() + "\n";
             }
             br.write(content);
             br.close();
@@ -209,7 +219,7 @@ public class TaxiService {
             String content = "";
             for (Car car: cars) {
                 content += car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
-                        + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "\n";
+                        + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "\n";
             }
             br.write(content);
             br.close();

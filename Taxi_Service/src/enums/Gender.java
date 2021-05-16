@@ -1,7 +1,5 @@
 package enums;
 
-import allUsers.User;
-
 
 public enum Gender {
     Male, 	// 0

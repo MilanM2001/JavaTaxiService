@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="jdk" jdkName="openjdk-16" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="miglayout-swing-4.3-20121116.151626-3" level="project" />
+    <orderEntry type="library" exported="" name="miglayout-4.0-swing" level="project" />
   </component>
 </module>

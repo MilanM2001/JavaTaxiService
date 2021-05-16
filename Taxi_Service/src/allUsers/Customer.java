@@ -79,7 +79,7 @@ public class Customer  {
 
     @Override
     public String toString() {
-        return "Dispatcher \nUsername: " + username +
+        return "Customer \nUsername: " + username +
                 "\nPassword: " + password +
                 "\nName: " + name +
                 "\nLast Name: " + lastName +
