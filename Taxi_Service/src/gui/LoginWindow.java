@@ -1,5 +1,7 @@
 package gui;
 
+import allUsers.Customer;
+import allUsers.Dispatcher;
 import allUsers.Driver;
 import main.TaxiService;
 import net.miginfocom.swing.MigLayout;
@@ -62,25 +64,66 @@ public class LoginWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = txtUsername.getText().trim();
                 String password = new String(pfPassword.getPassword()).trim();
+                Driver driverLoggedIn = taxiService.driverLogin(username, password);
+                Customer customerLoggedIn = taxiService.customerLogin(username, password);
+                Dispatcher dispatcherLoggedIn = taxiService.dispatcherLogin(username, password);
 
                 if(username.equals("") || password.equals("")) {
-                    JOptionPane.showMessageDialog(null, "You didn't fill all the required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                     Driver loggedIn = taxiService.login(username, password);
-                    if(loggedIn == null) {
-                        JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
+                    if(driverLoggedIn == null) {
+
                     }else {
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
-                        mainMenu mainM = new mainMenu(taxiService, loggedIn);
-                        mainM.setVisible(true);
+                        DriverMenu driverM = new DriverMenu(taxiService, driverLoggedIn);
+                        driverM.setVisible(true);
+                    }if(customerLoggedIn == null) {
+
+                    }else {
+                        LoginWindow.this.dispose();
+                        LoginWindow.this.setVisible(false);
+                        CustomerMenu customerM = new CustomerMenu(taxiService, customerLoggedIn);
+                        customerM.setVisible(true);
+                    }if(dispatcherLoggedIn == null) {
+
+                    }else {
+                        LoginWindow.this.dispose();
+                        LoginWindow.this.setVisible(false);
+                        DispatcherMenu dispatcherM = new DispatcherMenu(taxiService, dispatcherLoggedIn);
+                        dispatcherM.setVisible(true);
                     }
                 }
+
             }
         });
-
     }
-
 }
 
-
+//                if(driverLoggedIn == null) {
+//
+//                        }else {
+//                        LoginWindow.this.dispose();
+//                        LoginWindow.this.setVisible(false);
+//                        DriverMenu driverM = new DriverMenu(taxiService, driverLoggedIn);
+//                        driverM.setVisible(true);
+//                        }
+//                        if(customerLoggedIn == null) {
+//
+//                        }else {
+//                        LoginWindow.this.dispose();
+//                        LoginWindow.this.setVisible(false);
+//                        CustomerMenu customerM = new CustomerMenu(taxiService, customerLoggedIn);
+//                        customerM.setVisible(true);
+//                        }
+//                        if(dispatcherLoggedIn == null) {
+//
+//                        }else {
+//                        LoginWindow.this.dispose();
+//                        LoginWindow.this.setVisible(false);
+//                        DispatcherMenu dispatcherM = new DispatcherMenu(taxiService, dispatcherLoggedIn);
+//                        dispatcherM.setVisible(true);
+//
+//                        } if(username.equals("") || password.equals("")) {
+//                        JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
+//                        }

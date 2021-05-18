@@ -38,7 +38,7 @@ public class TaxiService {
     public ArrayList<Car> getCars() {return cars;}
     public void addCar(Car car) { this.cars.add(car); }
 
-    public Driver login(String username, String password) {
+    public Driver driverLogin(String username, String password) {
         for(Driver driver : drivers) {
             if(driver.getUsername().equalsIgnoreCase(username) &&
                     driver.getPassword().equals(password) && !driver.isDeleted()) {
@@ -47,6 +47,28 @@ public class TaxiService {
         }
         return null;
     }
+
+    public Customer customerLogin(String username, String password) {
+        for(Customer customer : customers) {
+            if(customer.getUsername().equalsIgnoreCase(username) &&
+                    customer.getPassword().equals(password) && !customer.isDeleted()) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
+    public Dispatcher dispatcherLogin(String username, String password) {
+        for(Dispatcher dispatcher : dispatchers) {
+            if(dispatcher.getUsername().equalsIgnoreCase(username) &&
+                    dispatcher.getPassword().equals(password) && !dispatcher.isDeleted()) {
+                return dispatcher;
+            }
+        }
+        return null;
+    }
+
+
 
     public void loadDrivers(String fileName) {
         try {

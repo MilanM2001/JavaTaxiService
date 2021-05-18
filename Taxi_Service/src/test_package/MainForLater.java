@@ -70,3 +70,18 @@ public class MainForLater {
 //            System.out.println(car + "\n");
 //        }
 //    }
+
+
+// if(username.equals("") || password.equals("")) {
+//         JOptionPane.showMessageDialog(null, "You didn't fill all the required fields.", "Error", JOptionPane.WARNING_MESSAGE);
+//         }else {
+//         Customer customerLoggedIn = taxiService.customerLogin(username, password);
+//         if(customerLoggedIn == null) {
+//         JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
+//         }else {
+//         LoginWindow.this.dispose();
+//         LoginWindow.this.setVisible(false);
+//         CustomerMenu customerM = new CustomerMenu(taxiService, customerLoggedIn);
+//         customerM.setVisible(true);
+//         }
+//         }

@@ -1,11 +1,12 @@
 package gui;
 
+import allUsers.Customer;
 import allUsers.Driver;
 import main.TaxiService;
 
 import javax.swing.*;
 
-public class mainMenu extends JFrame {
+public class CustomerMenu extends JFrame {
 
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu carsMenu = new JMenu("Vehicles");
@@ -13,12 +14,12 @@ public class mainMenu extends JFrame {
 
 
     private TaxiService taxiService;
-    private Driver loggedIn;
+    private Customer loggedIn;
 
-    public mainMenu(TaxiService taxiService, Driver loggedIn) {
+    public CustomerMenu(TaxiService taxiService, Customer loggedIn) {
         this.taxiService = taxiService;
         this.loggedIn = loggedIn;
-        setTitle("Driver: " + loggedIn.getUsername());
+        setTitle("Customer Main Menu: " + loggedIn.getUsername());
         setSize(500, 500);
         setResizable(false);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
