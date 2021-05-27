@@ -9,10 +9,12 @@ public class Dispatcher extends Users {
     protected double dispatcherPay;
     protected String phoneLine;
     protected Department department;
+    protected Person person;
 
-    public Dispatcher(String username, String password, String name, String lastName, String jmbg, String address, String phoneNumber, Gender gender, double dispatcherPay, String phoneLine, Department department) {
+    public Dispatcher(String username, String password, String address, String phoneNumber, Gender gender,Person person, double dispatcherPay, String phoneLine, Department department) {
 
-        super(username, password, name, lastName, jmbg, address, phoneNumber, gender);
+        super(username, password, address, phoneNumber, gender);
+        this.person = person;
         this.dispatcherPay = dispatcherPay;
         this.phoneLine = phoneLine;
         this.department = department;
@@ -21,12 +23,16 @@ public class Dispatcher extends Users {
 
     @Override
     public String toString() {
-        return super.toString() + " " + dispatcherPay + " " + StringUtils.clean(phoneLine) + " " + department;
+        return super.toString() + " " + StringUtils.clean(person.getJmbg()) + " " + dispatcherPay + " " + StringUtils.clean(phoneLine) + " " + department;
     }
 
 
-
-
+    public Person getPerson() {
+        return person;
+    }
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public double getDispatcherPay() {return dispatcherPay;}
     public void setDispatcherPay(double dispatcherPay) {this.dispatcherPay = dispatcherPay;}

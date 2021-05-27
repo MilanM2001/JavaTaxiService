@@ -1,7 +1,10 @@
 package AllUsers.AllUsersDAO;
 
 import AllUsers.Dispatcher;
+import AllUsers.Person;
+import Enums.Gender;
 import Utils.FileUtils;
+import Utils.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -34,28 +37,29 @@ public class DispatcherDAO {
 
     private Dispatcher fromString(String str) {
         String parts[] = str.split(",");
-        String korisnickoIme = parts[0];
-        String lozinka = parts[1];
-        String jmbg = parts[2];
-        String email = parts[3];
-        OsobaDAO oDAO = new OsobaDAO();
-        Osoba o = oDAO.loadOsobaByJmbG(jmbg);
-        return new Admin(korisnickoIme, lozinka, o, email);
+        String username = parts[0];
+        String password = parts[1];
+        String address = parts[2];
+        String phoneNumber = parts[3];
+        boolean gender = Gender.Female(parts[4]);
+        PersonDAO personDAO = new PersonDAO();
+        Person p = personDAO.loadPersonByJmbG(jmbg);
+        return new Dispatcher(korisnickoIme, lozinka, o, email);
     }
 
-    public void saveAllAdminToFile(HashMap<String, Admin> map) {
-        try (PrintWriter out = FileUtils.getPrintWriter("Admin")) {
-            for (Admin a : map.values()) {
-                out.println(toFileString(a));
+    public void saveAllDispatcherToFile(HashMap<String, Dispatcher> map) {
+        try (PrintWriter out = FileUtils.getPrintWriter("Dispatcher")) {
+            for (Dispatcher d : map.values()) {
+                out.println(toFileString(d));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private String toFileString(Admin a) {
-        KorisnikDAO dao = new KorisnikDAO();
-        return dao.toFileString(a) + "," +
+    private String toFileString(Dispatcher d) {
+        UsersDAO dao = new UsersDAO();
+        return dao.toFileString(d) + "," +
                 StringUtils.clean(a.getOsoba().getJmbg()) + "," + StringUtils.clean(a.getEmail());
     }
 

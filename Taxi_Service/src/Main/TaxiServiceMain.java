@@ -18,7 +18,7 @@ public class TaxiServiceMain {
         taxiService.loadDispatchers(Dispatchers_File);
         taxiService.loadCars(Cars_File);
 
-        LoginWindow lw = new LoginWindow(taxiService);
+        LoginWindow lw = new LoginWindow();
         lw.setVisible(true);
 
     }

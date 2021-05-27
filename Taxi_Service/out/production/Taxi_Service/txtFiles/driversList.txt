@@ -1,2 +1,2 @@
-Zoki21|zoran123|Zoran|Zoranovic|12342121|Vrsacka 2|123421231|0|35000|2112
-marko96|maki1996|Marko|Markovic|12342121|Plandistanska 2|123421231|0|35000|2112
+Zoki21|zoran123|Zoran|Zoranovic|12342121|Vrsacka 2|123421231|0|35000|2112|false
+marko96|maki1996|Marko|Markovic|12342121|Plandistanska 2|123421231|0|35000|2112|false

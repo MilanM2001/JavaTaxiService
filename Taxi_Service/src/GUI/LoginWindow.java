@@ -1,8 +1,10 @@
 package GUI;
 
+import AllUsers.AllUsersDAO.UsersDAO;
 import AllUsers.Customer;
 import AllUsers.Dispatcher;
 import AllUsers.Driver;
+import AllUsers.Users;
 import Main.TaxiService;
 import Utils.WindowUtils;
 import net.miginfocom.swing.MigLayout;
@@ -62,32 +64,32 @@ public class LoginWindow extends JFrame {
             public void actionPerformed(ActionEvent arg0) {
                 String usern = tUsername.getText();
                 String pass = new String(tPass.getPassword());
-                KorisnikDAO dao = new KorisnikDAO();
-                Korisnik k = dao.loadKorisnikByKorisnickoIme(ki);
+                UsersDAO dao = new UsersDAO();
+                Users u = dao.loadUserByUsername(usern);
 
-                if(k!=null) {
-                    System.out.println(k);
+                if(u!=null) {
+                    System.out.println(u);
                     try {
-                        if(k.getLozinka().equals(loz) &&
-                                (k.getClass().equals(Class.forName("model.osobe."+(String)cTipKorisnika.getSelectedItem())))) {
+                        if(u.getPassword().equals(pass) &&
+                                (u.getClass().equals(Class.forName("AllUsers"+(String)cUserType.getSelectedItem())))) {
                             MainFrame mf = new MainFrame();
                             mf.setVisible(true);
                         }else{
-                            JOptionPane.showConfirmDialog(thisFrame,"Greska2");
+                            JOptionPane.showConfirmDialog(thisFrame,"Error2");
                         }
                     } catch (ClassNotFoundException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }else{
-                    JOptionPane.showConfirmDialog(thisFrame,"Greska");
+                    JOptionPane.showConfirmDialog(thisFrame,"Error1");
                 }
             }
         });
     }
 
     public static void main(String args []) {
-        LoginForma lf = new LoginForma();
-        lf.setVisible(true);
+        LoginWindow lw = new LoginWindow();
+        lw.setVisible(true);
     }
 }

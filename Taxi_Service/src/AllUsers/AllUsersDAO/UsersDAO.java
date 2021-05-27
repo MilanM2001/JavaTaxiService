@@ -7,17 +7,17 @@ import java.util.HashMap;
 
 public class UsersDAO {
 
-    public Users loadKorisnikByKorisnickoIme(String ki) {
-        return loadAllKorisnikFromFile().get(ki);
+    public Users loadUserByUsername(String us) {
+        return loadAllUsersFromFile().get(us);
     }
 
-    public HashMap<String, Users> loadAllKorisnikFromFile() {
+    public HashMap<String, Users> loadAllUsersFromFile() {
         HashMap<String, Users> map = new HashMap<String, Users>();
 
         DispatcherDAO dDAO = new DispatcherDAO();
         map.putAll(dDAO.loadAllDispatchersFromFile());
-        KupacDAO kDAO = new KupacDAO();
-        map.putAll(kDAO.loadAllKupacFromFile());
+        DriverDAO drDAO = new DriverDAO();
+        map.putAll(drDAO.loadAllDriverFromFile());
         return map;
     }
 
