@@ -1,2 +1,1 @@
-Srdjan12|srki123|Srdjan|Srdjanovic|1234322222|Dunavksa12|1234223231|0|40000|1234231|0|false
-david02|daki123|David|Davidovic|1234322222|Presevska41|1234223231|0|40000|1234231|1|false
+milan01|miki2001|Milan|Miljus|06486|Skolska14|06520|1|false|1|1|45000|06532|1

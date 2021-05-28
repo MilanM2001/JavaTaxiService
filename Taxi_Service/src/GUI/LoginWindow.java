@@ -1,12 +1,10 @@
 package GUI;
 
-import AllUsers.AllUsersDAO.UsersDAO;
 import AllUsers.Customer;
 import AllUsers.Dispatcher;
 import AllUsers.Driver;
 import AllUsers.Users;
 import Main.TaxiService;
-import Utils.WindowUtils;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -14,82 +12,75 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginWindow extends JFrame {
+    private JLabel lblGreeting = new JLabel("Welcome, Please Register.");
+    private JLabel lblUsername = new JLabel("Username");
+    private JTextField txtUsername = new JTextField(20);
+    private JLabel lblPassword = new JLabel("Password");
+    private JPasswordField pfPassword = new JPasswordField(20);
+    private JButton btnOk = new JButton("OK");
+    private JButton btnCancel = new JButton("Cancel");
 
-    private JLabel lGreeting;
-    private JLabel lUsername;
-    private JTextField tUsername;
-    private JLabel lPassword;
-    private JPasswordField tPass;
-    private JLabel lUserType;
-    private JComboBox<String> cUserType;
-    private JButton bOK;
-    private JButton bCancel;
-    private JFrame thisFrame;
+    private TaxiService taxiService;
 
-    public LoginWindow() {
-        setTitle("Taxi Service");
-        setSize(300, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new MigLayout("wrap 2"));
-        WindowUtils.centerOnScreen(this);
-        initGui();
+    public LoginWindow(TaxiService taxiService) {
+        this.taxiService = taxiService;
+        setTitle("Login");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+        initGUI();
+        initActions();
         pack();
     }
 
-    private void initGui() {
-        lGreeting = new JLabel("Ulogujte se:");
-        add(lGreeting, "span 2, align center");
-        lUsername = new JLabel("Kor ime:");
-        add(lUsername, "align right");
-        tUsername = new JTextField(15);
-        add(tUsername);
-        lPassword = new JLabel("Lozinka:");
-        add(lPassword, "align right");
-        tPass = new JPasswordField(15);
-        add(tPass);
-        cUserType = new JComboBox<>();
-        cUserType.addItem("Admin");
-        cUserType.addItem("Kupac");
-        lUserType = new JLabel("Tip korisnika:");
-        add(lUserType, "align right");
-        add(cUserType);
-        bOK = new JButton("OK");
-        add(bOK, "span, split 2, sizegroup btn, align center");
-        bCancel = new JButton("Cancel");
-        add(bCancel, "span, split 2, sizegroup btn, align center");
+    public void initGUI() {
+        MigLayout mig = new MigLayout("wrap 2", "[][]", "[]10[][]10[]");
+        setLayout(mig);
 
-        bOK.addActionListener(new ActionListener() {
+        add(lblGreeting, "span 2");
+        add(lblUsername);
+        add(txtUsername);
+        add(lblPassword);
+        add(pfPassword);
+        add(new JLabel());
+        add(btnOk, "split 2");
+        add(btnCancel);
 
+
+        txtUsername.setText("petarp");
+        pfPassword.setText("12345");
+        getRootPane().setDefaultButton(btnOk);
+    }
+
+    public void initActions() {
+        btnCancel.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent arg0) {
-                String usern = tUsername.getText();
-                String pass = new String(tPass.getPassword());
-                UsersDAO dao = new UsersDAO();
-                Users u = dao.loadUserByUsername(usern);
+            public void actionPerformed(ActionEvent e) {
+                LoginWindow.this.dispose();
+                LoginWindow.this.setVisible(false);
+            }
+        });
 
-                if(u!=null) {
-                    System.out.println(u);
-                    try {
-                        if(u.getPassword().equals(pass) &&
-                                (u.getClass().equals(Class.forName("AllUsers"+(String)cUserType.getSelectedItem())))) {
-                            MainFrame mf = new MainFrame();
-                            mf.setVisible(true);
-                        }else{
-                            JOptionPane.showConfirmDialog(thisFrame,"Error2");
-                        }
-                    } catch (ClassNotFoundException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
+        btnOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = txtUsername.getText().trim();
+                String password = new String(pfPassword.getPassword()).trim();
+
+                if(username.equals("") || password.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke za prijavu.", "Greska", JOptionPane.WARNING_MESSAGE);
+                }else {
+                    Dispatcher loggedIn = taxiService.dispatcherLogin(username, password);
+                    if(loggedIn == null) {
+                        JOptionPane.showMessageDialog(null, "Pogrešni login podaci.", "Greška", JOptionPane.WARNING_MESSAGE);
+                    }else {
+                        LoginWindow.this.dispose();
+                        LoginWindow.this.setVisible(false);
+                        DispatcherMenu dm = new DispatcherMenu(taxiService, loggedIn);
+                        dm.setVisible(true);
                     }
-                }else{
-                    JOptionPane.showConfirmDialog(thisFrame,"Error1");
                 }
             }
         });
-    }
 
-    public static void main(String args []) {
-        LoginWindow lw = new LoginWindow();
-        lw.setVisible(true);
     }
 }

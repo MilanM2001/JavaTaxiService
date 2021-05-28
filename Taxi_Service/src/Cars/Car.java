@@ -5,6 +5,7 @@ import Enums.VehicleType;
 
 public class Car {
 
+    private int carID;
     private String model;
     private String manufacturer;
     private int yearProduced;
@@ -16,6 +17,7 @@ public class Car {
 
     public Car() {
 
+        this.carID = 0;
         this.model = "";
         this.manufacturer = "";
         this.yearProduced = 0;
@@ -26,9 +28,10 @@ public class Car {
 
     }
 
-    public Car(String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
+    public Car(int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
 
         super();
+        this.carID = carID;
         this.model = model;
         this.manufacturer = manufacturer;
         this.yearProduced = yearProduced;
@@ -38,6 +41,9 @@ public class Car {
         this.deleted = deleted;
 
     }
+
+    public int getCarID() {return carID;}
+    public void setCarID(int carID) { this.carID = carID; }
 
     public String getModel() {return model;}
     public void setModel(String model) { this.model = model; }

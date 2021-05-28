@@ -1,28 +1,28 @@
 package AllUsers;
 
 import Enums.Gender;
-import Utils.StringUtils;
+import Enums.Roles;
 
 
 public class Customer extends Users {
 
-    protected Person person;
-
-    public Customer(String username, String password, String address, String  phoneNumber, Gender gender, Person person) {
-        super(username, password, address, phoneNumber, gender);
-        this.person = person;
+    public Customer(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles) {
+        super(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles);
     }
 
     @Override
     public String toString() {
-        return super.toString() + " " + StringUtils.clean(person.getJmbg());
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-    public void setPerson(Person person) {
-        this.person = person;
+        return "Customer \nUsername: " + username +
+                "\nPassword: " + password +
+                "\nName: " + name +
+                "\nLast Name: " + lastName +
+                "\nJMBG: " + jmbg +
+                "\nAddress: " + address +
+                "\nPhone Number: " + phoneNumber +
+                "\nGender" + gender +
+                "\nDeleted: " + deleted +
+                "\nID: " + id +
+                "\nRoles: " + roles;
     }
 
 }
