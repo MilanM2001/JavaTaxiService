@@ -1,9 +1,10 @@
-package GUI.DispatcherForms;
+package GUI.DispatcherUtils;
 
 import AllUsers.Driver;
 import Enums.Gender;
 import Enums.Roles;
 import Main.TaxiService;
+import Main.TaxiServiceMain;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -126,23 +127,37 @@ public class DriversForm extends JFrame {
                 if(Validation()) {
                     String username = txtUsername.getText().trim();
                     String password = new String(pfPassword.getPassword()).trim();
-                    String prezime = txtPrezime.getText().trim();
-                    String korisnickoIme = txtKorisnickoIme.getText().trim();
-                    Pol pol = (Pol)cbPol.getSelectedItem();
+                    String name = txtName.getText().trim();
+                    String lastName = txtLastName.getText().trim();
+                    String jmbg = txtJmbg.getText().trim();
+                    String address = txtAddress.getText().trim();
+                    int phoneNumber = Integer.parseInt(txtPhoneNumber.getText().trim());
+                    Gender gender = (Gender) cbGender.getSelectedItem();
+                    int id = Integer.parseInt(txtID.getText().trim());
+                    Roles roles = (Roles) cbRoles.getSelectedItem();
+                    double driverPay = Double.parseDouble(txtDriverPay.getText().trim());
+                    int membershipCard = Integer.parseInt(txtMembershipCard.getText().trim());
 
-                    if(prodavac == null) { // DODAVANJE:
-                        Prodavac novi = new Prodavac(ime, prezime, pol, korisnickoIme, sifra, false);
-                        prodavnica.dodajProdavca(novi);
-                    }else { // IZMENA:
-                        prodavac.setIme(ime);
-                        prodavac.setPrezime(prezime);
-                        prodavac.setKorisnickoIme(korisnickoIme);
-                        prodavac.setLozinka(sifra);
-                        prodavac.setPol(pol);
+                    if(driver == null) {
+                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard);
+                        taxiService.addDriver(newDriver);
+                    }else {
+                        driver.setUsername(username);
+                        driver.setPassword(password);
+                        driver.setName(name);
+                        driver.setLastName(lastName);
+                        driver.setJmbg(jmbg);
+                        driver.setAddress(address);
+                        driver.setPhoneNumber(phoneNumber);
+                        driver.setGender(gender);
+                        driver.setId(id);
+                        driver.setRoles(roles);
+                        driver.setDriverPay(driverPay);
+                        driver.setMembershipCard(membershipCard);
                     }
-                    prodavnica.snimiZaposlene(ProdavnicaMain.PRODAVCI_FAJL);
-                    ProdavciForma.this.dispose();
-                    ProdavciForma.this.setVisible(false);
+                    taxiService.saveDrivers(TaxiServiceMain.Drivers_File);
+                    DriversForm.this.dispose();
+                    DriversForm.this.setVisible(false);
                 }
             }
         });
@@ -165,36 +180,50 @@ public class DriversForm extends JFrame {
 
     private boolean Validation() {
         boolean ok = true;
-        String message = "Molimo popravite sledece greske u unosu:\n";
+        String message = "Please correct the following mistakes:\n";
 
-        if(txtIme.getText().trim().equals("")) {
-            poruka += "- Unesite ime\n";
+        if(txtUsername.getText().trim().equals("")) {
+            message += "- Username\n";
             ok = false;
         }
-        if(txtPrezime.getText().trim().equals("")) {
-            poruka += "- Unesite prezime\n";
+        String password = new String(pfPassword.getPassword()).trim();
+        if(password.equals("")) {
+            message += "- Password\n";
             ok = false;
-        }
-        if(txtKorisnickoIme.getText().trim().equals("")) {
-            poruka += "- Unesite korisnicko ime\n";
+        }if(txtName.getText().trim().equals("")) {
+            message += "- Name\n";
             ok = false;
-        }else if(prodavac == null){
-            String korisnickoIme = txtKorisnickoIme.getText().trim();
-            Prodavac pronadjeni = prodavnica.nadjiProdavca(korisnickoIme);
-            if(pronadjeni != null) {
-                poruka += "- Prodavac sa tim korisnickim imenom vec postoji\n";
+        }if(txtLastName.getText().trim().equals("")) {
+            message += "- Last Name\n";
+            ok = false;
+        }if(txtJmbg.getText().trim().equals("")) {
+            message += "- JMBG\n";
+            ok = false;
+        }if(txtAddress.getText().trim().equals("")) {
+            message += "- Address\n";
+            ok = false;
+        }if(txtPhoneNumber.getText().trim().equals("")) {
+            message += "- Phone Number\n";
+            ok = false;
+        }if(txtID.getText().trim().equals("")) {
+            message += "- ID\n";
+            ok = false;
+        }if(txtDriverPay.getText().trim().equals("")) {
+            message += "- Pay\n";
+            ok = false;
+        }if(txtMembershipCard.getText().trim().equals("")) {
+            message += "- Membership Card\n";
+            ok = false;
+        }else if(driver == null){
+            String username = txtUsername.getText().trim();
+            Driver found = taxiService.findDriver(username);
+            if(found != null) {
+                message += "- Driver with that username already exists\n";
                 ok = false;
             }
         }
-
-        String sifra = new String(pfSifra.getPassword()).trim();
-        if(sifra.equals("")) {
-            poruka += "- Unesite sifru\n";
-            ok = false;
-        }
-
         if(ok == false) {
-            JOptionPane.showMessageDialog(null, poruka, "Neispravni podaci", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, message, "Incorrect Info", JOptionPane.WARNING_MESSAGE);
         }
 
         return ok;

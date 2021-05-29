@@ -7,7 +7,7 @@ public class Driver extends Users {
 
     protected double driverPay;
     protected int membershipCard;
-    //protected Car car;
+    //protected Car car; Da dodam dodelu auta kasnije
 
     public Driver(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles, double driverPay, int membershipCard) {
         super(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles);

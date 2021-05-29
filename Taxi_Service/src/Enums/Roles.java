@@ -1,7 +1,7 @@
 package Enums;
 
 public enum Roles {
-    Customer,
-    Dispatcher,
-    Driver
+    Customer, //0
+    Dispatcher, //1
+    Driver //2
 }

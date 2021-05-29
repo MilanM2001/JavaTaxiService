@@ -99,14 +99,15 @@ public class TaxiService {
         return null;
     }
 
-//    public Car findCar(int carID) {
-//        for (Car car : cars) {
-//            if (car.getCarID().equals(carID)) {
-//                return car;
-//            }
-//        }
-//        return null;
-//    }
+
+    public Car findCar(String IDCode) {
+        for (Car car : cars) {
+            if (car.getIDCode().equals(IDCode)) {
+                return car;
+            }
+        }
+        return null;
+    }
 
 
     public void loadDispatchers(String fileName) {
@@ -211,17 +212,18 @@ public class TaxiService {
             String line = null;
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("\\|");
-                int carId = Integer.parseInt(split[0]);
-                String model = split[1];
-                String manufacturer = split[2];
-                int yearProduced = Integer.parseInt(split[3]);
-                int registrationNumber = Integer.parseInt(split[4]);
-                int taxiNumber = Integer.parseInt(split[5]);
-                int vehicleInt = Integer.parseInt(split[6]);
+                String IDCode = split[0];
+                int carId = Integer.parseInt(split[1]);
+                String model = split[2];
+                String manufacturer = split[3];
+                int yearProduced = Integer.parseInt(split[4]);
+                int registrationNumber = Integer.parseInt(split[5]);
+                int taxiNumber = Integer.parseInt(split[6]);
+                int vehicleInt = Integer.parseInt(split[7]);
                 VehicleType vehicletype = VehicleType.values()[vehicleInt];
-                boolean deleted = Boolean.parseBoolean(split[7]);
+                boolean deleted = Boolean.parseBoolean(split[8]);
 
-                Car car = new Car(carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted);
+                Car car = new Car(IDCode, carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted);
                 cars.add(car);
             }
             br.close();
@@ -235,6 +237,26 @@ public class TaxiService {
         for (Driver driver : drivers) {
             if(!driver.isDeleted()) {
                 notDeleted.add(driver);
+            }
+        }
+        return notDeleted;
+    }
+
+    public ArrayList<Dispatcher> allNotDeletedDispatchers() {
+        ArrayList<Dispatcher> notDeleted = new ArrayList<Dispatcher>();
+        for (Dispatcher dispatcher : dispatchers) {
+            if(!dispatcher.isDeleted()) {
+                notDeleted.add(dispatcher);
+            }
+        }
+        return notDeleted;
+    }
+
+    public ArrayList<Car> allNotDeletedCars() {
+        ArrayList<Car> notDeleted = new ArrayList<Car>();
+        for (Car car : cars) {
+            if(!car.isDeleted()) {
+                notDeleted.add(car);
             }
         }
         return notDeleted;
@@ -294,7 +316,7 @@ public class TaxiService {
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
             String content = "";
             for (Car car: cars) {
-                content += car.getCarID() + "|" + car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
+                content += car.getIDCode() + "|" + car.getCarID() + "|" + car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
                         + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "\n";
             }
             br.write(content);

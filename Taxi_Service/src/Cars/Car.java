@@ -5,6 +5,7 @@ import Enums.VehicleType;
 
 public class Car {
 
+    private String IDCode;
     private int carID;
     private String model;
     private String manufacturer;
@@ -14,9 +15,9 @@ public class Car {
     private VehicleType vehicletype;
     private boolean deleted;
 
-
     public Car() {
 
+        this.IDCode = "";
         this.carID = 0;
         this.model = "";
         this.manufacturer = "";
@@ -28,9 +29,10 @@ public class Car {
 
     }
 
-    public Car(int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
+    public Car(String IDCode, int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
 
         super();
+        this.IDCode = IDCode;
         this.carID = carID;
         this.model = model;
         this.manufacturer = manufacturer;
@@ -41,6 +43,9 @@ public class Car {
         this.deleted = deleted;
 
     }
+
+    public String getIDCode() {return IDCode;}
+    public void setIDCode(String IDCode) { this.IDCode = IDCode; }
 
     public int getCarID() {return carID;}
     public void setCarID(int carID) { this.carID = carID; }
@@ -73,12 +78,15 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Vehicle \nModel: " + model +
+        return "Vehicle \nID Code: " + IDCode +
+        "\nCar ID: " + carID +
+        "\nModel: " + model +
         "\nManufacturer: " + manufacturer +
         "\nYear Produced: " + yearProduced +
         "\nRegistration Number: " + registrationNumber +
         "\nTaxi Number: " + taxiNumber +
-        "\nVehicle Type: " + vehicletype;
+        "\nVehicle Type: " + vehicletype +
+        "\nDeleted: " + deleted;
     }
 
 }

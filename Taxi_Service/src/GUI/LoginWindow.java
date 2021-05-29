@@ -46,8 +46,8 @@ public class LoginWindow extends JFrame {
         add(btnCancel);
 
 
-        txtUsername.setText("petarp");
-        pfPassword.setText("12345");
+        txtUsername.setText("milan01");
+        pfPassword.setText("miki2001");
         getRootPane().setDefaultButton(btnOk);
     }
 
@@ -65,20 +65,37 @@ public class LoginWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = txtUsername.getText().trim();
                 String password = new String(pfPassword.getPassword()).trim();
+                Driver driverLoggedIn = taxiService.driverLogin(username, password);
+                Customer customerLoggedIn = taxiService.customerLogin(username, password);
+                Dispatcher dispatcherLoggedIn = taxiService.dispatcherLogin(username, password);
 
                 if(username.equals("") || password.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Niste uneli sve podatke za prijavu.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    Dispatcher loggedIn = taxiService.dispatcherLogin(username, password);
-                    if(loggedIn == null) {
-                        JOptionPane.showMessageDialog(null, "Pogrešni login podaci.", "Greška", JOptionPane.WARNING_MESSAGE);
+                    if(driverLoggedIn == null) {
+
                     }else {
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
-                        DispatcherMenu dm = new DispatcherMenu(taxiService, loggedIn);
-                        dm.setVisible(true);
+                        DriverMenu driverM = new DriverMenu(taxiService, driverLoggedIn);
+                        driverM.setVisible(true);
+                    }if(customerLoggedIn == null) {
+
+                    }else {
+                        LoginWindow.this.dispose();
+                        LoginWindow.this.setVisible(false);
+                        CustomerMenu customerM = new CustomerMenu(taxiService, customerLoggedIn);
+                        customerM.setVisible(true);
+                    }if(dispatcherLoggedIn == null) {
+
+                    }else {
+                        LoginWindow.this.dispose();
+                        LoginWindow.this.setVisible(false);
+                        DispatcherMenu dispatcherM = new DispatcherMenu(taxiService, dispatcherLoggedIn);
+                        dispatcherM.setVisible(true);
                     }
                 }
+
             }
         });
 

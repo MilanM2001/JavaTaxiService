@@ -1,4 +1,4 @@
-package GUI.DispatcherForms;
+package GUI.DispatcherUtils;
 
 import AllUsers.Driver;
 import Main.TaxiService;
@@ -45,7 +45,7 @@ public class DisplayDrivers extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"", "Prezime", "Pol", "Korisnicko ime", "Sifra"};
+        String[] headings = new String[] {"Username", "Password", "Name", "Last Name", "JMBG", "Address", "Phone Number", "Gender", "ID", "Role", "Pay", "Card"};
         Object[][] content = new Object[taxiService.allNotDeletedDrivers().size()][headings.length];
 
         for(int i=0; i<taxiService.allNotDeletedDrivers().size(); i++) {
@@ -84,14 +84,14 @@ public class DisplayDrivers extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 int row = DriversDisplay.getSelectedRow();
                 if(row == -1) {
-                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
                     String username = tableModel.getValueAt(row, 3).toString();
                     Driver driver = taxiService.findDriver(username);
 
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Da li ste sigurni da zelite da obrisete prodavca?",
-                            username + " - Portvrda brisanja", JOptionPane.YES_NO_OPTION);
+                            "Are you sure you want to delete the user?",
+                            username + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         driver.setDeleted(true);
                         tableModel.removeRow(row);
@@ -104,8 +104,8 @@ public class DisplayDrivers extends JFrame {
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ProdavciForma pf = new ProdavciForma(prodavnica, null);
-                pf.setVisible(true);
+                DriversForm df = new DriversForm(taxiService, null);
+                df.setVisible(true);
             }
         });
 
@@ -113,17 +113,17 @@ public class DisplayDrivers extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                int red = prodavciTabela.getSelectedRow();
-                if(red == -1) {
-                    JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+                int row = DriversDisplay.getSelectedRow();
+                if(row == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String korisnickoIme = tableModel.getValueAt(red, 3).toString();
-                    Prodavac prodavac = prodavnica.nadjiProdavca(korisnickoIme);
-                    if(prodavac == null) {
-                        JOptionPane.showMessageDialog(null, "Greska prilikom pronalazenja prodavca sa tim korisnickim imenom", "Greska", JOptionPane.WARNING_MESSAGE);
+                    String username = tableModel.getValueAt(row, 3).toString();
+                    Driver driver = taxiService.findDriver(username);
+                    if(driver == null) {
+                        JOptionPane.showMessageDialog(null, "Couldn't find a user with that Username", "Error", JOptionPane.WARNING_MESSAGE);
                     }else {
-                        ProdavciForma pf = new ProdavciForma(prodavnica, prodavac);
-                        pf.setVisible(true);
+                        DriversForm df = new DriversForm(taxiService, driver);
+                        df.setVisible(true);
                     }
                 }
             }

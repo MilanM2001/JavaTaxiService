@@ -1,0 +1,2 @@
+123|1|Audi|Germany|2001|13|652044|1|false
+321|2|Audi|Belgium|1999|42|652012|0|false
