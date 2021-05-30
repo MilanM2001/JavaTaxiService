@@ -1,4 +1,4 @@
-package GUI.DispatcherUtils;
+package GUI.DispatcherOptions;
 
 import Cars.Car;
 import Enums.VehicleType;
@@ -65,7 +65,6 @@ public class CarsForm extends JFrame {
         if(car != null) {
             FillFields();
         }
-
         add(lblIDCode);
         add(txtIDCode);
 
@@ -181,6 +180,5 @@ public class CarsForm extends JFrame {
 
         return ok;
     }
-
 
 }

@@ -1,4 +1,4 @@
-package GUI.DispatcherUtils;
+package GUI.DispatcherOptions;
 
 import Cars.Car;
 import Main.TaxiService;
@@ -69,6 +69,17 @@ public class DisplayCars extends JFrame {
         CarsDisplay.setDefaultEditor(Object.class, null);
         CarsDisplay.getTableHeader().setReorderingAllowed(false);
 
+        CarsDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for(int i=0; i< headings.length; i++) {
+            CarsDisplay.getColumnModel().getColumn(0).setPreferredWidth(70);
+            CarsDisplay.getColumnModel().getColumn(1).setPreferredWidth(40);
+            CarsDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
+            CarsDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
+            CarsDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
+            CarsDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
+            CarsDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
+            CarsDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
+        }
         JScrollPane scrollPane = new JScrollPane(CarsDisplay);
         add(scrollPane, BorderLayout.CENTER);
     }
@@ -81,11 +92,11 @@ public class DisplayCars extends JFrame {
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String IDCode = tableModel.getValueAt(row, 3).toString();
+                    String IDCode = tableModel.getValueAt(row, 0).toString();
                     Car car = taxiService.findCar(IDCode);
 
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Are you sure you want to delete the user?",
+                            "Are you sure you want to delete this Car??",
                             IDCode + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         car.setDeleted(true);
@@ -105,14 +116,13 @@ public class DisplayCars extends JFrame {
         });
 
         btnEdit.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = CarsDisplay.getSelectedRow();
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String IDCode = tableModel.getValueAt(row, 3).toString();
+                    String IDCode = tableModel.getValueAt(row, 0).toString();
                     Car car = taxiService.findCar(IDCode);
                     if(car == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Car with that ID Code", "Error", JOptionPane.WARNING_MESSAGE);
@@ -124,7 +134,5 @@ public class DisplayCars extends JFrame {
             }
         });
     }
-
-
 
 }

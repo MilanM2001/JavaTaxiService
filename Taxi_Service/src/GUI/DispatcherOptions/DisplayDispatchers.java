@@ -1,7 +1,6 @@
-package GUI.DispatcherUtils;
+package GUI.DispatcherOptions;
 
 import AllUsers.Dispatcher;
-import AllUsers.Driver;
 import Main.TaxiService;
 import Main.TaxiServiceMain;
 
@@ -63,18 +62,33 @@ public class DisplayDispatchers extends JFrame {
             content[i][9] = dispatcher.getRoles();
             content[i][10] = dispatcher.getDispatcherPay();
             content[i][11] = dispatcher.getPhoneLine();
-            content[i][12] = dispatcher.getGender();
+            content[i][12] = dispatcher.getDepartment();
         }
 
         tableModel = new DefaultTableModel(content, headings);
         DispatchersDisplay = new JTable(tableModel);
-
         DispatchersDisplay.setRowSelectionAllowed(true);
         DispatchersDisplay.setColumnSelectionAllowed(false);
         DispatchersDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DispatchersDisplay.setDefaultEditor(Object.class, null);
         DispatchersDisplay.getTableHeader().setReorderingAllowed(false);
 
+        DispatchersDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for(int i=0; i< headings.length; i++) {
+            DispatchersDisplay.getColumnModel().getColumn(0).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(1).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(8).setPreferredWidth(40);
+            DispatchersDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
+            DispatchersDisplay.getColumnModel().getColumn(12).setPreferredWidth(100);
+        }
         JScrollPane scrollPane = new JScrollPane(DispatchersDisplay);
         add(scrollPane, BorderLayout.CENTER);
     }
@@ -87,11 +101,11 @@ public class DisplayDispatchers extends JFrame {
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String username = tableModel.getValueAt(row, 3).toString();
+                    String username = tableModel.getValueAt(row, 0).toString();
                     Dispatcher dispatcher = taxiService.findDispatcher(username);
 
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Are you sure you want to delete the user?",
+                            "Are you sure you want to delete the Dispatcher?",
                             username + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         dispatcher.setDeleted(true);
@@ -111,14 +125,13 @@ public class DisplayDispatchers extends JFrame {
         });
 
         btnEdit.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = DispatchersDisplay.getSelectedRow();
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String username = tableModel.getValueAt(row, 3).toString();
+                    String username = tableModel.getValueAt(row, 0).toString();
                     Dispatcher dispatcher = taxiService.findDispatcher(username);
                     if(dispatcher == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Dispatcher with that Username", "Error", JOptionPane.WARNING_MESSAGE);
@@ -130,7 +143,5 @@ public class DisplayDispatchers extends JFrame {
             }
         });
     }
-
-
 
 }

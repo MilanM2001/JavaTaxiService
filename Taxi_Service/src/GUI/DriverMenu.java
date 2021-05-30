@@ -11,7 +11,6 @@ public class DriverMenu extends JFrame {
     private JMenu carsMenu = new JMenu("Vehicles");
     private JMenuItem carsItem = new JMenuItem("Cars");
 
-
     private TaxiService taxiService;
     private Driver loggedIn;
 

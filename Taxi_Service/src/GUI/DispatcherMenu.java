@@ -1,9 +1,10 @@
 package GUI;
 
 import AllUsers.Dispatcher;
-import GUI.DispatcherUtils.DisplayCars;
-import GUI.DispatcherUtils.DisplayDispatchers;
-import GUI.DispatcherUtils.DisplayDrivers;
+import GUI.DispatcherOptions.DisplayCars;
+import GUI.DispatcherOptions.DisplayDispatchers;
+import GUI.DispatcherOptions.DisplayDrivers;
+import GUI.DispatcherOptions.DisplayRides;
 import Main.TaxiService;
 
 import javax.swing.*;
@@ -20,6 +21,8 @@ public class DispatcherMenu extends JFrame {
     private JMenu carsMenu = new JMenu("Cars");
     private JMenuItem showCarsItem = new JMenuItem("Show Cars");
     private JMenuItem searchCarsItem = new JMenuItem("Search Cars");
+    private JMenu ridesMenu = new JMenu("Rides");
+    private JMenuItem showRidesItem = new JMenuItem("Show Rides");
 
     private TaxiService taxiService;
     private Dispatcher loggedIn;
@@ -45,6 +48,8 @@ public class DispatcherMenu extends JFrame {
         mainMenu.add(carsMenu);
         carsMenu.add(showCarsItem);
         carsMenu.add(searchCarsItem);
+        mainMenu.add(ridesMenu);
+        ridesMenu.add(showRidesItem);
     }
 
     private void initActions() {
@@ -71,14 +76,13 @@ public class DispatcherMenu extends JFrame {
                 dd.setVisible(true);
             }
         });
-//
-//        knjigeItem.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                KnjigeProzor kp = new KnjigeProzor(prodavnica);
-//                kp.setVisible(true);
-//            }
-//        });
-    }
 
+        showRidesItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayRides dd = new DisplayRides(taxiService);
+                dd.setVisible(true);
+            }
+        });
+    }
 }

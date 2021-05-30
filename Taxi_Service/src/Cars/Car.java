@@ -16,7 +16,6 @@ public class Car {
     private boolean deleted;
 
     public Car() {
-
         this.IDCode = "";
         this.carID = 0;
         this.model = "";
@@ -26,11 +25,9 @@ public class Car {
         this.taxiNumber = 0;
         this.vehicletype = VehicleType.Passenger;
         this.deleted = false;
-
     }
 
     public Car(String IDCode, int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
-
         super();
         this.IDCode = IDCode;
         this.carID = carID;
@@ -41,7 +38,6 @@ public class Car {
         this.taxiNumber = taxiNumber;
         this.vehicletype = vehicletype;
         this.deleted = deleted;
-
     }
 
     public String getIDCode() {return IDCode;}
@@ -74,7 +70,6 @@ public class Car {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
-
 
     @Override
     public String toString() {

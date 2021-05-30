@@ -1,4 +1,4 @@
-package GUI.DispatcherUtils;
+package GUI.DispatcherOptions;
 
 import AllUsers.Driver;
 import Main.TaxiService;
@@ -67,13 +67,27 @@ public class DisplayDrivers extends JFrame {
 
         tableModel = new DefaultTableModel(content, headings);
         DriversDisplay = new JTable(tableModel);
-
         DriversDisplay.setRowSelectionAllowed(true);
         DriversDisplay.setColumnSelectionAllowed(false);
         DriversDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DriversDisplay.setDefaultEditor(Object.class, null);
         DriversDisplay.getTableHeader().setReorderingAllowed(false);
 
+        DriversDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for(int i=0; i< headings.length; i++) {
+            DriversDisplay.getColumnModel().getColumn(0).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(1).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(8).setPreferredWidth(40);
+            DriversDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
+        }
         JScrollPane scrollPane = new JScrollPane(DriversDisplay);
         add(scrollPane, BorderLayout.CENTER);
     }
@@ -86,11 +100,11 @@ public class DisplayDrivers extends JFrame {
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String username = tableModel.getValueAt(row, 3).toString();
+                    String username = tableModel.getValueAt(row, 0).toString();
                     Driver driver = taxiService.findDriver(username);
 
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Are you sure you want to delete the user?",
+                            "Are you sure you want to delete the Driver?",
                             username + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         driver.setDeleted(true);
@@ -117,10 +131,10 @@ public class DisplayDrivers extends JFrame {
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String username = tableModel.getValueAt(row, 3).toString();
+                    String username = tableModel.getValueAt(row, 0).toString();
                     Driver driver = taxiService.findDriver(username);
                     if(driver == null) {
-                        JOptionPane.showMessageDialog(null, "Couldn't find a user with that Username", "Error", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Couldn't find a Driver with that Username", "Error", JOptionPane.WARNING_MESSAGE);
                     }else {
                         DriversForm df = new DriversForm(taxiService, driver);
                         df.setVisible(true);
@@ -129,6 +143,5 @@ public class DisplayDrivers extends JFrame {
             }
         });
     }
-
 
 }

@@ -45,7 +45,6 @@ public class LoginWindow extends JFrame {
         add(btnOk, "split 2");
         add(btnCancel);
 
-
         txtUsername.setText("milan01");
         pfPassword.setText("miki2001");
         getRootPane().setDefaultButton(btnOk);
@@ -65,28 +64,35 @@ public class LoginWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String username = txtUsername.getText().trim();
                 String password = new String(pfPassword.getPassword()).trim();
-                Driver driverLoggedIn = taxiService.driverLogin(username, password);
-                Customer customerLoggedIn = taxiService.customerLogin(username, password);
-                Dispatcher dispatcherLoggedIn = taxiService.dispatcherLogin(username, password);
+
 
                 if(username.equals("") || password.equals("")) {
                     JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    if(driverLoggedIn == null) {
+                    Driver driverLoggedIn = taxiService.driverLogin(username, password);
+                    Customer customerLoggedIn = taxiService.customerLogin(username, password);
+                    Dispatcher dispatcherLoggedIn = taxiService.dispatcherLogin(username, password);
+//UserLoggedin = taxiService.userlogin(username, login)
 
+                    if(driverLoggedIn == null) {
+                        //userLoggedin == null { error }
                     }else {
+                        //switch user.Role
+                        //case ....
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
                         DriverMenu driverM = new DriverMenu(taxiService, driverLoggedIn);
                         driverM.setVisible(true);
-                    }if(customerLoggedIn == null) {
+                    }
+                    if(customerLoggedIn == null) {
 
                     }else {
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
                         CustomerMenu customerM = new CustomerMenu(taxiService, customerLoggedIn);
                         customerM.setVisible(true);
-                    }if(dispatcherLoggedIn == null) {
+                    }
+                    if(dispatcherLoggedIn == null) {
 
                     }else {
                         LoginWindow.this.dispose();

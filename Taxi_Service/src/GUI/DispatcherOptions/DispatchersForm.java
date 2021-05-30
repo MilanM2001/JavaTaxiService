@@ -1,7 +1,6 @@
-package GUI.DispatcherUtils;
+package GUI.DispatcherOptions;
 
 import AllUsers.Dispatcher;
-import AllUsers.Driver;
 import Enums.Department;
 import Enums.Gender;
 import Enums.Roles;
@@ -83,7 +82,6 @@ public class DispatchersForm extends JFrame {
         if(dispatcher != null) {
             FillFields();
         }
-
         add(lblUsername);
         add(txtUsername);
 

@@ -1,4 +1,4 @@
-package GUI.DispatcherUtils;
+package GUI.DispatcherOptions;
 
 import AllUsers.Driver;
 import Enums.Gender;
@@ -78,7 +78,6 @@ public class DriversForm extends JFrame {
         if(driver != null) {
             FillFields();
         }
-
         add(lblUsername);
         add(txtUsername);
 
