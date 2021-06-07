@@ -3,8 +3,7 @@ package GUI;
 import AllUsers.Customer;
 import AllUsers.Dispatcher;
 import AllUsers.Driver;
-import AllUsers.Users;
-import Main.TaxiService;
+import ServiceData.TaxiService;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;

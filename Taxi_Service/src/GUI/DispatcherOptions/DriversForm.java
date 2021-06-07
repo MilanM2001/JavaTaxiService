@@ -3,7 +3,7 @@ package GUI.DispatcherOptions;
 import AllUsers.Driver;
 import Enums.Gender;
 import Enums.Roles;
-import Main.TaxiService;
+import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import net.miginfocom.swing.MigLayout;
 

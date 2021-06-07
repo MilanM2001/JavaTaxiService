@@ -1,7 +1,7 @@
 package GUI.DispatcherOptions;
 
 import Enums.RideStatus;
-import Main.TaxiService;
+import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 import net.miginfocom.swing.MigLayout;

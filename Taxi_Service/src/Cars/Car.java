@@ -4,7 +4,6 @@ package Cars;
 import Enums.VehicleType;
 
 public class Car {
-
     private String IDCode;
     private int carID;
     private String model;

@@ -2,7 +2,7 @@ package GUI.DispatcherOptions;
 
 import Cars.Car;
 import Enums.VehicleType;
-import Main.TaxiService;
+import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import net.miginfocom.swing.MigLayout;
 

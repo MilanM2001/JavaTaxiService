@@ -1,6 +1,6 @@
 package GUI.DispatcherOptions;
 
-import Main.TaxiService;
+import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DisplayRides extends JFrame {
+public class RidesDisplay extends JFrame {
 
     private JToolBar mainToolbar = new JToolBar();
     private JButton btnAdd = new JButton();
@@ -22,7 +22,7 @@ public class DisplayRides extends JFrame {
 
     private TaxiService taxiService;
 
-    public DisplayRides(TaxiService taxiService) {
+    public RidesDisplay(TaxiService taxiService) {
         this.taxiService = taxiService;
         setTitle("Rides");
         setSize(500, 300);

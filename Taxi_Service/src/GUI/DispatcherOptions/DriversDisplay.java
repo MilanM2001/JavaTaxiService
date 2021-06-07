@@ -1,7 +1,7 @@
 package GUI.DispatcherOptions;
 
 import AllUsers.Driver;
-import Main.TaxiService;
+import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DisplayDrivers extends JFrame {
+public class DriversDisplay extends JFrame {
 
     private JToolBar mainToolbar = new JToolBar();
     private JButton btnAdd = new JButton();
@@ -22,7 +22,7 @@ public class DisplayDrivers extends JFrame {
 
     private TaxiService taxiService;
 
-    public DisplayDrivers(TaxiService taxiService) {
+    public DriversDisplay(TaxiService taxiService) {
         this.taxiService = taxiService;
         setTitle("Drivers");
         setSize(500, 300);

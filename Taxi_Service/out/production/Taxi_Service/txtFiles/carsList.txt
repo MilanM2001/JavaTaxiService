@@ -1,3 +1,1 @@
-123|1|Audi|Germany|2001|13|652044|1|false
-321|2|Audi|Belgium|1999|42|652012|0|false
-421|3|Citroen|Russia|2005|51|652055|0|false
+12121|1|Audi|Germany|2001|112233|652033|0|false

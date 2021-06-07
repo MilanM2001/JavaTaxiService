@@ -1,4 +1,4 @@
-package Main;
+package ServiceData;
 
 import AllUsers.Customer;
 import AllUsers.Dispatcher;
@@ -18,6 +18,7 @@ public class TaxiService {
     private ArrayList<Dispatcher> dispatchers;
     private ArrayList<Car> cars;
     private ArrayList<Ride> rides;
+    private ArrayList<TaxiServiceInfo> serviceInfos;
 
     public TaxiService() {
         this.drivers = new ArrayList<Driver>();
@@ -25,6 +26,7 @@ public class TaxiService {
         this.dispatchers = new ArrayList<Dispatcher>();
         this.cars = new ArrayList<Car>();
         this.rides = new ArrayList<Ride>();
+        this.serviceInfos = new ArrayList<TaxiServiceInfo>();
     }
 
     public ArrayList<Driver> getDrivers() {return drivers;}
@@ -39,13 +41,17 @@ public class TaxiService {
     public void addDispatcher(Dispatcher dispatcher) { this.dispatchers.add(dispatcher); }
     public void removeDispatcher(Dispatcher dispatcher) {this.dispatchers.remove(dispatcher);}
 
+    public ArrayList<Car> getCars() {return cars;}
+    public void addCar(Car car) {this.cars.add(car);}
+    public void removeCar(Car car) {this.cars.remove(car);}
+
     public ArrayList<Ride> getRides() {return rides;}
     public void addRide(Ride ride) { this.rides.add(ride); }
     public void removeRide(Ride ride) {this.rides.remove(ride);}
 
-    public ArrayList<Car> getCars() {return cars;}
-    public void addCar(Car car) {this.cars.add(car);}
-    public void removeCar(Car car) {this.cars.remove(car);}
+    public ArrayList<TaxiServiceInfo> getServiceInfos() {return serviceInfos;}
+    public void addInfo(TaxiServiceInfo taxiServiceInfo) { this.serviceInfos.add(taxiServiceInfo); }
+    public void removeInfo(TaxiServiceInfo taxiServiceInfo) {this.serviceInfos.remove(taxiServiceInfo);}
 
     public Driver driverLogin(String username, String password) {
         for(Driver driver : drivers) {
@@ -127,6 +133,15 @@ public class TaxiService {
         for (Ride ride : rides) {
             if (ride.getRideID().equals(rideID)) {
                 return ride;
+            }
+        }
+        return null;
+    }
+
+    public TaxiServiceInfo findInfo(String TaxiServiceName) {
+        for (TaxiServiceInfo taxiServiceInfo : serviceInfos) {
+            if (taxiServiceInfo.getTaxiServiceName().equals(TaxiServiceName)) {
+                return taxiServiceInfo;
             }
         }
         return null;
@@ -282,6 +297,29 @@ public class TaxiService {
         }
     }
 
+    public void loadInfo(String fileName) {
+        try {
+            File usersFile = new File("src/txtFiles/" + fileName);
+            BufferedReader br = new BufferedReader(new FileReader(usersFile));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                String[] split = line.split("\\|");
+                int PIB = Integer.parseInt(split[0]);
+                String TaxiServiceName = split[1];
+                String TaxiServiceAddress = split[2];
+                double TaxiServiceStartingPrice = Double.parseDouble(split[3]);
+                double TaxiServicePricePerKM = Double.parseDouble(split[4]);
+                boolean deleted = Boolean.parseBoolean(split[5]);
+
+                TaxiServiceInfo taxiServiceInfo = new TaxiServiceInfo(PIB, TaxiServiceName, TaxiServiceAddress, TaxiServiceStartingPrice, TaxiServicePricePerKM, deleted);
+                serviceInfos.add(taxiServiceInfo);
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Driver> allNotDeletedDrivers() {
         ArrayList<Driver> notDeleted = new ArrayList<Driver>();
         for (Driver driver : drivers) {
@@ -317,6 +355,16 @@ public class TaxiService {
         for (Ride ride : rides) {
             if(!ride.isDeleted()) {
                 notDeleted.add(ride);
+            }
+        }
+        return notDeleted;
+    }
+
+    public ArrayList<TaxiServiceInfo> allNotDeletedInfo() {
+        ArrayList<TaxiServiceInfo> notDeleted = new ArrayList<TaxiServiceInfo>();
+        for (TaxiServiceInfo taxiServiceInfo : serviceInfos) {
+            if(!taxiServiceInfo.isDeleted()) {
+                notDeleted.add(taxiServiceInfo);
             }
         }
         return notDeleted;
@@ -394,6 +442,22 @@ public class TaxiService {
             for (Ride ride: rides) {
                 content += ride.getRideID() + "|" + ride.getOrderDate() + "|" + ride.getStartAddress() + "|" + ride.getDestinationAddress() + "|"
                         + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.isDeleted() + "\n";
+            }
+            br.write(content);
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveInfo(String fileName) {
+        try {
+            File file = new File("src/txtFiles/" + fileName);
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            String content = "";
+            for (TaxiServiceInfo taxiServiceInfo: serviceInfos) {
+                content += taxiServiceInfo.getPIB() + "|" + taxiServiceInfo.getTaxiServiceName() + "|" + taxiServiceInfo.getTaxiServiceAddress() + "|"
+                        + taxiServiceInfo.getTaxiServiceStartingPrice() + "|" + taxiServiceInfo.getTaxiServicePricePerKM() + "|" + taxiServiceInfo.isDeleted() + "\n";
             }
             br.write(content);
             br.close();

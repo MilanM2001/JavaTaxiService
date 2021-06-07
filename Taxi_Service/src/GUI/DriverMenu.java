@@ -1,7 +1,7 @@
 package GUI;
 
 import AllUsers.Driver;
-import Main.TaxiService;
+import ServiceData.TaxiService;
 
 import javax.swing.*;
 

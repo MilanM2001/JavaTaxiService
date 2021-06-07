@@ -1,18 +1,14 @@
 package GUI;
 
 import AllUsers.Dispatcher;
-import GUI.DispatcherOptions.DisplayCars;
-import GUI.DispatcherOptions.DisplayDispatchers;
-import GUI.DispatcherOptions.DisplayDrivers;
-import GUI.DispatcherOptions.DisplayRides;
-import Main.TaxiService;
+import GUI.DispatcherOptions.*;
+import ServiceData.TaxiService;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DispatcherMenu extends JFrame {
-
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu driversMenu = new JMenu("Users");
     private JMenuItem showDriversItem = new JMenuItem("Show Drivers");
@@ -23,6 +19,8 @@ public class DispatcherMenu extends JFrame {
     private JMenuItem searchCarsItem = new JMenuItem("Search Cars");
     private JMenu ridesMenu = new JMenu("Rides");
     private JMenuItem showRidesItem = new JMenuItem("Show Rides");
+    private JMenu taxiServiceInfoMenu = new JMenu("Info");
+    private JMenuItem showServiceInfo = new JMenuItem("Show Service Info");
 
     private TaxiService taxiService;
     private Dispatcher loggedIn;
@@ -50,13 +48,15 @@ public class DispatcherMenu extends JFrame {
         carsMenu.add(searchCarsItem);
         mainMenu.add(ridesMenu);
         ridesMenu.add(showRidesItem);
+        mainMenu.add(taxiServiceInfoMenu);
+        taxiServiceInfoMenu.add(showServiceInfo);
     }
 
     private void initActions() {
         showDriversItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DisplayDrivers dd = new DisplayDrivers(taxiService);
+                DriversDisplay dd = new DriversDisplay(taxiService);
                 dd.setVisible(true);
             }
         });
@@ -64,7 +64,7 @@ public class DispatcherMenu extends JFrame {
         showCarsItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DisplayCars dc = new DisplayCars(taxiService);
+                CarsDisplay dc = new CarsDisplay(taxiService);
                 dc.setVisible(true);
             }
         });
@@ -72,7 +72,7 @@ public class DispatcherMenu extends JFrame {
         showDispatchersItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DisplayDispatchers dd = new DisplayDispatchers(taxiService);
+                DispatchersDisplay dd = new DispatchersDisplay(taxiService);
                 dd.setVisible(true);
             }
         });
@@ -80,8 +80,16 @@ public class DispatcherMenu extends JFrame {
         showRidesItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DisplayRides dd = new DisplayRides(taxiService);
+                RidesDisplay dd = new RidesDisplay(taxiService);
                 dd.setVisible(true);
+            }
+        });
+
+        showServiceInfo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InfoDisplay id = new InfoDisplay(taxiService);
+                id.setVisible(true);
             }
         });
     }
