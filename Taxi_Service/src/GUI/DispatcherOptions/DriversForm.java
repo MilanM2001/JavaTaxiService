@@ -50,7 +50,7 @@ public class DriversForm extends JFrame {
     private JTextField txtMembershipCard = new JTextField(20);
 
     private JButton btnOk = new JButton("OK");
-    private JButton btnCanel = new JButton("Cancel");
+    private JButton btnCancel = new JButton("Cancel");
 
     private TaxiService taxiService;
     private Driver driver;
@@ -116,7 +116,7 @@ public class DriversForm extends JFrame {
 
         add(new JLabel());
         add(btnOk, "split 2");
-        add(btnCanel);
+        add(btnCancel);
     }
 
     private void initActions() {

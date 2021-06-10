@@ -29,7 +29,7 @@ public class InfoForm extends JFrame {
     private JTextField txtServicePricePerKM = new JTextField(20);
 
     private JButton btnOk = new JButton("OK");
-    private JButton btnCanel = new JButton("Cancel");
+    private JButton btnCancel = new JButton("Cancel");
 
     private TaxiService taxiService;
     private TaxiServiceInfo taxiServiceInfo;
@@ -74,7 +74,7 @@ public class InfoForm extends JFrame {
 
         add(new JLabel());
         add(btnOk, "split 2");
-        add(btnCanel);
+        add(btnCancel);
     }
 
     private void initActions() {

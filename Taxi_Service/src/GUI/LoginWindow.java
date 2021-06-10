@@ -71,13 +71,10 @@ public class LoginWindow extends JFrame {
                     Driver driverLoggedIn = taxiService.driverLogin(username, password);
                     Customer customerLoggedIn = taxiService.customerLogin(username, password);
                     Dispatcher dispatcherLoggedIn = taxiService.dispatcherLogin(username, password);
-//UserLoggedin = taxiService.userlogin(username, login)
 
                     if(driverLoggedIn == null) {
-                        //userLoggedin == null { error }
+
                     }else {
-                        //switch user.Role
-                        //case ....
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
                         DriverMenu driverM = new DriverMenu(taxiService, driverLoggedIn);

@@ -4,7 +4,6 @@ import Enums.Gender;
 import Enums.Roles;
 
 public class Driver extends Users {
-
     protected double driverPay;
     protected int membershipCard;
     //protected Car car; Da dodam dodelu auta kasnije

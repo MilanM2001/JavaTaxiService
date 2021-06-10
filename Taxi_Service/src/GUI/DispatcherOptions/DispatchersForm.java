@@ -54,7 +54,7 @@ public class DispatchersForm extends JFrame {
     private JComboBox<Department> cbDepartment = new JComboBox<Department>(Department.values());
 
     private JButton btnOk = new JButton("OK");
-    private JButton btnCanel = new JButton("Cancel");
+    private JButton btnCancel = new JButton("Cancel");
 
     private TaxiService taxiService;
     private Dispatcher dispatcher;
@@ -123,7 +123,7 @@ public class DispatchersForm extends JFrame {
 
         add(new JLabel());
         add(btnOk, "split 2");
-        add(btnCanel);
+        add(btnCancel);
     }
 
     private void initActions() {

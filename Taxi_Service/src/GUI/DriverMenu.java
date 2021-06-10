@@ -6,7 +6,6 @@ import ServiceData.TaxiService;
 import javax.swing.*;
 
 public class DriverMenu extends JFrame {
-
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu carsMenu = new JMenu("Vehicles");
     private JMenuItem carsItem = new JMenuItem("Cars");

@@ -40,7 +40,7 @@ public class RidesForm extends JFrame {
     private JComboBox<RideStatus> cbRideStatus = new JComboBox<RideStatus>(RideStatus.values());
 
     private JButton btnOk = new JButton("OK");
-    private JButton btnCanel = new JButton("Cancel");
+    private JButton btnCancel = new JButton("Cancel");
 
     private TaxiService taxiService;
     private Ride ride;
@@ -97,7 +97,7 @@ public class RidesForm extends JFrame {
 
         add(new JLabel());
         add(btnOk, "split 2");
-        add(btnCanel);
+        add(btnCancel);
     }
 
     private void initActions() {

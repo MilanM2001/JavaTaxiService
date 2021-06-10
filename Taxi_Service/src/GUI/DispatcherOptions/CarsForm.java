@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CarsForm extends JFrame {
-
     private JLabel lblIDCode = new JLabel("ID Code");
     private JTextField txtIDCode = new JTextField(20);
 
@@ -37,7 +36,7 @@ public class CarsForm extends JFrame {
     private JComboBox<VehicleType> cbVehicleType = new JComboBox<VehicleType>(VehicleType.values());
 
     private JButton btnOk = new JButton("OK");
-    private JButton btnCanel = new JButton("Cancel");
+    private JButton btnCancel = new JButton("Cancel");
 
     private TaxiService taxiService;
     private Car car;
@@ -91,7 +90,7 @@ public class CarsForm extends JFrame {
 
         add(new JLabel());
         add(btnOk, "split 2");
-        add(btnCanel);
+        add(btnCancel);
     }
 
     private void initActions() {

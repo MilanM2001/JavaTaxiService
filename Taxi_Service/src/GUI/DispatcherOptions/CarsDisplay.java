@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CarsDisplay extends JFrame {
-
     private JToolBar mainToolbar = new JToolBar();
     private JButton btnAdd = new JButton();
     private JButton btnEdit = new JButton();

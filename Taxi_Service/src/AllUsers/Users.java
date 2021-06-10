@@ -4,7 +4,6 @@ import Enums.Gender;
 import Enums.Roles;
 
 public abstract class Users {
-
     protected String username;
     protected String password;
     protected String name;
