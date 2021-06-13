@@ -1,2 +1,2 @@
-1|5.3|Sokolac|Vrsac|Milan|Filip|100.0|45.0|1|false
-2|2.3|Novi Sad|Zrenjanin|Nemanja|David|24.0|123.0|0|false
+1|0.0|Vrsac|Sokolac|Your Name|None|0.0|0.0|1|sdadasda|false
+5|0.0|adas|asdasd|Your Name|None|0.0|0.0|0||false

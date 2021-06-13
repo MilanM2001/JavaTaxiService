@@ -5,6 +5,7 @@ import GUI.DispatcherOptions.*;
 import ServiceData.TaxiService;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,15 +13,14 @@ public class DispatcherMenu extends JFrame {
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu driversMenu = new JMenu("Users");
     private JMenuItem showDriversItem = new JMenuItem("Show Drivers");
-    private JMenuItem searchDriversItem = new JMenuItem("Search Drivers");
     private JMenuItem showDispatchersItem = new JMenuItem("Show Dispatchers");
     private JMenu carsMenu = new JMenu("Cars");
     private JMenuItem showCarsItem = new JMenuItem("Show Cars");
-    private JMenuItem searchCarsItem = new JMenuItem("Search Cars");
     private JMenu ridesMenu = new JMenu("Rides");
     private JMenuItem showRidesItem = new JMenuItem("Show Rides");
     private JMenu taxiServiceInfoMenu = new JMenu("Info");
     private JMenuItem showServiceInfo = new JMenuItem("Show Service Info");
+    private JButton logOff = new JButton("LogOut");
 
     private TaxiService taxiService;
     private Dispatcher loggedIn;
@@ -41,18 +41,24 @@ public class DispatcherMenu extends JFrame {
         setJMenuBar(mainMenu);
         mainMenu.add(driversMenu);
         driversMenu.add(showDriversItem);
-        driversMenu.add(searchDriversItem);
         driversMenu.add(showDispatchersItem);
+
         mainMenu.add(carsMenu);
         carsMenu.add(showCarsItem);
-        carsMenu.add(searchCarsItem);
+
         mainMenu.add(ridesMenu);
         ridesMenu.add(showRidesItem);
+
         mainMenu.add(taxiServiceInfoMenu);
         taxiServiceInfoMenu.add(showServiceInfo);
+
+        mainMenu.add(logOff);
+
+
     }
 
     private void initActions() {
+
         showDriversItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,5 +98,16 @@ public class DispatcherMenu extends JFrame {
                 id.setVisible(true);
             }
         });
+
+        logOff.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                LoginWindow lw = new LoginWindow(taxiService);
+                lw.setVisible(true);
+                DispatcherMenu.this.dispose();
+                DispatcherMenu.this.setVisible(false);
+            }
+        });
+
     }
 }

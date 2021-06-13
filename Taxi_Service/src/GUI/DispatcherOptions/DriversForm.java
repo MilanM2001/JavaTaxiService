@@ -107,6 +107,8 @@ public class DriversForm extends JFrame {
 
         add(lblRoles);
         add(cbRoles);
+        cbRoles.setSelectedItem(Roles.Driver);
+        cbRoles.setEnabled(false);
 
         add(lblDriverPay);
         add(txtDriverPay);

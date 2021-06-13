@@ -111,6 +111,8 @@ public class DispatchersForm extends JFrame {
 
         add(lblRoles);
         add(cbRoles);
+        cbRoles.setSelectedItem(Roles.Dispatcher);
+        cbRoles.setEnabled(false);
 
         add(lblDispatcherPay);
         add(txtDispatcherPay);
@@ -120,6 +122,9 @@ public class DispatchersForm extends JFrame {
 
         add(lblGender);
         add(cbGender);
+
+        add(lblDepartment);
+        add(cbDepartment);
 
         add(new JLabel());
         add(btnOk, "split 2");

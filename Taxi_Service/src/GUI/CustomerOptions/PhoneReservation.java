@@ -1,16 +1,17 @@
-package GUI.DispatcherOptions;
+package GUI.CustomerOptions;
 
+import AllUsers.Customer;
 import Enums.RideStatus;
-import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import Rides.Ride;
+import ServiceData.TaxiService;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RidesForm extends JFrame {
+public class PhoneReservation extends JFrame {
 
     private JLabel lblRideID = new JLabel("Ride ID");
     private JTextField txtRideID = new JTextField(20);
@@ -47,14 +48,14 @@ public class RidesForm extends JFrame {
 
     private TaxiService taxiService;
     private Ride ride;
+    private Customer customer;
 
-    public RidesForm(TaxiService taxiService, Ride ride) {
+    public PhoneReservation(TaxiService taxiService, Ride ride, Customer customer) {
         this.taxiService = taxiService;
         this.ride = ride;
-        if(ride == null) {
-            setTitle("Adding Ride");
-        }else {
-            setTitle("Change Information - " + ride.getRideID());
+        this.customer = customer;
+        if (ride == null) {
+            setTitle("Phone Reservation");
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -68,14 +69,13 @@ public class RidesForm extends JFrame {
         MigLayout layout = new MigLayout("wrap 2", "[][]", "[][][][][]20[]");
         setLayout(layout);
 
-        if(ride != null) {
+        if (ride != null) {
             FillFields();
         }
         add(lblRideID);
         add(txtRideID);
 
-        add(lblOrderDate);
-        add(txtOrderDate);
+        txtOrderDate.setText("0");
 
         add(lblStartAddress);
         add(txtStartAddress);
@@ -85,21 +85,17 @@ public class RidesForm extends JFrame {
 
         add(lblCustomerOrder);
         add(txtCustomerOrder);
+        txtCustomerOrder.setText("Your Name");
 
-        add(lblDriverOrder);
-        add(txtDriverOrder);
+        txtDriverOrder.setText("None");
 
-        add(lblKmPassed);
-        add(txtKmPassed);
+        txtKmPassed.setText("0");
 
-        add(lblRideDuration);
-        add(txtRideDuration);
+        txtRideDuration.setText("0");
 
-        add(lblRideStatus);
-        add(cbRideStatus);
+        cbRideStatus.setSelectedItem(RideStatus.Created);
 
-        add(lblCustomerNote);
-        add(txtCustomerNote);
+        txtCustomerNote.setText("");
 
         add(new JLabel());
         add(btnOk, "split 2");
@@ -138,8 +134,8 @@ public class RidesForm extends JFrame {
                         ride.setCustomerNote(customerNote);
                     }
                     taxiService.saveRides(TaxiServiceMain.Rides_File);
-                    RidesForm.this.dispose();
-                    RidesForm.this.setVisible(false);
+                    PhoneReservation.this.dispose();
+                    PhoneReservation.this.setVisible(false);
                 }
             }
         });
@@ -162,30 +158,11 @@ public class RidesForm extends JFrame {
         boolean ok = true;
         String message = "Please correct the following mistakes:\n";
 
-        if(txtRideID.getText().trim().equals("")) {
-            message += "- Ride ID\n";
-            ok = false;
-        }
-        if(txtOrderDate.getText().trim().equals("")) {
-            message += "- Order Date\n";
-            ok = false;
-        }if(txtStartAddress.getText().trim().equals("")) {
+        if(txtStartAddress.getText().trim().equals("")) {
             message += "- Start Address\n";
             ok = false;
         }if(txtDestinationAddress.getText().trim().equals("")) {
             message += "- Destination Address\n";
-            ok = false;
-        }if(txtCustomerOrder.getText().trim().equals("")) {
-            message += "- Customer\n";
-            ok = false;
-        }if(txtDriverOrder.getText().trim().equals("")) {
-            message += "- Driver\n";
-            ok = false;
-        }if(txtKmPassed.getText().trim().equals("")) {
-            message += "- KM Passed\n";
-            ok = false;
-        }if(txtRideDuration.getText().trim().equals("")) {
-            message += "- Ride Duration\n";
             ok = false;
         }else if(ride == null){
             String rideID = txtRideID.getText().trim();
@@ -201,5 +178,6 @@ public class RidesForm extends JFrame {
 
         return ok;
     }
+
 
 }

@@ -124,7 +124,6 @@ public class DriversDisplay extends JFrame {
         });
 
         btnEdit.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = DriversDisplay.getSelectedRow();

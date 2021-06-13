@@ -286,9 +286,10 @@ public class TaxiService {
                 double rideDuration = Double.parseDouble(split[7]);
                 int statusInt = Integer.parseInt(split[8]);
                 RideStatus rideStatus = RideStatus.values()[statusInt];
-                boolean deleted = Boolean.parseBoolean(split[9]);
+                String customerNote = split[9];
+                boolean deleted = Boolean.parseBoolean(split[10]);
 
-                Ride ride = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, deleted);
+                Ride ride = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, deleted);
                 rides.add(ride);
             }
             br.close();
@@ -441,7 +442,7 @@ public class TaxiService {
             String content = "";
             for (Ride ride: rides) {
                 content += ride.getRideID() + "|" + ride.getOrderDate() + "|" + ride.getStartAddress() + "|" + ride.getDestinationAddress() + "|"
-                        + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.isDeleted() + "\n";
+                        + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.getCustomerNote() + "|" + ride.isDeleted() +  "\n";
             }
             br.write(content);
             br.close();

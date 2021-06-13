@@ -81,7 +81,7 @@ public class InfoForm extends JFrame {
         btnOk.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(CarsValidation()) {
+                if(InfoValidation()) {
                     int PIB = Integer.parseInt(txtServicePIB.getText().trim());
                     String TaxiServiceName = txtServiceName.getText().trim();
                     String TaxiServiceAddress = txtServiceAddress.getText().trim();
@@ -115,7 +115,7 @@ public class InfoForm extends JFrame {
         txtServicePricePerKM.setText(String.valueOf(taxiServiceInfo.getTaxiServicePricePerKM()));
     }
 
-    private boolean CarsValidation() {
+    private boolean InfoValidation() {
         boolean ok = true;
         String message = "Please correct the following mistakes:\n";
 

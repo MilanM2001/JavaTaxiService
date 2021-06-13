@@ -45,7 +45,7 @@ public class RidesDisplay extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status"};
+        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note"};
         Object[][] content = new Object[taxiService.allNotDeletedRides().size()][headings.length];
 
         for(int i=0; i<taxiService.allNotDeletedRides().size(); i++) {
@@ -59,6 +59,7 @@ public class RidesDisplay extends JFrame {
             content[i][6] = ride.getKmPassed();
             content[i][7] = ride.getRideDuration();
             content[i][8] = ride.getRideStatus();
+            content[i][9] = ride.getCustomerNote();
         }
 
         tableModel = new DefaultTableModel(content, headings);
@@ -81,6 +82,7 @@ public class RidesDisplay extends JFrame {
             RidesDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
             RidesDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
             RidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(100);
+            RidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
         }
         JScrollPane scrollPane = new JScrollPane(RidesDisplay);
         add(scrollPane, BorderLayout.CENTER);
