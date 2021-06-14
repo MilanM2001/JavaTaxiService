@@ -5,7 +5,11 @@ import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,9 +20,11 @@ public class DispatchersDisplay extends JFrame {
     private JButton btnAdd = new JButton();
     private JButton btnEdit = new JButton();
     private JButton btnDelete = new JButton();
+    private JTextField jtfFilter = new JTextField();
 
     private DefaultTableModel tableModel;
     private JTable DispatchersDisplay;
+
 
     private TaxiService taxiService;
 
@@ -73,6 +79,14 @@ public class DispatchersDisplay extends JFrame {
         DispatchersDisplay.setDefaultEditor(Object.class, null);
         DispatchersDisplay.getTableHeader().setReorderingAllowed(false);
 
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(new JLabel("Specify a word to match:"),
+                BorderLayout.WEST);
+        panel.add(jtfFilter, BorderLayout.CENTER);
+        setLayout(new BorderLayout());
+        add(panel, BorderLayout.SOUTH);
+        add(new JScrollPane(DispatchersDisplay), BorderLayout.CENTER);
+
         DispatchersDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for(int i=0; i< headings.length; i++) {
             DispatchersDisplay.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -94,6 +108,10 @@ public class DispatchersDisplay extends JFrame {
     }
 
     private void initActions() {
+        TableRowSorter<TableModel> rowSorter
+                = new TableRowSorter<>(DispatchersDisplay.getModel());
+        DispatchersDisplay.setRowSorter(rowSorter);
+
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -142,6 +160,37 @@ public class DispatchersDisplay extends JFrame {
                 }
             }
         });
+
+        jtfFilter.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jtfFilter.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jtfFilter.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
+
     }
 
 }
