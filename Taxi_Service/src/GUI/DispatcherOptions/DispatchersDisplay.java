@@ -25,7 +25,6 @@ public class DispatchersDisplay extends JFrame {
     private DefaultTableModel tableModel;
     private JTable DispatchersDisplay;
 
-
     private TaxiService taxiService;
 
     public DispatchersDisplay(TaxiService taxiService) {
@@ -80,10 +79,8 @@ public class DispatchersDisplay extends JFrame {
         DispatchersDisplay.getTableHeader().setReorderingAllowed(false);
 
         JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JLabel("Specify a word to match:"),
-                BorderLayout.WEST);
+        panel.add(new JLabel("Specify a word to match:"), BorderLayout.WEST);
         panel.add(jtfFilter, BorderLayout.CENTER);
-        setLayout(new BorderLayout());
         add(panel, BorderLayout.SOUTH);
         add(new JScrollPane(DispatchersDisplay), BorderLayout.CENTER);
 

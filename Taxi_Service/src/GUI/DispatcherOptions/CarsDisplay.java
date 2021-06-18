@@ -5,7 +5,11 @@ import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +19,7 @@ public class CarsDisplay extends JFrame {
     private JButton btnAdd = new JButton();
     private JButton btnEdit = new JButton();
     private JButton btnDelete = new JButton();
+    private JTextField jtfFilter = new JTextField();
 
     private DefaultTableModel tableModel;
     private JTable CarsDisplay;
@@ -61,12 +66,17 @@ public class CarsDisplay extends JFrame {
 
         tableModel = new DefaultTableModel(content, headings);
         CarsDisplay = new JTable(tableModel);
-
         CarsDisplay.setRowSelectionAllowed(true);
         CarsDisplay.setColumnSelectionAllowed(false);
         CarsDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         CarsDisplay.setDefaultEditor(Object.class, null);
         CarsDisplay.getTableHeader().setReorderingAllowed(false);
+
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(new JLabel("Specify a word to match:"), BorderLayout.WEST);
+        panel.add(jtfFilter, BorderLayout.CENTER);
+        add(panel, BorderLayout.SOUTH);
+        add(new JScrollPane(CarsDisplay), BorderLayout.CENTER);
 
         CarsDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for(int i=0; i< headings.length; i++) {
@@ -84,6 +94,10 @@ public class CarsDisplay extends JFrame {
     }
 
     private void initActions() {
+        TableRowSorter<TableModel> rowSorter
+                = new TableRowSorter<>(CarsDisplay.getModel());
+        CarsDisplay.setRowSorter(rowSorter);
+
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -132,6 +146,37 @@ public class CarsDisplay extends JFrame {
                 }
             }
         });
+
+        jtfFilter.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = jtfFilter.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = jtfFilter.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
+
     }
 
 }

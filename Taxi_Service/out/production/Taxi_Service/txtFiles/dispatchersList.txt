@@ -1,3 +1,2 @@
-milan01|miki2001|Milan|Miljus|06486|Skolska14|06520|0|false|1|1|45000|06532|1
-milan01|miki2001|Milan|Miljus|06486|Skolska14|06520|0|false|1|1|45000|06532|1
-milan01|miki2001|Milan|Miljus|06486|Skolska14|06520|0|false|1|1|45000|12323|1
+milan01|miki2001|Milan|Miljus|06486|Skolska14|6520|0|false|1|1|45000.0|6532|1
+petar05|pera999|Petar|Petrovic|06495|Dunavska|6550|0|false|2|1|50000.0|6213|1
