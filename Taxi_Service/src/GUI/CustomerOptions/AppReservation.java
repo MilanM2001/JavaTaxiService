@@ -87,7 +87,7 @@ public class AppReservation extends JFrame {
 
         add(lblCustomerOrder);
         add(txtCustomerOrder);
-        txtCustomerOrder.setText("Your Name");
+        txtCustomerOrder.setText("");
 
         txtDriverOrder.setText("None");
         txtDriverOrder.setEnabled(false);
