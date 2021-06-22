@@ -5,14 +5,11 @@ import Enums.VehicleType;
 import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import net.miginfocom.swing.MigLayout;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CarsForm extends JFrame {
-    private JLabel lblIDCode = new JLabel("ID Code");
-    private JTextField txtIDCode = new JTextField(20);
 
     private JLabel lblCarID = new JLabel("Car ID");
     private JTextField txtCarID = new JTextField(20);
@@ -47,7 +44,7 @@ public class CarsForm extends JFrame {
         if(car == null) {
             setTitle("Adding Car");
         }else {
-            setTitle("Change Information - " + car.getIDCode());
+            setTitle("Change Information - " + car.getCarID());
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -64,12 +61,6 @@ public class CarsForm extends JFrame {
         if(car != null) {
             FillFields();
         }
-        add(lblIDCode);
-        add(txtIDCode);
-
-        add(lblCarID);
-        add(txtCarID);
-
         add(lblModel);
         add(txtModel);
 
@@ -98,8 +89,7 @@ public class CarsForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(CarsValidation()) {
-                    String IDCode = txtIDCode.getText().trim();
-                    int carID = Integer.parseInt(txtCarID.getText().trim());
+                    int carID = taxiService.generateIDCar();
                     String model = txtModel.getText().trim();
                     String manufacturer = txtManufacturer.getText().trim();
                     int yearProduced = Integer.parseInt(txtYearProduced.getText().trim());
@@ -108,10 +98,9 @@ public class CarsForm extends JFrame {
                     VehicleType vehicleType = (VehicleType) cbVehicleType.getSelectedItem();
 
                     if(car == null) {
-                        Car newCar = new Car(IDCode, carID, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicleType, false);
+                        Car newCar = new Car(carID, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicleType, false);
                         taxiService.addCar(newCar);
                     }else {
-                        car.setIDCode(IDCode);
                         car.setCarID(carID);
                         car.setModel(model);
                         car.setManufacturer(manufacturer);
@@ -126,10 +115,17 @@ public class CarsForm extends JFrame {
                 }
             }
         });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarsForm.this.dispose();
+                CarsForm.this.setVisible(false);
+            }
+        });
     }
 
     private void FillFields() {
-        txtIDCode.setText(car.getIDCode());
         txtCarID.setText(String.valueOf(car.getCarID()));
         txtModel.setText(car.getModel());
         txtManufacturer.setText(car.getManufacturer());
@@ -143,14 +139,7 @@ public class CarsForm extends JFrame {
         boolean ok = true;
         String message = "Please correct the following mistakes:\n";
 
-        if(txtIDCode.getText().trim().equals("")) {
-            message += "- ID Code\n";
-            ok = false;
-        }
-        if(txtCarID.getText().trim().equals("")) {
-            message += "- ID\n";
-            ok = false;
-        }if(txtModel.getText().trim().equals("")) {
+        if(txtModel.getText().trim().equals("")) {
             message += "- Model\n";
             ok = false;
         }if(txtManufacturer.getText().trim().equals("")) {
@@ -165,13 +154,6 @@ public class CarsForm extends JFrame {
         }if(txtTaxiNumber.getText().trim().equals("")) {
             message += "- Taxi Number\n";
             ok = false;
-        }else if(car == null){
-            String IDCode = txtIDCode.getText().trim();
-            Car found = taxiService.findCar(IDCode);
-            if(found != null) {
-                message += "- Car with that ID already exists\n";
-                ok = false;
-            }
         }
         if(ok == false) {
             JOptionPane.showMessageDialog(null, message, "Incorrect Info", JOptionPane.WARNING_MESSAGE);

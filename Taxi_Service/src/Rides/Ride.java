@@ -1,5 +1,6 @@
 package Rides;
 
+import Enums.RideOrderType;
 import Enums.RideStatus;
 import Enums.VehicleType;
 
@@ -7,35 +8,36 @@ import java.time.LocalDateTime;
 
 public class Ride {
 
-//    private LocalDateTime orderDate;
-    private String rideID;
-    private double orderDate;
+    private int rideID;
+    private String orderDate;
     private String startAddress;
     private String destinationAddress;
-    private String customerOrder;
+    private int customerOrder;
     private String driverOrder;
     private double kmPassed;
     private double rideDuration;
     private RideStatus rideStatus;
     private String customerNote;
+    private RideOrderType rideOrderType;
     private boolean deleted;
-    // Rezervacije putem Telefona i Aplikacije fale----
+
 
     public Ride() {
-        this.rideID = "";
-        this.orderDate = 0;
+        this.rideID = 0;
+        this.orderDate = "";
         this.startAddress = "";
         this.destinationAddress = "";
-        this.customerOrder = "";
+        this.customerOrder = 0;
         this.driverOrder = "";
         this.kmPassed = 0;
         this.rideDuration = 0;
         this.rideStatus = RideStatus.Created;
+        this.rideOrderType = RideOrderType.Phone;
         this.customerNote = "";
         this.deleted = false;
     }
 
-    public Ride(String rideID, double orderDate, String startAddress, String destinationAddress, String customerOrder, String driverOrder, double kmPassed, double rideDuration, RideStatus rideStatus, String customerNote, boolean deleted) {
+    public Ride(int rideID, String orderDate, String startAddress, String destinationAddress, int customerOrder, String driverOrder, double kmPassed, double rideDuration, RideStatus rideStatus, String customerNote, RideOrderType rideOrderType, boolean deleted) {
         super();
         this.rideID = rideID;
         this.orderDate = orderDate;
@@ -47,14 +49,15 @@ public class Ride {
         this.rideDuration = rideDuration;
         this.rideStatus = rideStatus;
         this.customerNote = customerNote;
+        this.rideOrderType = rideOrderType;
         this.deleted = deleted;
     }
 
-    public String getRideID() {return rideID;}
-    public void setRideID(String rideID) {this.rideID = rideID;}
+    public int getRideID() {return rideID;}
+    public void setRideID(int rideID) {this.rideID = rideID;}
 
-    public double getOrderDate() {return orderDate;}
-    public void setOrderDate(double orderDate) {this.orderDate = orderDate;}
+    public String getOrderDate() {return orderDate;}
+    public void setOrderDate(String orderDate) {this.orderDate = orderDate;}
 
     public String getStartAddress() {return startAddress;}
     public void setStartAddress(String startAddress) {this.startAddress = startAddress;}
@@ -62,8 +65,8 @@ public class Ride {
     public String getDestinationAddress() {return destinationAddress;}
     public void setDestinationAddress(String destinationAddress) {this.destinationAddress = destinationAddress;}
 
-    public String getCustomerOrder() {return customerOrder;}
-    public void setCustomerOrder(String customerOrder) {this.customerOrder = customerOrder;}
+    public int getCustomerOrder() {return customerOrder;}
+    public void setCustomerOrder(int customerOrder) {this.customerOrder = customerOrder;}
 
     public String getDriverOrder() {return driverOrder;}
     public void setDriverOrder(String driverOrder) {this.driverOrder = driverOrder;}
@@ -79,6 +82,9 @@ public class Ride {
 
     public String getCustomerNote() {return customerNote;}
     public void setCustomerNote(String customerNote) {this.customerNote = customerNote;}
+
+    public RideOrderType getRideOrderType() {return rideOrderType;}
+    public void setRideOrderType(RideOrderType rideOrderType) {this.rideOrderType = rideOrderType;}
 
     public boolean isDeleted() {
         return deleted;
@@ -99,6 +105,7 @@ public class Ride {
                 "\nRide Duration: " + rideDuration +
                 "\nRide Status: " + rideStatus +
                 "\nCustomer Note: " + customerNote +
+                "\nOrder Type: " + rideOrderType +
                 "\nDeleted: " + deleted;
     }
 }

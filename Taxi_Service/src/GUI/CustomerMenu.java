@@ -3,14 +3,13 @@ package GUI;
 import AllUsers.Customer;
 import GUI.CustomerOptions.AppReservation;
 import GUI.CustomerOptions.PhoneReservation;
-import GUI.DispatcherOptions.DriversForm;
 import ServiceData.TaxiService;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CustomerMenu extends JFrame {
+
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu reservationMenu = new JMenu("Reservations");
     private JMenuItem phoneReservationItem = new JMenuItem("Phone Reservation");

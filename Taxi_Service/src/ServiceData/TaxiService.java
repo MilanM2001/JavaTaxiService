@@ -120,18 +120,18 @@ public class TaxiService {
         return null;
     }
 
-    public Car findCar(String IDCode) {
+    public Car findCar(int carID) {
         for (Car car : cars) {
-            if (car.getIDCode().equals(IDCode)) {
+            if (car.getCarID() == carID) {
                 return car;
             }
         }
         return null;
     }
 
-    public Ride findRide(String rideID) {
+    public Ride findRide(int rideID) {
         for (Ride ride : rides) {
-            if (ride.getRideID().equals(rideID)) {
+            if (ride.getRideID() == rideID) {
                 return ride;
             }
         }
@@ -145,6 +145,46 @@ public class TaxiService {
             }
         }
         return null;
+    }
+
+    public int generateIDDispatcher() {
+        int counter = 1;
+        for (Dispatcher dispatcher : dispatchers) {
+            counter++;
+        }
+        return counter;
+    }
+
+    public int generateIDDriver() {
+        int counter = 1;
+        for (Driver driver : drivers) {
+            counter++;
+        }
+        return counter;
+    }
+
+    public int generateIDCustomer() {
+        int counter = 1;
+        for (Customer customer : customers) {
+            counter++;
+        }
+        return counter;
+    }
+
+    public int generateIDRide() {
+        int counter = 1;
+        for (Ride ride : rides) {
+            counter++;
+        }
+        return counter;
+    }
+
+    public int generateIDCar() {
+        int counter = 1;
+        for (Car car : cars) {
+            counter++;
+        }
+        return counter;
     }
 
     public void loadDispatchers(String fileName) {
@@ -249,18 +289,17 @@ public class TaxiService {
             String line = null;
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("\\|");
-                String IDCode = split[0];
-                int carId = Integer.parseInt(split[1]);
-                String model = split[2];
-                String manufacturer = split[3];
-                int yearProduced = Integer.parseInt(split[4]);
-                int registrationNumber = Integer.parseInt(split[5]);
-                int taxiNumber = Integer.parseInt(split[6]);
-                int vehicleInt = Integer.parseInt(split[7]);
+                int carId = Integer.parseInt(split[0]);
+                String model = split[1];
+                String manufacturer = split[2];
+                int yearProduced = Integer.parseInt(split[3]);
+                int registrationNumber = Integer.parseInt(split[4]);
+                int taxiNumber = Integer.parseInt(split[5]);
+                int vehicleInt = Integer.parseInt(split[6]);
                 VehicleType vehicletype = VehicleType.values()[vehicleInt];
-                boolean deleted = Boolean.parseBoolean(split[8]);
+                boolean deleted = Boolean.parseBoolean(split[7]);
 
-                Car car = new Car(IDCode, carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted);
+                Car car = new Car(carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted);
                 cars.add(car);
             }
             br.close();
@@ -276,20 +315,22 @@ public class TaxiService {
             String line = null;
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("\\|");
-                String rideID = split[0];
-                double orderDate = Double.parseDouble(split[1]);
+                int rideID = Integer.parseInt(split[0]);
+                String orderDate = split[1];
                 String startAddress = split[2];
                 String destinationAddress = split[3];
-                String customerOrder = split[4];
+                int customerOrder = Integer.parseInt(split[4]);
                 String driverOrder = split[5];
                 double kmPassed = Double.parseDouble(split[6]);
                 double rideDuration = Double.parseDouble(split[7]);
                 int statusInt = Integer.parseInt(split[8]);
                 RideStatus rideStatus = RideStatus.values()[statusInt];
                 String customerNote = split[9];
-                boolean deleted = Boolean.parseBoolean(split[10]);
+                int rideOrderTypeInt = Integer.parseInt(split[10]);
+                RideOrderType rideOrderType = RideOrderType.values()[rideOrderTypeInt];
+                boolean deleted = Boolean.parseBoolean(split[11]);
 
-                Ride ride = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, deleted);
+                Ride ride = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, deleted);
                 rides.add(ride);
             }
             br.close();
@@ -425,7 +466,7 @@ public class TaxiService {
             BufferedWriter br = new BufferedWriter(new FileWriter(file));
             String content = "";
             for (Car car: cars) {
-                content += car.getIDCode() + "|" + car.getCarID() + "|" + car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
+                content += car.getCarID() + "|" + car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
                         + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "\n";
             }
             br.write(content);
@@ -442,7 +483,7 @@ public class TaxiService {
             String content = "";
             for (Ride ride: rides) {
                 content += ride.getRideID() + "|" + ride.getOrderDate() + "|" + ride.getStartAddress() + "|" + ride.getDestinationAddress() + "|"
-                        + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.getCustomerNote() + "|" + ride.isDeleted() +  "\n";
+                        + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.getCustomerNote() + "|" + ride.getRideOrderType().ordinal()+ "|" + ride.isDeleted() +  "\n";
             }
             br.write(content);
             br.close();

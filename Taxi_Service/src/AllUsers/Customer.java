@@ -3,7 +3,6 @@ package AllUsers;
 import Enums.Gender;
 import Enums.Roles;
 
-
 public class Customer extends Users {
 
     public Customer(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles) {

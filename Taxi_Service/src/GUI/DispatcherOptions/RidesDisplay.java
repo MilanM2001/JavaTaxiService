@@ -50,7 +50,7 @@ public class RidesDisplay extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note"};
+        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By"};
         Object[][] content = new Object[taxiService.allNotDeletedRides().size()][headings.length];
 
         for(int i=0; i<taxiService.allNotDeletedRides().size(); i++) {
@@ -65,6 +65,7 @@ public class RidesDisplay extends JFrame {
             content[i][7] = ride.getRideDuration();
             content[i][8] = ride.getRideStatus();
             content[i][9] = ride.getCustomerNote();
+            content[i][10] = ride.getRideOrderType();
         }
 
         tableModel = new DefaultTableModel(content, headings);
@@ -94,6 +95,7 @@ public class RidesDisplay extends JFrame {
             RidesDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
             RidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(100);
             RidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
+            RidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
         }
         JScrollPane scrollPane = new JScrollPane(RidesDisplay);
         add(scrollPane, BorderLayout.CENTER);
@@ -111,7 +113,7 @@ public class RidesDisplay extends JFrame {
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String rideID = tableModel.getValueAt(row, 0).toString();
+                    int rideID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
                     Ride ride = taxiService.findRide(rideID);
 
                     int choice = JOptionPane.showConfirmDialog(null,
@@ -120,7 +122,7 @@ public class RidesDisplay extends JFrame {
                     if(choice == JOptionPane.YES_OPTION) {
                         ride.setDeleted(true);
                         tableModel.removeRow(row);
-                        taxiService.saveRides(TaxiServiceMain.Drivers_File);
+                        taxiService.saveRides(TaxiServiceMain.Rides_File);
                     }
                 }
             }
@@ -141,7 +143,7 @@ public class RidesDisplay extends JFrame {
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
-                    String rideID = tableModel.getValueAt(row, 0).toString();
+                    int rideID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
                     Ride ride = taxiService.findRide(rideID);
                     if(ride == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Ride with that ID", "Error", JOptionPane.WARNING_MESSAGE);

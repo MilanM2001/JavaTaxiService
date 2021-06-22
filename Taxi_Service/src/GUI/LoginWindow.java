@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginWindow extends JFrame {
+
     private JLabel lblGreeting = new JLabel("Welcome, Please Register.");
     private JLabel lblUsername = new JLabel("Username");
     private JTextField txtUsername = new JTextField(20);
@@ -34,7 +35,6 @@ public class LoginWindow extends JFrame {
     public void initGUI() {
         MigLayout mig = new MigLayout("wrap 2", "[][]", "[]10[][]10[]");
         setLayout(mig);
-
         add(lblGreeting, "span 2");
         add(lblUsername);
         add(txtUsername);
@@ -43,7 +43,6 @@ public class LoginWindow extends JFrame {
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
-
         txtUsername.setText("milan01");
         pfPassword.setText("miki2001");
         getRootPane().setDefaultButton(btnOk);

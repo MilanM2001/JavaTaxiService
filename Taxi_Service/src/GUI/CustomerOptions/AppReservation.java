@@ -1,6 +1,7 @@
 package GUI.CustomerOptions;
 
 import AllUsers.Customer;
+import Enums.RideOrderType;
 import Enums.RideStatus;
 import GUI.DispatcherOptions.RidesForm;
 import Main.TaxiServiceMain;
@@ -11,6 +12,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AppReservation extends JFrame {
 
@@ -44,7 +47,10 @@ public class AppReservation extends JFrame {
     private JLabel lblCustomerNote = new JLabel("Note");
     private JTextField txtCustomerNote = new JTextField(20);
 
-    private JButton btnOk = new JButton("OK");
+    private JLabel lblRideOrderType = new JLabel("Order Type");
+    private JComboBox<RideOrderType> cbRideOrderType = new JComboBox<RideOrderType>(RideOrderType.values());
+
+    private JButton btnOk = new JButton("Order");
     private JButton btnCancel = new JButton("Cancel");
 
     private TaxiService taxiService;
@@ -73,36 +79,26 @@ public class AppReservation extends JFrame {
         if (ride != null) {
             FillFields();
         }
-        add(lblRideID);
-        add(txtRideID);
-
-        txtOrderDate.setText("0");
-        txtOrderDate.setEnabled(false);
-
         add(lblStartAddress);
         add(txtStartAddress);
 
         add(lblDestinationAddress);
         add(txtDestinationAddress);
 
-        add(lblCustomerOrder);
-        add(txtCustomerOrder);
         txtCustomerOrder.setText("");
 
         txtDriverOrder.setText("None");
-        txtDriverOrder.setEnabled(false);
 
         txtKmPassed.setText("0");
-        txtKmPassed.setEnabled(false);
 
         txtRideDuration.setText("0");
-        txtRideDuration.setEnabled(false);
 
         cbRideStatus.setSelectedItem(RideStatus.Created_On_Wait);
-        cbRideStatus.setEnabled(false);
 
         add(lblCustomerNote);
         add(txtCustomerNote);
+
+        cbRideOrderType.setSelectedItem(RideOrderType.Application);
 
         add(new JLabel());
         add(btnOk, "split 2");
@@ -114,19 +110,20 @@ public class AppReservation extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(RidesValidation()) {
-                    String rideID = txtRideID.getText().trim();
-                    double orderDate = Double.parseDouble(txtOrderDate.getText().trim());
+                    int rideID = taxiService.generateIDRide();
+                    String orderDate = new SimpleDateFormat("dd-MM-yyyy/HH:mm").format(new Date());
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
-                    String customerOrder = txtCustomerOrder.getText().trim();
+                    int customerOrder = Integer.parseInt(txtCustomerOrder.getText().trim());
                     String driverOrder = txtDriverOrder.getText().trim();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());
                     RideStatus rideStatus = (RideStatus) cbRideStatus.getSelectedItem();
                     String customerNote = txtCustomerNote.getText().trim();
+                    RideOrderType rideOrderType = (RideOrderType) cbRideOrderType.getSelectedItem();
 
                     if(ride == null) {
-                        Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, false);
+                        Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, false);
                         taxiService.addRide(newRide);
                     }else {
                         ride.setRideID(rideID);
@@ -139,6 +136,7 @@ public class AppReservation extends JFrame {
                         ride.setRideDuration(rideDuration);
                         ride.setRideStatus(rideStatus);
                         ride.setCustomerNote(customerNote);
+                        ride.setRideOrderType(rideOrderType);
                     }
                     taxiService.saveRides(TaxiServiceMain.Rides_File);
                     AppReservation.this.dispose();
@@ -146,11 +144,19 @@ public class AppReservation extends JFrame {
                 }
             }
         });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AppReservation.this.dispose();
+                AppReservation.this.setVisible(false);
+            }
+        });
     }
 
     private void FillFields() {
-        txtRideID.setText(ride.getRideID());
-        txtOrderDate.setText(String.valueOf(ride.getOrderDate()));
+        txtRideID.setText(String.valueOf(ride.getRideID()));
+        txtOrderDate.setText(ride.getOrderDate());
         txtStartAddress.setText(ride.getStartAddress());
         txtDestinationAddress.setText(ride.getDestinationAddress());
         txtCustomerOrder.setText(String.valueOf(ride.getCustomerOrder()));
@@ -159,6 +165,7 @@ public class AppReservation extends JFrame {
         txtRideDuration.setText(String.valueOf(ride.getRideDuration()));
         cbRideStatus.setSelectedItem(ride.getRideStatus());
         txtCustomerNote.setText(ride.getCustomerNote());
+        cbRideOrderType.setSelectedItem(ride.getRideOrderType());
     }
 
     private boolean RidesValidation() {
@@ -174,14 +181,6 @@ public class AppReservation extends JFrame {
         }if(txtCustomerNote.getText().trim().equals("")) {
             message += "- Note\n";
             ok = false;
-
-        }else if(ride == null){
-            String rideID = txtRideID.getText().trim();
-            Ride found = taxiService.findRide(rideID);
-            if(found != null) {
-                message += "- Ride with that ID already exists\n";
-                ok = false;
-            }
         }
         if(ok == false) {
             JOptionPane.showMessageDialog(null, message, "Incorrect Info", JOptionPane.WARNING_MESSAGE);

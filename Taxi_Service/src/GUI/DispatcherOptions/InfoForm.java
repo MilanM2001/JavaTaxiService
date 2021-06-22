@@ -105,6 +105,14 @@ public class InfoForm extends JFrame {
                 }
             }
         });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InfoForm.this.dispose();
+                InfoForm.this.setVisible(false);
+            }
+        });
     }
 
     private void FillFields() {

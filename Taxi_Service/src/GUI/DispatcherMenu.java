@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DispatcherMenu extends JFrame {
+
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu driversMenu = new JMenu("Users");
     private JMenuItem showDriversItem = new JMenuItem("Show Drivers");
@@ -42,23 +43,16 @@ public class DispatcherMenu extends JFrame {
         mainMenu.add(driversMenu);
         driversMenu.add(showDriversItem);
         driversMenu.add(showDispatchersItem);
-
         mainMenu.add(carsMenu);
         carsMenu.add(showCarsItem);
-
         mainMenu.add(ridesMenu);
         ridesMenu.add(showRidesItem);
-
         mainMenu.add(taxiServiceInfoMenu);
         taxiServiceInfoMenu.add(showServiceInfo);
-
         mainMenu.add(logOff);
-
-
     }
 
     private void initActions() {
-
         showDriversItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

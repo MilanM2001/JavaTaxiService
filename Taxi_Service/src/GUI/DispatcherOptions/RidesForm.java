@@ -1,6 +1,8 @@
 package GUI.DispatcherOptions;
 
+import Enums.RideOrderType;
 import Enums.RideStatus;
+import Enums.Roles;
 import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import Rides.Ride;
@@ -9,6 +11,8 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RidesForm extends JFrame {
 
@@ -42,6 +46,9 @@ public class RidesForm extends JFrame {
     private JLabel lblCustomerNote = new JLabel("Note");
     private JTextField txtCustomerNote = new JTextField(20);
 
+    private JLabel lblRideOrderType = new JLabel("Order Type");
+    private JComboBox<RideOrderType> cbRideOrderType = new JComboBox<RideOrderType>(RideOrderType.values());
+
     private JButton btnOk = new JButton("OK");
     private JButton btnCancel = new JButton("Cancel");
 
@@ -71,12 +78,6 @@ public class RidesForm extends JFrame {
         if(ride != null) {
             FillFields();
         }
-        add(lblRideID);
-        add(txtRideID);
-
-        add(lblOrderDate);
-        add(txtOrderDate);
-
         add(lblStartAddress);
         add(txtStartAddress);
 
@@ -101,6 +102,9 @@ public class RidesForm extends JFrame {
         add(lblCustomerNote);
         add(txtCustomerNote);
 
+        add(lblRideOrderType);
+        add(cbRideOrderType);
+
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
@@ -111,19 +115,20 @@ public class RidesForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(RidesValidation()) {
-                    String rideID = txtRideID.getText().trim();
-                    double orderDate = Double.parseDouble(txtOrderDate.getText().trim());
+                    int rideID = taxiService.generateIDRide();
+                    String orderDate = new SimpleDateFormat("dd-MM-yyyy/HH:mm").format(new Date());
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
-                    String customerOrder = txtCustomerOrder.getText().trim();
+                    int customerOrder = Integer.parseInt(txtCustomerOrder.getText().trim());
                     String driverOrder = txtDriverOrder.getText().trim();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());
                     RideStatus rideStatus = (RideStatus) cbRideStatus.getSelectedItem();
                     String customerNote = txtCustomerNote.getText().trim();
+                    RideOrderType rideOrderType = (RideOrderType) cbRideOrderType.getSelectedItem();
 
                     if(ride == null) {
-                        Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, false);
+                        Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, false);
                         taxiService.addRide(newRide);
                     }else {
                         ride.setRideID(rideID);
@@ -143,11 +148,19 @@ public class RidesForm extends JFrame {
                 }
             }
         });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RidesForm.this.dispose();
+                RidesForm.this.setVisible(false);
+            }
+        });
     }
 
     private void FillFields() {
-        txtRideID.setText(ride.getRideID());
-        txtOrderDate.setText(String.valueOf(ride.getOrderDate()));
+        txtRideID.setText(String.valueOf(ride.getRideID()));
+        txtOrderDate.setText(ride.getOrderDate());
         txtStartAddress.setText(ride.getStartAddress());
         txtDestinationAddress.setText(ride.getDestinationAddress());
         txtCustomerOrder.setText(String.valueOf(ride.getCustomerOrder()));
@@ -162,14 +175,7 @@ public class RidesForm extends JFrame {
         boolean ok = true;
         String message = "Please correct the following mistakes:\n";
 
-        if(txtRideID.getText().trim().equals("")) {
-            message += "- Ride ID\n";
-            ok = false;
-        }
-        if(txtOrderDate.getText().trim().equals("")) {
-            message += "- Order Date\n";
-            ok = false;
-        }if(txtStartAddress.getText().trim().equals("")) {
+        if(txtStartAddress.getText().trim().equals("")) {
             message += "- Start Address\n";
             ok = false;
         }if(txtDestinationAddress.getText().trim().equals("")) {
@@ -187,13 +193,6 @@ public class RidesForm extends JFrame {
         }if(txtRideDuration.getText().trim().equals("")) {
             message += "- Ride Duration\n";
             ok = false;
-        }else if(ride == null){
-            String rideID = txtRideID.getText().trim();
-            Ride found = taxiService.findRide(rideID);
-            if(found != null) {
-                message += "- Ride with that ID already exists\n";
-                ok = false;
-            }
         }
         if(ok == false) {
             JOptionPane.showMessageDialog(null, message, "Incorrect Info", JOptionPane.WARNING_MESSAGE);

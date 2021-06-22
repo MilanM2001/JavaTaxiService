@@ -3,6 +3,7 @@ package GUI.DispatcherOptions;
 import AllUsers.Driver;
 import Enums.Gender;
 import Enums.Roles;
+import GUI.CustomerOptions.PhoneReservation;
 import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import net.miginfocom.swing.MigLayout;
@@ -102,9 +103,6 @@ public class DriversForm extends JFrame {
         add(lblGender);
         add(cbGender);
 
-        add(lblID);
-        add(txtID);
-
         add(lblRoles);
         add(cbRoles);
         cbRoles.setSelectedItem(Roles.Driver);
@@ -134,7 +132,7 @@ public class DriversForm extends JFrame {
                     String address = txtAddress.getText().trim();
                     int phoneNumber = Integer.parseInt(txtPhoneNumber.getText().trim());
                     Gender gender = (Gender) cbGender.getSelectedItem();
-                    int id = Integer.parseInt(txtID.getText().trim());
+                    int id = taxiService.generateIDDriver();
                     Roles roles = (Roles) cbRoles.getSelectedItem();
                     double driverPay = Double.parseDouble(txtDriverPay.getText().trim());
                     int membershipCard = Integer.parseInt(txtMembershipCard.getText().trim());
@@ -160,6 +158,14 @@ public class DriversForm extends JFrame {
                     DriversForm.this.dispose();
                     DriversForm.this.setVisible(false);
                 }
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DriversForm.this.dispose();
+                DriversForm.this.setVisible(false);
             }
         });
     }
@@ -205,9 +211,6 @@ public class DriversForm extends JFrame {
             ok = false;
         }if(txtPhoneNumber.getText().trim().equals("")) {
             message += "- Phone Number\n";
-            ok = false;
-        }if(txtID.getText().trim().equals("")) {
-            message += "- ID\n";
             ok = false;
         }if(txtDriverPay.getText().trim().equals("")) {
             message += "- Pay\n";

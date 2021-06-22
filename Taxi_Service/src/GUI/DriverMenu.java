@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DriverMenu extends JFrame {
+
     private JMenuBar mainMenu = new JMenuBar();
     private JMenu carsMenu = new JMenu("Vehicles");
     private JMenuItem carsItem = new JMenuItem("Cars");
@@ -36,7 +37,6 @@ public class DriverMenu extends JFrame {
     }
 
     private void initActions() {
-
         logOff.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

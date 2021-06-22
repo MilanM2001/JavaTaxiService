@@ -5,6 +5,7 @@ import Enums.Gender;
 import Enums.Roles;
 
 public class Dispatcher extends Users {
+
     protected double dispatcherPay;
     protected int phoneLine;
     protected Department department;

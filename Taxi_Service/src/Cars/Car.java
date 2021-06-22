@@ -4,7 +4,7 @@ package Cars;
 import Enums.VehicleType;
 
 public class Car {
-    private String IDCode;
+
     private int carID;
     private String model;
     private String manufacturer;
@@ -15,7 +15,6 @@ public class Car {
     private boolean deleted;
 
     public Car() {
-        this.IDCode = "";
         this.carID = 0;
         this.model = "";
         this.manufacturer = "";
@@ -26,9 +25,8 @@ public class Car {
         this.deleted = false;
     }
 
-    public Car(String IDCode, int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
+    public Car(int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
         super();
-        this.IDCode = IDCode;
         this.carID = carID;
         this.model = model;
         this.manufacturer = manufacturer;
@@ -38,9 +36,6 @@ public class Car {
         this.vehicletype = vehicletype;
         this.deleted = deleted;
     }
-
-    public String getIDCode() {return IDCode;}
-    public void setIDCode(String IDCode) { this.IDCode = IDCode; }
 
     public int getCarID() {return carID;}
     public void setCarID(int carID) { this.carID = carID; }
@@ -72,8 +67,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Vehicle \nID Code: " + IDCode +
-        "\nCar ID: " + carID +
+        return "Vehicle \nCarID: " + carID +
         "\nModel: " + model +
         "\nManufacturer: " + manufacturer +
         "\nYear Produced: " + yearProduced +

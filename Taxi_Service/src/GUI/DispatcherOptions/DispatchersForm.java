@@ -4,6 +4,7 @@ import AllUsers.Dispatcher;
 import Enums.Department;
 import Enums.Gender;
 import Enums.Roles;
+import GUI.CustomerOptions.PhoneReservation;
 import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
 import net.miginfocom.swing.MigLayout;
@@ -106,9 +107,6 @@ public class DispatchersForm extends JFrame {
         add(lblGender);
         add(cbGender);
 
-        add(lblID);
-        add(txtID);
-
         add(lblRoles);
         add(cbRoles);
         cbRoles.setSelectedItem(Roles.Dispatcher);
@@ -144,7 +142,7 @@ public class DispatchersForm extends JFrame {
                     String address = txtAddress.getText().trim();
                     int phoneNumber = Integer.parseInt(txtPhoneNumber.getText().trim());
                     Gender gender = (Gender) cbGender.getSelectedItem();
-                    int id = Integer.parseInt(txtID.getText().trim());
+                    int id = taxiService.generateIDDispatcher();
                     Roles roles = (Roles) cbRoles.getSelectedItem();
                     double dispatcherPay = Double.parseDouble(txtDispatcherPay.getText().trim());
                     int phoneLine = Integer.parseInt(txtPhoneline.getText().trim());
@@ -172,6 +170,14 @@ public class DispatchersForm extends JFrame {
                     DispatchersForm.this.dispose();
                     DispatchersForm.this.setVisible(false);
                 }
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DispatchersForm.this.dispose();
+                DispatchersForm.this.setVisible(false);
             }
         });
     }
@@ -218,9 +224,6 @@ public class DispatchersForm extends JFrame {
             ok = false;
         }if(txtPhoneNumber.getText().trim().equals("")) {
             message += "- Phone Number\n";
-            ok = false;
-        }if(txtID.getText().trim().equals("")) {
-            message += "- ID\n";
             ok = false;
         }if(txtDispatcherPay.getText().trim().equals("")) {
             message += "- Pay\n";

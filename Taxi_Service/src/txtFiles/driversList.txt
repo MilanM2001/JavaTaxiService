@@ -1,3 +1,2 @@
-filipF|filip12|Filip|Filipovic|423|Dunavska9|652045|0|true|1|2|35000.0|4232
-david1995|david222|David|Davidovic|532|Gradska15|652352|0|false|2|2|35000.0|4215
-markoni05|mare123|Marko|Markovic|531|Studentska3|652643|0|false|3|2|40000.0|5413
+filipF|filip004|Filip|Filipovski|05912|Dunavska|658588|0|false|1|2|40000.0|23123
+jovanJ|jovica200|Jovan|Jovanovic|05652|Vrsacka10|658746|0|false|2|2|39000.0|54215
