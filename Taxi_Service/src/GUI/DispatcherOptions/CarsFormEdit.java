@@ -3,14 +3,15 @@ package GUI.DispatcherOptions;
 import Cars.Car;
 import Enums.VehicleAvailable;
 import Enums.VehicleType;
-import ServiceData.TaxiService;
 import Main.TaxiServiceMain;
+import ServiceData.TaxiService;
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CarsForm extends JFrame {
+public class CarsFormEdit extends JFrame{
 
     private JLabel lblCarID = new JLabel("Car ID");
     private JTextField txtCarID = new JTextField(20);
@@ -42,7 +43,7 @@ public class CarsForm extends JFrame {
     private TaxiService taxiService;
     private Car car;
 
-    public CarsForm(TaxiService taxiService, Car car) {
+    public CarsFormEdit(TaxiService taxiService, Car car) {
         this.taxiService = taxiService;
         this.car = car;
         if(car == null) {
@@ -95,7 +96,7 @@ public class CarsForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(CarsValidation()) {
-                    int carID = taxiService.generateIDCar();
+                    int carID = Integer.parseInt(txtCarID.getText().trim());
                     String model = txtModel.getText().trim();
                     String manufacturer = txtManufacturer.getText().trim();
                     int yearProduced = Integer.parseInt(txtYearProduced.getText().trim());
@@ -118,8 +119,8 @@ public class CarsForm extends JFrame {
                         car.setVehicleAvailable(vehicleAvailable);
                     }
                     taxiService.saveCars(TaxiServiceMain.Cars_File);
-                    CarsForm.this.dispose();
-                    CarsForm.this.setVisible(false);
+                    CarsFormEdit.this.dispose();
+                    CarsFormEdit.this.setVisible(false);
                 }
             }
         });
@@ -127,8 +128,8 @@ public class CarsForm extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CarsForm.this.dispose();
-                CarsForm.this.setVisible(false);
+                CarsFormEdit.this.dispose();
+                CarsFormEdit.this.setVisible(false);
             }
         });
     }
@@ -170,5 +171,4 @@ public class CarsForm extends JFrame {
 
         return ok;
     }
-
 }

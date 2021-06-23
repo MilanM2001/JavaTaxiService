@@ -151,7 +151,7 @@ public class DriversDisplay extends JFrame {
                     if(driver == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Driver with that Username", "Error", JOptionPane.WARNING_MESSAGE);
                     }else {
-                        DriversForm df = new DriversForm(taxiService, driver);
+                        DriversFormEdit df = new DriversFormEdit(taxiService, driver);
                         df.setVisible(true);
                     }
                 }

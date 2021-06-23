@@ -1,8 +1,9 @@
-package GUI.DispatcherOptions;
+package GUI.DriverOptions;
 
-import ServiceData.TaxiService;
+import GUI.DispatcherOptions.RidesForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
+import ServiceData.TaxiService;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -14,7 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RidesDisplay extends JFrame {
+public class RidesByApplicationDisplay extends JFrame {
 
     private JToolBar mainToolbar = new JToolBar();
     private JButton btnEdit = new JButton();
@@ -22,13 +23,13 @@ public class RidesDisplay extends JFrame {
     private JTextField jtfFilter = new JTextField();
 
     private DefaultTableModel tableModel;
-    private JTable RidesDisplay;
+    private JTable ApplicationRidesDisplay;
 
     private TaxiService taxiService;
 
-    public RidesDisplay(TaxiService taxiService) {
+    public RidesByApplicationDisplay(TaxiService taxiService) {
         this.taxiService = taxiService;
-        setTitle("Rides");
+        setTitle("Ordered By App");
         setSize(500, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -47,10 +48,10 @@ public class RidesDisplay extends JFrame {
         add(mainToolbar, BorderLayout.NORTH);
 
         String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By"};
-        Object[][] content = new Object[taxiService.allNotDeletedRides().size()][headings.length];
+        Object[][] content = new Object[taxiService.RidesByApplication().size()][headings.length];
 
-        for(int i=0; i<taxiService.allNotDeletedRides().size(); i++) {
-            Ride ride = taxiService.allNotDeletedRides().get(i);
+        for(int i=0; i<taxiService.RidesByApplication().size(); i++) {
+            Ride ride = taxiService.RidesByApplication().get(i);
             content[i][0] = ride.getRideID();
             content[i][1] = ride.getOrderDate();
             content[i][2] = ride.getStartAddress();
@@ -65,47 +66,47 @@ public class RidesDisplay extends JFrame {
         }
 
         tableModel = new DefaultTableModel(content, headings);
-        RidesDisplay = new JTable(tableModel);
+        ApplicationRidesDisplay = new JTable(tableModel);
 
-        RidesDisplay.setRowSelectionAllowed(true);
-        RidesDisplay.setColumnSelectionAllowed(false);
-        RidesDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        RidesDisplay.setDefaultEditor(Object.class, null);
-        RidesDisplay.getTableHeader().setReorderingAllowed(false);
+        ApplicationRidesDisplay.setRowSelectionAllowed(true);
+        ApplicationRidesDisplay.setColumnSelectionAllowed(false);
+        ApplicationRidesDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ApplicationRidesDisplay.setDefaultEditor(Object.class, null);
+        ApplicationRidesDisplay.getTableHeader().setReorderingAllowed(false);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JLabel("Specify a word to match:"), BorderLayout.WEST);
         panel.add(jtfFilter, BorderLayout.CENTER);
         add(panel, BorderLayout.SOUTH);
-        add(new JScrollPane(RidesDisplay), BorderLayout.CENTER);
+        add(new JScrollPane(ApplicationRidesDisplay), BorderLayout.CENTER);
 
-        RidesDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        ApplicationRidesDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for(int i=0; i< headings.length; i++) {
-            RidesDisplay.getColumnModel().getColumn(0).setPreferredWidth(50);
-            RidesDisplay.getColumnModel().getColumn(1).setPreferredWidth(110);
-            RidesDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(115);
-            RidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
-            RidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(0).setPreferredWidth(50);
+            ApplicationRidesDisplay.getColumnModel().getColumn(1).setPreferredWidth(110);
+            ApplicationRidesDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(115);
+            ApplicationRidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
         }
-        JScrollPane scrollPane = new JScrollPane(RidesDisplay);
+        JScrollPane scrollPane = new JScrollPane(ApplicationRidesDisplay);
         add(scrollPane, BorderLayout.CENTER);
     }
 
     private void initActions() {
         TableRowSorter<TableModel> rowSorter
-                = new TableRowSorter<>(RidesDisplay.getModel());
-        RidesDisplay.setRowSorter(rowSorter);
+                = new TableRowSorter<>(ApplicationRidesDisplay.getModel());
+        ApplicationRidesDisplay.setRowSorter(rowSorter);
 
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = RidesDisplay.getSelectedRow();
+                int row = ApplicationRidesDisplay.getSelectedRow();
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
@@ -127,7 +128,7 @@ public class RidesDisplay extends JFrame {
         btnEdit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = RidesDisplay.getSelectedRow();
+                int row = ApplicationRidesDisplay.getSelectedRow();
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
@@ -176,3 +177,4 @@ public class RidesDisplay extends JFrame {
     }
 
 }
+

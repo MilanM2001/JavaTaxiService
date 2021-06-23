@@ -51,7 +51,7 @@ public class CarsDisplay extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"ID", "Model", "Manufacturer", "Year Produced", "Registrations", "Taxi Number", "Type"};
+        String[] headings = new String[] {"ID", "Model", "Manufacturer", "Year Produced", "Registrations", "Taxi Number", "Type", "Available"};
         Object[][] content = new Object[taxiService.allNotDeletedCars().size()][headings.length];
 
         for(int i=0; i<taxiService.allNotDeletedCars().size(); i++) {
@@ -63,6 +63,7 @@ public class CarsDisplay extends JFrame {
             content[i][4] = car.getRegistrationNumber();
             content[i][5] = car.getTaxiNumber();
             content[i][6] = car.getVehicletype();
+            content[i][7] = car.getVehicleAvailable();
         }
 
         tableModel = new DefaultTableModel(content, headings);
@@ -88,6 +89,7 @@ public class CarsDisplay extends JFrame {
             CarsDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
             CarsDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
             CarsDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
+            CarsDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
         }
         JScrollPane scrollPane = new JScrollPane(CarsDisplay);
         add(scrollPane, BorderLayout.CENTER);
@@ -140,7 +142,7 @@ public class CarsDisplay extends JFrame {
                     if(car == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Car with that ID Code", "Error", JOptionPane.WARNING_MESSAGE);
                     }else {
-                        CarsForm cf = new CarsForm(taxiService, car);
+                        CarsFormEdit cf = new CarsFormEdit(taxiService, car);
                         cf.setVisible(true);
                     }
                 }

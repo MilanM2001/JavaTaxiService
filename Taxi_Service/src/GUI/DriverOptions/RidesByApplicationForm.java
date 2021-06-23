@@ -1,20 +1,18 @@
-package GUI.DispatcherOptions;
+package GUI.DriverOptions;
 
 import Enums.RideOrderType;
 import Enums.RideStatus;
-import Enums.Roles;
-import ServiceData.TaxiService;
+import GUI.DispatcherOptions.RidesForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
+import ServiceData.TaxiService;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class RidesForm extends JFrame {
+public class RidesByApplicationForm extends JFrame {
 
     private JLabel lblRideID = new JLabel("Ride ID");
     private JTextField txtRideID = new JTextField(20);
@@ -55,7 +53,7 @@ public class RidesForm extends JFrame {
     private TaxiService taxiService;
     private Ride ride;
 
-    public RidesForm(TaxiService taxiService, Ride ride) {
+    public RidesByApplicationForm(TaxiService taxiService, Ride ride) {
         this.taxiService = taxiService;
         this.ride = ride;
         if(ride == null) {
@@ -144,8 +142,8 @@ public class RidesForm extends JFrame {
                         ride.setCustomerNote(customerNote);
                     }
                     taxiService.saveRides(TaxiServiceMain.Rides_File);
-                    RidesForm.this.dispose();
-                    RidesForm.this.setVisible(false);
+                    RidesByApplicationForm.this.dispose();
+                    RidesByApplicationForm.this.setVisible(false);
                 }
             }
         });
@@ -153,8 +151,8 @@ public class RidesForm extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RidesForm.this.dispose();
-                RidesForm.this.setVisible(false);
+                RidesByApplicationForm.this.dispose();
+                RidesByApplicationForm.this.setVisible(false);
             }
         });
     }

@@ -1,6 +1,8 @@
 package GUI;
 
 import AllUsers.Driver;
+import GUI.DriverOptions.RidesByApplicationDisplay;
+import GUI.DriverOptions.RidesByApplicationForm;
 import ServiceData.TaxiService;
 
 import javax.swing.*;
@@ -10,8 +12,9 @@ import java.awt.event.ActionListener;
 public class DriverMenu extends JFrame {
 
     private JMenuBar mainMenu = new JMenuBar();
-    private JMenu carsMenu = new JMenu("Vehicles");
-    private JMenuItem carsItem = new JMenuItem("Cars");
+    private JMenu ridesMenu = new JMenu("Rides");
+    private JMenuItem ridesByApplication = new JMenuItem("Application");
+    private JMenuItem ridesByPhone = new JMenuItem("Phone");
     private JButton logOff = new JButton("Log Out");
 
     private TaxiService taxiService;
@@ -31,8 +34,9 @@ public class DriverMenu extends JFrame {
 
     private void initMenu() {
         setJMenuBar(mainMenu);
-        mainMenu.add(carsMenu);
-        carsMenu.add(carsItem);
+        mainMenu.add(ridesMenu);
+        ridesMenu.add(ridesByApplication);
+        ridesMenu.add(ridesByPhone);
         mainMenu.add(logOff);
     }
 
@@ -44,6 +48,21 @@ public class DriverMenu extends JFrame {
                 lw.setVisible(true);
                 DriverMenu.this.dispose();
                 DriverMenu.this.setVisible(false);
+            }
+        });
+
+        ridesByApplication.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RidesByApplicationDisplay dr = new RidesByApplicationDisplay(taxiService);
+                dr.setVisible(true);
+            }
+        });
+
+        ridesByPhone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

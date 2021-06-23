@@ -22,6 +22,7 @@ public class Ride {
     private boolean deleted;
 
 
+
     public Ride() {
         this.rideID = 0;
         this.orderDate = "";

@@ -298,8 +298,10 @@ public class TaxiService {
                 int vehicleInt = Integer.parseInt(split[6]);
                 VehicleType vehicletype = VehicleType.values()[vehicleInt];
                 boolean deleted = Boolean.parseBoolean(split[7]);
+                int availableInt = Integer.parseInt(split[8]);
+                VehicleAvailable vehicleAvailable = VehicleAvailable.values()[availableInt];
 
-                Car car = new Car(carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted);
+                Car car = new Car(carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted, vehicleAvailable);
                 cars.add(car);
             }
             br.close();
@@ -402,6 +404,16 @@ public class TaxiService {
         return notDeleted;
     }
 
+    public ArrayList<Ride> RidesByApplication() {
+        ArrayList<Ride> byApp = new ArrayList<Ride>();
+        for (Ride ride: rides) {
+            if(ride.getRideOrderType().equals(RideOrderType.Application) && !ride.isDeleted()) {
+                byApp.add(ride);
+            }
+        }
+        return byApp;
+    }
+
     public ArrayList<TaxiServiceInfo> allNotDeletedInfo() {
         ArrayList<TaxiServiceInfo> notDeleted = new ArrayList<TaxiServiceInfo>();
         for (TaxiServiceInfo taxiServiceInfo : serviceInfos) {
@@ -467,7 +479,7 @@ public class TaxiService {
             String content = "";
             for (Car car: cars) {
                 content += car.getCarID() + "|" + car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
-                        + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "\n";
+                        + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "|" + car.getVehicleAvailable().ordinal() + "\n";
             }
             br.write(content);
             br.close();

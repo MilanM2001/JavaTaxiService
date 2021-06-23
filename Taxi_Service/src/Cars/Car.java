@@ -1,6 +1,7 @@
 package Cars;
 
 
+import Enums.VehicleAvailable;
 import Enums.VehicleType;
 
 public class Car {
@@ -13,6 +14,7 @@ public class Car {
     private int taxiNumber;
     private VehicleType vehicletype;
     private boolean deleted;
+    private VehicleAvailable vehicleAvailable;
 
     public Car() {
         this.carID = 0;
@@ -23,9 +25,10 @@ public class Car {
         this.taxiNumber = 0;
         this.vehicletype = VehicleType.Passenger;
         this.deleted = false;
+        this.vehicleAvailable = VehicleAvailable.Available;
     }
 
-    public Car(int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted) {
+    public Car(int carID, String model, String manufacturer, int yearProduced, int registrationNumber, int taxiNumber, VehicleType vehicletype, boolean deleted, VehicleAvailable vehicleAvailable) {
         super();
         this.carID = carID;
         this.model = model;
@@ -35,6 +38,7 @@ public class Car {
         this.taxiNumber = taxiNumber;
         this.vehicletype = vehicletype;
         this.deleted = deleted;
+        this.vehicleAvailable = vehicleAvailable;
     }
 
     public int getCarID() {return carID;}
@@ -65,6 +69,9 @@ public class Car {
         this.deleted = deleted;
     }
 
+    public VehicleAvailable getVehicleAvailable() { return vehicleAvailable;}
+    public void setVehicleAvailable(VehicleAvailable vehicleAvailable) {this.vehicleAvailable = vehicleAvailable;}
+
     @Override
     public String toString() {
         return "Vehicle \nCarID: " + carID +
@@ -74,7 +81,8 @@ public class Car {
         "\nRegistration Number: " + registrationNumber +
         "\nTaxi Number: " + taxiNumber +
         "\nVehicle Type: " + vehicletype +
-        "\nDeleted: " + deleted;
+        "\nDeleted: " + deleted +
+        "\nVehicle Available: " + vehicleAvailable;
     }
 
 }
