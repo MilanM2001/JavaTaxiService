@@ -3,7 +3,6 @@ package GUI.CustomerOptions;
 import AllUsers.Customer;
 import Enums.RideOrderType;
 import Enums.RideStatus;
-import GUI.DispatcherOptions.RidesForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 import ServiceData.TaxiService;
@@ -85,7 +84,7 @@ public class AppReservation extends JFrame {
         add(lblDestinationAddress);
         add(txtDestinationAddress);
 
-        txtCustomerOrder.setText("");
+        txtCustomerOrder.setText("0");
 
         txtDriverOrder.setText("None");
 

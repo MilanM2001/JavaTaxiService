@@ -414,6 +414,16 @@ public class TaxiService {
         return byApp;
     }
 
+    public ArrayList<Ride> RidesByPhone() {
+        ArrayList<Ride> byPhone = new ArrayList<Ride>();
+        for (Ride ride: rides) {
+            if(ride.getRideOrderType().equals(RideOrderType.Phone) && !ride.isDeleted()) {
+                byPhone.add(ride);
+            }
+        }
+        return byPhone;
+    }
+
     public ArrayList<TaxiServiceInfo> allNotDeletedInfo() {
         ArrayList<TaxiServiceInfo> notDeleted = new ArrayList<TaxiServiceInfo>();
         for (TaxiServiceInfo taxiServiceInfo : serviceInfos) {

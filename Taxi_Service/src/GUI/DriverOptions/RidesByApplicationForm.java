@@ -2,7 +2,6 @@ package GUI.DriverOptions;
 
 import Enums.RideOrderType;
 import Enums.RideStatus;
-import GUI.DispatcherOptions.RidesForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 import ServiceData.TaxiService;
@@ -86,12 +85,13 @@ public class RidesByApplicationForm extends JFrame {
 
         txtCustomerOrder.setEnabled(false);
 
-        add(lblDriverOrder);
-        add(txtDriverOrder);
+        txtDriverOrder.setEnabled(false);
 
-        txtKmPassed.setEnabled(false);
+        add(lblKmPassed);
+        add(txtKmPassed);
 
-        txtRideDuration.setEnabled(false);
+        add(lblRideDuration);
+        add(txtRideDuration);
 
         add(lblRideStatus);
         add(cbRideStatus);

@@ -2,9 +2,6 @@ package Rides;
 
 import Enums.RideOrderType;
 import Enums.RideStatus;
-import Enums.VehicleType;
-
-import java.time.LocalDateTime;
 
 public class Ride {
 
@@ -20,8 +17,6 @@ public class Ride {
     private String customerNote;
     private RideOrderType rideOrderType;
     private boolean deleted;
-
-
 
     public Ride() {
         this.rideID = 0;

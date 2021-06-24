@@ -1,6 +1,6 @@
 package GUI.DriverOptions;
 
-import GUI.DispatcherOptions.RidesForm;
+import GUI.DispatcherOptions.ForRides.RidesForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 import ServiceData.TaxiService;
@@ -137,7 +137,7 @@ public class RidesByApplicationDisplay extends JFrame {
                     if(ride == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Ride with that ID", "Error", JOptionPane.WARNING_MESSAGE);
                     }else {
-                        RidesForm rf = new RidesForm(taxiService, ride);
+                        RidesByApplicationForm rf = new RidesByApplicationForm(taxiService, ride);
                         rf.setVisible(true);
                     }
                 }

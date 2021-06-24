@@ -3,6 +3,9 @@ package GUI;
 import AllUsers.Customer;
 import AllUsers.Dispatcher;
 import AllUsers.Driver;
+import GUI.Menus.CustomerMenu;
+import GUI.Menus.DispatcherMenu;
+import GUI.Menus.DriverMenu;
 import ServiceData.TaxiService;
 import net.miginfocom.swing.MigLayout;
 
@@ -63,16 +66,14 @@ public class LoginWindow extends JFrame {
                 String username = txtUsername.getText().trim();
                 String password = new String(pfPassword.getPassword()).trim();
 
-
                 if(username.equals("") || password.equals("")) {
-                    JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Please Enter Username and Password.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
                     Driver driverLoggedIn = taxiService.driverLogin(username, password);
                     Customer customerLoggedIn = taxiService.customerLogin(username, password);
                     Dispatcher dispatcherLoggedIn = taxiService.dispatcherLogin(username, password);
 
                     if(driverLoggedIn == null) {
-
                     }else {
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
@@ -80,7 +81,6 @@ public class LoginWindow extends JFrame {
                         driverM.setVisible(true);
                     }
                     if(customerLoggedIn == null) {
-
                     }else {
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
@@ -88,17 +88,17 @@ public class LoginWindow extends JFrame {
                         customerM.setVisible(true);
                     }
                     if(dispatcherLoggedIn == null) {
-
                     }else {
                         LoginWindow.this.dispose();
                         LoginWindow.this.setVisible(false);
                         DispatcherMenu dispatcherM = new DispatcherMenu(taxiService, dispatcherLoggedIn);
                         dispatcherM.setVisible(true);
                     }
+                    if(driverLoggedIn == null && customerLoggedIn == null && dispatcherLoggedIn == null) {
+                        JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
                 }
-
             }
         });
-
     }
 }
