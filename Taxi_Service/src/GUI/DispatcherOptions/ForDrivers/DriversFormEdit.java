@@ -1,6 +1,7 @@
 package GUI.DispatcherOptions.ForDrivers;
 
 import AllUsers.Driver;
+import Cars.Car;
 import Enums.Gender;
 import Enums.Roles;
 import Main.TaxiServiceMain;
@@ -48,6 +49,12 @@ public class DriversFormEdit extends JFrame {
 
     private JLabel lblMembershipCard = new JLabel("Membership Card");
     private JTextField txtMembershipCard = new JTextField(20);
+
+    private JLabel lblCarIDString = new JLabel("Car ID String");
+    private JTextField txtCarIDString = new JTextField(20);
+
+    private JLabel lblCar = new JLabel("Car");
+    private JComboBox<Car> cbCar = new JComboBox<Car>();
 
     private JButton btnOk = new JButton("OK");
     private JButton btnCancel = new JButton("Cancel");
@@ -113,6 +120,9 @@ public class DriversFormEdit extends JFrame {
         add(lblMembershipCard);
         add(txtMembershipCard);
 
+        add(lblCar);
+        add(cbCar);
+
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
@@ -135,9 +145,11 @@ public class DriversFormEdit extends JFrame {
                     Roles roles = (Roles) cbRoles.getSelectedItem();
                     double driverPay = Double.parseDouble(txtDriverPay.getText().trim());
                     int membershipCard = Integer.parseInt(txtMembershipCard.getText().trim());
+                    String carIDString = txtCarIDString.getText().trim();
+                    Car car = (Car) cbCar.getSelectedItem();
 
                     if(driver == null) {
-                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard);
+                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard, carIDString, car);
                         taxiService.addDriver(newDriver);
                     }else {
                         driver.setUsername(username);
@@ -152,6 +164,8 @@ public class DriversFormEdit extends JFrame {
                         driver.setRoles(roles);
                         driver.setDriverPay(driverPay);
                         driver.setMembershipCard(membershipCard);
+                        driver.setCarIDString(carIDString);
+                        driver.setCar(car);
                     }
                     taxiService.saveDrivers(TaxiServiceMain.Drivers_File);
                     DriversFormEdit.this.dispose();
@@ -182,6 +196,8 @@ public class DriversFormEdit extends JFrame {
         cbRoles.setSelectedItem(driver.getRoles());
         txtDriverPay.setText(String.valueOf(driver.getDriverPay()));
         txtMembershipCard.setText(String.valueOf(driver.getMembershipCard()));
+        txtCarIDString.setText(driver.getCarIDString());
+        cbCar.setSelectedItem(driver.getCar());
     }
 
     private boolean Validation() {

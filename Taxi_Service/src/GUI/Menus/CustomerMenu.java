@@ -3,7 +3,7 @@ package GUI.Menus;
 import AllUsers.Customer;
 import GUI.CustomerOptions.AppReservation;
 import GUI.CustomerOptions.PhoneReservation;
-import GUI.LoginWindow;
+import Main.LoginWindow;
 import ServiceData.TaxiService;
 import javax.swing.*;
 import java.awt.event.ActionEvent;

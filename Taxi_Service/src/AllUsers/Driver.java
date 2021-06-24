@@ -1,5 +1,6 @@
 package AllUsers;
 
+import Cars.Car;
 import Enums.Gender;
 import Enums.Roles;
 
@@ -7,11 +8,15 @@ public class Driver extends Users {
 
     protected double driverPay;
     protected int membershipCard;
+    protected String carIDString;
+    protected Car car;
 
-    public Driver(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles, double driverPay, int membershipCard) {
+    public Driver(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles, double driverPay, int membershipCard,String carIDString, Car car) {
         super(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles);
         this.driverPay = driverPay;
         this.membershipCard = membershipCard;
+        this.car = car;
+        this.carIDString = carIDString;
     }
 
     public double getDriverPay() {return driverPay;}
@@ -19,6 +24,12 @@ public class Driver extends Users {
 
     public int getMembershipCard() {return membershipCard;}
     public void setMembershipCard(int membershipCard) {this.membershipCard = membershipCard;}
+
+    public Car getCar() {return car;}
+    public void setCar(Car car) {this.car = car;}
+
+    public String getCarIDString() {return carIDString;}
+    public void setCarIDString(String carIDString) {this.carIDString = carIDString;}
 
     @Override
     public String toString() {
@@ -34,7 +45,9 @@ public class Driver extends Users {
                 "\nID: " + id +
                 "\nRoles: " + roles +
                 "\nPay: " + driverPay +
-                "\nMembership Card: " + membershipCard;
+                "\nMembership Card: " + membershipCard +
+                "\nCarID String: " + carIDString +
+                "\nCar: " + car;
     }
 
 }

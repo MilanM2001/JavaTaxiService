@@ -1,4 +1,4 @@
-package GUI;
+package Main;
 
 import AllUsers.Customer;
 import AllUsers.Dispatcher;

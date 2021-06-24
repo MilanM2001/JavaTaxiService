@@ -28,7 +28,7 @@ public class RidesByPhoneToDriversDisplay extends JFrame {
 
     public RidesByPhoneToDriversDisplay(TaxiService taxiService) {
         this.taxiService = taxiService;
-        setTitle("Ordered By App");
+        setTitle("Ordered By Phone");
         setSize(500, 300);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -136,7 +136,7 @@ public class RidesByPhoneToDriversDisplay extends JFrame {
                     if(ride == null) {
                         JOptionPane.showMessageDialog(null, "Couldn't find a Ride with that ID", "Error", JOptionPane.WARNING_MESSAGE);
                     }else {
-                        RidesForm rf = new RidesForm(taxiService, ride);
+                        RidesByPhoneToDriversForm rf = new RidesByPhoneToDriversForm(taxiService, ride);
                         rf.setVisible(true);
                     }
                 }

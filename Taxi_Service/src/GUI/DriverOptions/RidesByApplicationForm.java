@@ -28,7 +28,7 @@ public class RidesByApplicationForm extends JFrame {
     private JLabel lblCustomerOrder = new JLabel("Customer");
     private JTextField txtCustomerOrder = new JTextField(20);
 
-    private JLabel lblDriverOrder = new JLabel("Driver");
+    private JLabel lblDriverOrder = new JLabel("Your Name");
     private JTextField txtDriverOrder = new JTextField(20);
 
     private JLabel lblKmPassed = new JLabel("KM Passed");
@@ -58,7 +58,7 @@ public class RidesByApplicationForm extends JFrame {
         if(ride == null) {
             setTitle("Adding Ride");
         }else {
-            setTitle("Change Information - " + ride.getRideID());
+            setTitle("Finishing Ride - " + ride.getRideID());
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -85,7 +85,8 @@ public class RidesByApplicationForm extends JFrame {
 
         txtCustomerOrder.setEnabled(false);
 
-        txtDriverOrder.setEnabled(false);
+        add(lblDriverOrder);
+        add(txtDriverOrder);
 
         add(lblKmPassed);
         add(txtKmPassed);
@@ -95,6 +96,8 @@ public class RidesByApplicationForm extends JFrame {
 
         add(lblRideStatus);
         add(cbRideStatus);
+        cbRideStatus.setSelectedItem(RideStatus.Finished);
+        cbRideStatus.setEnabled(false);
 
         add(lblCustomerNote);
         add(txtCustomerNote);
@@ -118,7 +121,7 @@ public class RidesByApplicationForm extends JFrame {
                     String orderDate = txtOrderDate.getText().trim();
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
-                    int customerOrder = Integer.parseInt(txtCustomerOrder.getText().trim());
+                    String customerOrder = txtCustomerOrder.getText().trim();
                     String driverOrder = txtDriverOrder.getText().trim();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());

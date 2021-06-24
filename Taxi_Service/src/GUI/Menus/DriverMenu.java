@@ -3,7 +3,7 @@ package GUI.Menus;
 import AllUsers.Driver;
 import GUI.DriverOptions.RidesByApplicationDisplay;
 import GUI.DriverOptions.RidesByPhoneDisplay;
-import GUI.LoginWindow;
+import Main.LoginWindow;
 import ServiceData.TaxiService;
 
 import javax.swing.*;

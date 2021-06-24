@@ -117,7 +117,7 @@ public class RidesForm extends JFrame {
                     String orderDate = txtOrderDate.getText().trim();
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
-                    int customerOrder = Integer.parseInt(txtCustomerOrder.getText().trim());
+                    String customerOrder = txtCustomerOrder.getText().trim();
                     String driverOrder = txtDriverOrder.getText().trim();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());

@@ -1,2 +1,2 @@
-1|20-06-2021/23:38|Vrsac|Sokolac|1|None|0.0|0.0|0||0|false
-2|20-06-2021/23:40|Novi Sad|Zrenjanin|2|None|0.0|0.0|1|Fast Ride|1|false
+1|25-06-2021/01:09|Vrsac|Novi Sad|KristiX|None|0.0|0.0|1|No Note|1|false
+2|25-06-2021/01:18|Sokolac|Zrenjanin|David1987|vozac|0.0|0.0|2|None|0|false

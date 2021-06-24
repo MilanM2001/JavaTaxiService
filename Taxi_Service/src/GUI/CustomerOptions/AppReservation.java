@@ -28,7 +28,7 @@ public class AppReservation extends JFrame {
     private JLabel lblDestinationAddress = new JLabel("Destination Address");
     private JTextField txtDestinationAddress = new JTextField(20);
 
-    private JLabel lblCustomerOrder = new JLabel("Customer");
+    private JLabel lblCustomerOrder = new JLabel("Your Name");
     private JTextField txtCustomerOrder = new JTextField(20);
 
     private JLabel lblDriverOrder = new JLabel("Driver");
@@ -84,7 +84,8 @@ public class AppReservation extends JFrame {
         add(lblDestinationAddress);
         add(txtDestinationAddress);
 
-        txtCustomerOrder.setText("0");
+        add(lblCustomerOrder);
+        add(txtCustomerOrder);
 
         txtDriverOrder.setText("None");
 
@@ -113,7 +114,7 @@ public class AppReservation extends JFrame {
                     String orderDate = new SimpleDateFormat("dd-MM-yyyy/HH:mm").format(new Date());
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
-                    int customerOrder = Integer.parseInt(txtCustomerOrder.getText().trim());
+                    String customerOrder = txtCustomerOrder.getText().trim();
                     String driverOrder = txtDriverOrder.getText().trim();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());

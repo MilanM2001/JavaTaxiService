@@ -72,16 +72,6 @@ public class TaxiService {
         }
         return null;
     }
-//
-//    public Users usersLogin(String username, String password) {
-//        for(Users users : customers) {
-//            if(customer.getUsername().equalsIgnoreCase(username) &&
-//                    customer.getPassword().equals(password) && !customer.isDeleted()) {
-//                return customer;
-//            }
-//        }
-//        return null;
-//    }
 
     public Dispatcher dispatcherLogin(String username, String password) {
         for(Dispatcher dispatcher : dispatchers) {
@@ -272,8 +262,11 @@ public class TaxiService {
                 Roles roles = Roles.values()[rolesInt];
                 double driverPay = Double.parseDouble(split[11]);
                 int membershipCard = Integer.parseInt(split[12]);
+                String carIDString = split[13];
+                int carID = Integer.parseInt(carIDString);
+                Car car = findCar(carID);
 
-                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles, driverPay, membershipCard);
+                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles, driverPay, membershipCard, carIDString, car);
                 drivers.add(driver);
             }
             br.close();
@@ -321,7 +314,7 @@ public class TaxiService {
                 String orderDate = split[1];
                 String startAddress = split[2];
                 String destinationAddress = split[3];
-                int customerOrder = Integer.parseInt(split[4]);
+                String customerOrder = split[4];
                 String driverOrder = split[5];
                 double kmPassed = Double.parseDouble(split[6]);
                 double rideDuration = Double.parseDouble(split[7]);
@@ -434,6 +427,15 @@ public class TaxiService {
         return notDeleted;
     }
 
+    public Car findCarID(int carID) {
+        for(Car car : cars) {
+            if(car.getCarID() == carID){
+                return car;
+            }
+        }
+        return null;
+    }
+
     public void saveDrivers(String fileName) {
         try {
             File file = new File("src/txtFiles/" + fileName);
@@ -441,7 +443,7 @@ public class TaxiService {
             String content = "";
             for (Driver driver: drivers) {
                 content += driver.getUsername() + "|" + driver.getPassword() + "|" + driver.getName() + "|"
-                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.isDeleted() + "|" + driver.getId() + "|" + driver.getRoles().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "\n";
+                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.isDeleted() + "|" + driver.getId() + "|" + driver.getRoles().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "|" + driver.getCarIDString() + "|" + driver.getCar() + "\n";
             }
             br.write(content);
             br.close();

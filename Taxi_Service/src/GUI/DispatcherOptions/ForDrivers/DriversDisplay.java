@@ -50,7 +50,7 @@ public class DriversDisplay extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"Username", "Password", "Name", "Last Name", "JMBG", "Address", "Phone Number", "Gender", "ID", "Role", "Pay", "Card"};
+        String[] headings = new String[] {"Username", "Password", "Name", "Last Name", "JMBG", "Address", "Phone Number", "Gender", "ID", "Role", "Pay", "Car ID", "Card"};
         Object[][] content = new Object[taxiService.allNotDeletedDrivers().size()][headings.length];
 
         for(int i=0; i<taxiService.allNotDeletedDrivers().size(); i++) {
@@ -66,7 +66,8 @@ public class DriversDisplay extends JFrame {
             content[i][8] = driver.getId();
             content[i][9] = driver.getRoles();
             content[i][10] = driver.getDriverPay();
-            content[i][11] = driver.getMembershipCard();
+            content[i][11] = driver.getCar();
+            content[i][12] = driver.getMembershipCard();
 
         }
 
@@ -99,6 +100,7 @@ public class DriversDisplay extends JFrame {
             DriversDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
             DriversDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
             DriversDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
+            DriversDisplay.getColumnModel().getColumn(12).setPreferredWidth(100);
         }
         JScrollPane scrollPane = new JScrollPane(DriversDisplay);
         add(scrollPane, BorderLayout.CENTER);

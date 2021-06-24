@@ -3,7 +3,6 @@ package GUI.CustomerOptions;
 import AllUsers.Customer;
 import Enums.RideOrderType;
 import Enums.RideStatus;
-import GUI.LoginWindow;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 import ServiceData.TaxiService;
@@ -29,7 +28,7 @@ public class PhoneReservation extends JFrame {
     private JLabel lblDestinationAddress = new JLabel("Destination Address");
     private JTextField txtDestinationAddress = new JTextField(20);
 
-    private JLabel lblCustomerOrder = new JLabel("Customer");
+    private JLabel lblCustomerOrder = new JLabel("Your Name");
     private JTextField txtCustomerOrder = new JTextField(20);
 
     private JLabel lblDriverOrder = new JLabel("Driver");
@@ -84,6 +83,9 @@ public class PhoneReservation extends JFrame {
         add(lblDestinationAddress);
         add(txtDestinationAddress);
 
+        add(lblCustomerOrder);
+        add(txtCustomerOrder);
+
         txtDriverOrder.setText("None");
 
         txtKmPassed.setText("0");
@@ -111,7 +113,7 @@ public class PhoneReservation extends JFrame {
                     String orderDate = new SimpleDateFormat("dd-MM-yyyy/HH:mm").format(new Date());
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
-                    int customerOrder = customer.getId();
+                    String customerOrder = txtCustomerOrder.getText().trim();
                     String driverOrder = txtDriverOrder.getText().trim();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());

@@ -1,2 +1,1 @@
-filipF|filip004|Filip|Filipovski|05912|Dunavska|658588|0|false|1|2|40000.0|23123
-jovanJ|jovica200|Jovan|Jovanovic|05652|Vrsacka10|658746|0|false|2|2|39000.0|54215
+vozac|vozac1|filip|filipovic|241241|Novosadska|213231|0|false|1|2|35000.0|412312|0|null
