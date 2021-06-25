@@ -83,6 +83,13 @@ public class RidesByPhoneForm extends JFrame {
         add(txtDestinationAddress);
         txtDestinationAddress.setEnabled(false);
 
+        add(lblCustomerOrder);
+        add(txtCustomerOrder);
+        txtCustomerOrder.setEnabled(false);
+
+        add(lblDriverOrder);
+        add(txtDriverOrder);
+
         add(lblKmPassed);
         add(txtKmPassed);
 
@@ -91,6 +98,8 @@ public class RidesByPhoneForm extends JFrame {
 
         add(lblRideStatus);
         add(cbRideStatus);
+        cbRideStatus.setSelectedItem(RideStatus.Finished);
+        cbRideStatus.setEnabled(false);
 
         add(lblCustomerNote);
         add(txtCustomerNote);

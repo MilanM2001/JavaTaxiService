@@ -119,7 +119,6 @@ public class RidesByApplicationDisplay extends JFrame {
                 }else {
                     int rideID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
                     Ride ride = taxiService.findRide(rideID);
-
                     int choice = JOptionPane.showConfirmDialog(null,
                             "Are you sure you want to CANCEL this ride?",
                             rideID + " - Confirm Choice", JOptionPane.YES_NO_OPTION);

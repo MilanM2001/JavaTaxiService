@@ -83,6 +83,8 @@ public class RidesByApplicationForm extends JFrame {
         add(txtDestinationAddress);
         txtDestinationAddress.setEnabled(false);
 
+        add(lblCustomerOrder);
+        add(txtCustomerOrder);
         txtCustomerOrder.setEnabled(false);
 
         add(lblDriverOrder);

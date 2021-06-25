@@ -1,5 +1,6 @@
 package GUI.DriverOptions;
 
+import Enums.RideStatus;
 import GUI.DispatcherOptions.ForRides.RidesForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
@@ -20,6 +21,7 @@ public class RidesByPhoneDisplay extends JFrame {
     private JToolBar mainToolbar = new JToolBar();
     private JButton btnEdit = new JButton();
     private JButton btnDelete = new JButton();
+    private JButton btnAccept = new JButton();
     private JTextField jtfFilter = new JTextField();
 
     private DefaultTableModel tableModel;
@@ -42,9 +44,12 @@ public class RidesByPhoneDisplay extends JFrame {
         btnEdit.setIcon(editIcon);
         ImageIcon deleteIcon = new ImageIcon(getClass().getResource("/images/remove.gif"));
         btnDelete.setIcon(deleteIcon);
+        ImageIcon acceptIcon = new ImageIcon(getClass().getResource("/images/accept.gif"));
+        btnAccept.setIcon(acceptIcon);
 
         mainToolbar.add(btnEdit);
         mainToolbar.add(btnDelete);
+        mainToolbar.add(btnAccept);
         add(mainToolbar, BorderLayout.NORTH);
 
         String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By"};
@@ -139,6 +144,28 @@ public class RidesByPhoneDisplay extends JFrame {
                     }else {
                         RidesByPhoneForm rf = new RidesByPhoneForm(taxiService, ride);
                         rf.setVisible(true);
+                    }
+                }
+            }
+        });
+
+        btnAccept.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = ApplicationRidesDisplay.getSelectedRow();
+                if(row == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
+                }else {
+                    int rideID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+                    Ride ride = taxiService.findRide(rideID);
+
+                    int choice = JOptionPane.showConfirmDialog(null,
+                            "Are you sure you want to ACCEPT this Ride?",
+                            rideID + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
+                    if(choice == JOptionPane.YES_OPTION) {
+                        ride.setRideStatus(RideStatus.Accepted);
+//                        tableModel.removeRow(row);
+                        taxiService.saveRides(TaxiServiceMain.Rides_File);
                     }
                 }
             }
