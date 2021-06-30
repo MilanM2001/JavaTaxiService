@@ -66,7 +66,7 @@ public class DriversDisplay extends JFrame {
             content[i][8] = driver.getId();
             content[i][9] = driver.getRoles();
             content[i][10] = driver.getDriverPay();
-            content[i][11] = driver.getCar();
+            content[i][11] = driver.getCarID();
             content[i][12] = driver.getMembershipCard();
 
         }

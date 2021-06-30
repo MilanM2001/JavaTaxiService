@@ -8,15 +8,13 @@ public class Driver extends Users {
 
     protected double driverPay;
     protected int membershipCard;
-    protected String carIDString;
-    protected Car car;
+    protected int carID;
 
-    public Driver(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles, double driverPay, int membershipCard,String carIDString, Car car) {
+    public Driver(String username, String password, String name, String lastName, String jmbg, String address, int phoneNumber, Gender gender, boolean deleted, int id, Roles roles, double driverPay, int membershipCard, int carID) {
         super(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles);
         this.driverPay = driverPay;
         this.membershipCard = membershipCard;
-        this.car = car;
-        this.carIDString = carIDString;
+        this.carID = carID;
     }
 
     public double getDriverPay() {return driverPay;}
@@ -25,11 +23,8 @@ public class Driver extends Users {
     public int getMembershipCard() {return membershipCard;}
     public void setMembershipCard(int membershipCard) {this.membershipCard = membershipCard;}
 
-    public Car getCar() {return car;}
-    public void setCar(Car car) {this.car = car;}
-
-    public String getCarIDString() {return carIDString;}
-    public void setCarIDString(String carIDString) {this.carIDString = carIDString;}
+    public int getCarID() {return carID;}
+    public void setCarID(int carID) {this.carID = carID;}
 
     @Override
     public String toString() {
@@ -46,8 +41,7 @@ public class Driver extends Users {
                 "\nRoles: " + roles +
                 "\nPay: " + driverPay +
                 "\nMembership Card: " + membershipCard +
-                "\nCarID String: " + carIDString +
-                "\nCar: " + car;
+                "\nCarID String: " + carID;
     }
 
 }

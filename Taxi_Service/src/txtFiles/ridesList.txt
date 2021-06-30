@@ -1,2 +1,2 @@
-1|25-06-2021/21:27|Vrsac|Sokolac|KristiX|DavidD|150.0|45.0|4|None|0|false
-2|25-06-2021/21:27|Belgrade|Novi Sad|KristiX|DavidD|100.0|25.0|4|Fast Ride|1|false
+1|25-06-2021/21:27|Vrsac|Sokolac|KristiX|1|150.0|45.0|2|None|0|false
+2|25-06-2021/21:27|Belgrade|Novi Sad|KristiX|0|100.0|25.0|3|Fast Ride|1|false

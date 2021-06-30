@@ -6,10 +6,12 @@ import AllUsers.Driver;
 import AllUsers.Users;
 import Enums.*;
 import Cars.Car;
+import GUI.DispatcherOptions.ForDrivers.DriversDisplay;
 import Rides.Ride;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TaxiService {
 
@@ -262,11 +264,9 @@ public class TaxiService {
                 Roles roles = Roles.values()[rolesInt];
                 double driverPay = Double.parseDouble(split[11]);
                 int membershipCard = Integer.parseInt(split[12]);
-                String carIDString = split[13];
-                int carID = Integer.parseInt(carIDString);
-                Car car = findCar(carID);
+                int carID = Integer.parseInt(split[13]);
 
-                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles, driverPay, membershipCard, carIDString, car);
+                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles, driverPay, membershipCard, carID);
                 drivers.add(driver);
             }
             br.close();
@@ -315,7 +315,7 @@ public class TaxiService {
                 String startAddress = split[2];
                 String destinationAddress = split[3];
                 String customerOrder = split[4];
-                String driverOrder = split[5];
+                int driverOrder = Integer.parseInt(split[5]);
                 double kmPassed = Double.parseDouble(split[6]);
                 double rideDuration = Double.parseDouble(split[7]);
                 int statusInt = Integer.parseInt(split[8]);
@@ -443,7 +443,7 @@ public class TaxiService {
             String content = "";
             for (Driver driver: drivers) {
                 content += driver.getUsername() + "|" + driver.getPassword() + "|" + driver.getName() + "|"
-                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.isDeleted() + "|" + driver.getId() + "|" + driver.getRoles().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "|" + driver.getCarIDString() + "|" + driver.getCar() + "\n";
+                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.isDeleted() + "|" + driver.getId() + "|" + driver.getRoles().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "|" + driver.getCarID() + "\n";
             }
             br.write(content);
             br.close();

@@ -10,7 +10,7 @@ public class Ride {
     private String startAddress;
     private String destinationAddress;
     private String  customerOrder;
-    private String driverOrder;
+    private int driverOrder;
     private double kmPassed;
     private double rideDuration;
     private RideStatus rideStatus;
@@ -24,7 +24,7 @@ public class Ride {
         this.startAddress = "";
         this.destinationAddress = "";
         this.customerOrder = "";
-        this.driverOrder = "";
+        this.driverOrder = 0;
         this.kmPassed = 0;
         this.rideDuration = 0;
         this.rideStatus = RideStatus.Created;
@@ -33,7 +33,7 @@ public class Ride {
         this.deleted = false;
     }
 
-    public Ride(int rideID, String orderDate, String startAddress, String destinationAddress, String customerOrder, String driverOrder, double kmPassed, double rideDuration, RideStatus rideStatus, String customerNote, RideOrderType rideOrderType, boolean deleted) {
+    public Ride(int rideID, String orderDate, String startAddress, String destinationAddress, String customerOrder, int driverOrder, double kmPassed, double rideDuration, RideStatus rideStatus, String customerNote, RideOrderType rideOrderType, boolean deleted) {
         super();
         this.rideID = rideID;
         this.orderDate = orderDate;
@@ -64,8 +64,8 @@ public class Ride {
     public String getCustomerOrder() {return customerOrder;}
     public void setCustomerOrder(String  customerOrder) {this.customerOrder = customerOrder;}
 
-    public String getDriverOrder() {return driverOrder;}
-    public void setDriverOrder(String driverOrder) {this.driverOrder = driverOrder;}
+    public int getDriverOrder() {return driverOrder;}
+    public void setDriverOrder(int driverOrder) {this.driverOrder = driverOrder;}
 
     public double getKmPassed() {return kmPassed;}
     public void setKmPassed(double kmPassed) { this.kmPassed = kmPassed; }

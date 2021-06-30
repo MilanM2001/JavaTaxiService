@@ -11,8 +11,11 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class DriversForm extends JFrame {
+
+    private ArrayList<Car> carList;
 
     private JLabel lblUsername = new JLabel("Username");
     private JTextField txtUsername = new JTextField(20);
@@ -50,9 +53,6 @@ public class DriversForm extends JFrame {
     private JLabel lblMembershipCard = new JLabel("Membership Card");
     private JTextField txtMembershipCard = new JTextField(20);
 
-    private JLabel lblCarIDString = new JLabel("Car ID String");
-    private JTextField txtCarIDString = new JTextField(20);
-
     private JLabel lblCar = new JLabel("Car");
     private JComboBox<Car> cbCar = new JComboBox<Car>();
 
@@ -64,6 +64,10 @@ public class DriversForm extends JFrame {
 
     public DriversForm(TaxiService taxiService, Driver driver) {
         this.taxiService = taxiService;
+        this.carList = this.taxiService.getCars();
+        for (int i = 0; i < this.carList.size(); i++) {
+            this.cbCar.addItem(carList.get(i));
+        }
         this.driver = driver;
         if(driver == null) {
             setTitle("Adding Driver");
@@ -73,7 +77,7 @@ public class DriversForm extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI();
-        initActions();
+        this.initActions();
         setResizable(false);
         pack();
     }
@@ -120,8 +124,6 @@ public class DriversForm extends JFrame {
         add(lblMembershipCard);
         add(txtMembershipCard);
 
-        txtCarIDString.setText("0");
-
         add(lblCar);
         add(cbCar);
 
@@ -147,11 +149,10 @@ public class DriversForm extends JFrame {
                     Roles roles = (Roles) cbRoles.getSelectedItem();
                     double driverPay = Double.parseDouble(txtDriverPay.getText().trim());
                     int membershipCard = Integer.parseInt(txtMembershipCard.getText().trim());
-                    String carIDString = txtCarIDString.getText().trim();
-                    Car car = (Car) cbCar.getSelectedItem();
+                    int carID = ((Car) cbCar.getSelectedItem()).getCarID();
 
                     if(driver == null) {
-                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard, carIDString, car);
+                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard, carID);
                         taxiService.addDriver(newDriver);
                     }else {
                         driver.setUsername(username);
@@ -166,8 +167,7 @@ public class DriversForm extends JFrame {
                         driver.setRoles(roles);
                         driver.setDriverPay(driverPay);
                         driver.setMembershipCard(membershipCard);
-                        driver.setCarIDString(carIDString);
-                        driver.setCar(car);
+                        driver.setCarID(carID);
                     }
                     taxiService.saveDrivers(TaxiServiceMain.Drivers_File);
                     DriversForm.this.dispose();
@@ -198,8 +198,7 @@ public class DriversForm extends JFrame {
         cbRoles.setSelectedItem(driver.getRoles());
         txtDriverPay.setText(String.valueOf(driver.getDriverPay()));
         txtMembershipCard.setText(String.valueOf(driver.getMembershipCard()));
-        txtCarIDString.setText(driver.getCarIDString());
-        cbCar.setSelectedItem(driver.getCar());
+        cbCar.setSelectedItem(driver.getCarID());
     }
 
     private boolean Validation() {

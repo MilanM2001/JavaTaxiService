@@ -124,7 +124,7 @@ public class RidesByApplicationForm extends JFrame {
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
                     String customerOrder = txtCustomerOrder.getText().trim();
-                    String driverOrder = txtDriverOrder.getText().trim();
+                    int driverOrder = Integer.parseInt(txtDriverOrder.getText().trim());
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());
                     RideStatus rideStatus = (RideStatus) cbRideStatus.getSelectedItem();

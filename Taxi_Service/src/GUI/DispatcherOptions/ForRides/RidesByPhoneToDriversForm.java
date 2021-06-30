@@ -1,5 +1,7 @@
 package GUI.DispatcherOptions.ForRides;
 
+import AllUsers.Driver;
+import Cars.Car;
 import Enums.RideOrderType;
 import Enums.RideStatus;
 import GUI.DriverOptions.RidesByApplicationForm;
@@ -11,8 +13,11 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class RidesByPhoneToDriversForm extends JFrame {
+
+    private ArrayList<Driver> driverList;
 
     private JLabel lblRideID = new JLabel("Ride ID");
     private JTextField txtRideID = new JTextField(20);
@@ -30,7 +35,7 @@ public class RidesByPhoneToDriversForm extends JFrame {
     private JTextField txtCustomerOrder = new JTextField(20);
 
     private JLabel lblDriverOrder = new JLabel("Driver");
-    private JTextField txtDriverOrder = new JTextField(20);
+    private JComboBox<Driver> cbDriverOrder = new JComboBox<Driver>();
 
     private JLabel lblKmPassed = new JLabel("KM Passed");
     private JTextField txtKmPassed = new JTextField(20);
@@ -52,9 +57,15 @@ public class RidesByPhoneToDriversForm extends JFrame {
 
     private TaxiService taxiService;
     private Ride ride;
+    private Driver driver;
 
     public RidesByPhoneToDriversForm(TaxiService taxiService, Ride ride) {
         this.taxiService = taxiService;
+        this.driverList = this.taxiService.getDrivers();
+        for (int i = 0; i < this.driverList.size(); i++) {
+            this.cbDriverOrder.addItem(driverList.get(i));
+        }
+        this.driver = driver;
         this.ride = ride;
         if(ride == null) {
             setTitle("Adding Ride");
@@ -89,7 +100,7 @@ public class RidesByPhoneToDriversForm extends JFrame {
         txtCustomerOrder.setEnabled(false);
 
         add(lblDriverOrder);
-        add(txtDriverOrder);
+        add(cbDriverOrder);
 
         txtKmPassed.setEnabled(false);
 
@@ -123,7 +134,7 @@ public class RidesByPhoneToDriversForm extends JFrame {
                     String startAddress = txtStartAddress.getText().trim();
                     String destinationAddress = txtDestinationAddress.getText().trim();
                     String customerOrder = txtCustomerOrder.getText().trim();
-                    String driverOrder = txtDriverOrder.getText().trim();
+                    int driverOrder = ((Driver) cbDriverOrder.getSelectedItem()).getId();
                     double kmPassed = Double.parseDouble(txtKmPassed.getText().trim());
                     double rideDuration = Double.parseDouble(txtRideDuration.getText().trim());
                     RideStatus rideStatus = (RideStatus) cbRideStatus.getSelectedItem();
@@ -167,7 +178,7 @@ public class RidesByPhoneToDriversForm extends JFrame {
         txtStartAddress.setText(ride.getStartAddress());
         txtDestinationAddress.setText(ride.getDestinationAddress());
         txtCustomerOrder.setText(String.valueOf(ride.getCustomerOrder()));
-        txtDriverOrder.setText(String.valueOf(ride.getDriverOrder()));
+        cbDriverOrder.setSelectedItem(ride.getDriverOrder());
         txtKmPassed.setText(String.valueOf(ride.getKmPassed()));
         txtRideDuration.setText(String.valueOf(ride.getRideDuration()));
         cbRideStatus.setSelectedItem(ride.getRideStatus());
@@ -186,9 +197,6 @@ public class RidesByPhoneToDriversForm extends JFrame {
             ok = false;
         }if(txtCustomerOrder.getText().trim().equals("")) {
             message += "- Customer\n";
-            ok = false;
-        }if(txtDriverOrder.getText().trim().equals("")) {
-            message += "- Driver\n";
             ok = false;
         }if(txtKmPassed.getText().trim().equals("")) {
             message += "- KM Passed\n";
