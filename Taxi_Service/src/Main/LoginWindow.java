@@ -97,8 +97,13 @@ public class LoginWindow extends JFrame {
                     if(driverLoggedIn == null && customerLoggedIn == null && dispatcherLoggedIn == null) {
                         JOptionPane.showMessageDialog(null, "Incorrect Login Information.", "Error", JOptionPane.WARNING_MESSAGE);
                     }
+
                 }
+
             }
+
         });
+
     }
+
 }

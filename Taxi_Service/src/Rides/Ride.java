@@ -104,4 +104,5 @@ public class Ride {
                 "\nOrder Type: " + rideOrderType +
                 "\nDeleted: " + deleted;
     }
+
 }

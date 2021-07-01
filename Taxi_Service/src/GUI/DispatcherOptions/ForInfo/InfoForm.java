@@ -154,7 +154,7 @@ public class InfoForm extends JFrame {
         }
 
         return ok;
-    }
 
+    }
 
 }

@@ -126,4 +126,5 @@ public class StatisticsForm extends JFrame {
         String message = "Please correct the following mistakes:\n";
         return ok;
     }
+
 }

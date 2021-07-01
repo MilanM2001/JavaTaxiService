@@ -89,7 +89,7 @@ public class InfoDisplay extends JFrame {
                 }
             }
         });
-    }
 
+    }
 
 }

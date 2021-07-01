@@ -82,4 +82,5 @@ public class Statistics {
                 "\nAverage Pay per Ride: " + averagePayPerRide +
                 "\nDeleted: " + deleted;
     }
+
 }
