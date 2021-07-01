@@ -7,6 +7,7 @@ import AllUsers.Users;
 import Enums.*;
 import Cars.Car;
 import GUI.DispatcherOptions.ForDrivers.DriversDisplay;
+import GUI.DispatcherOptions.ReportStatistics.Statistics;
 import Rides.Ride;
 
 import java.io.*;
@@ -21,6 +22,7 @@ public class TaxiService {
     private ArrayList<Car> cars;
     private ArrayList<Ride> rides;
     private ArrayList<TaxiServiceInfo> serviceInfos;
+    private ArrayList<Statistics> yearlyStatistics;
 
     public TaxiService() {
         this.drivers = new ArrayList<Driver>();
@@ -29,6 +31,7 @@ public class TaxiService {
         this.cars = new ArrayList<Car>();
         this.rides = new ArrayList<Ride>();
         this.serviceInfos = new ArrayList<TaxiServiceInfo>();
+        this.yearlyStatistics = new ArrayList<Statistics>();
     }
 
     public ArrayList<Driver> getDrivers() {return drivers;}
@@ -54,6 +57,10 @@ public class TaxiService {
     public ArrayList<TaxiServiceInfo> getServiceInfos() {return serviceInfos;}
     public void addInfo(TaxiServiceInfo taxiServiceInfo) { this.serviceInfos.add(taxiServiceInfo); }
     public void removeInfo(TaxiServiceInfo taxiServiceInfo) {this.serviceInfos.remove(taxiServiceInfo);}
+
+    public ArrayList<Statistics> getStatistics() {return yearlyStatistics; }
+    public void addStatistics(Statistics statistics) {this.yearlyStatistics.add(statistics); }
+    public void removeStatistics(Statistics statistics) {this.yearlyStatistics.remove(statistics); }
 
     public Driver driverLogin(String username, String password) {
         for(Driver driver : drivers) {
@@ -336,8 +343,8 @@ public class TaxiService {
 
     public void loadInfo(String fileName) {
         try {
-            File usersFile = new File("src/txtFiles/" + fileName);
-            BufferedReader br = new BufferedReader(new FileReader(usersFile));
+            File infoFile = new File("src/txtFiles/" + fileName);
+            BufferedReader br = new BufferedReader(new FileReader(infoFile));
             String line = null;
             while ((line = br.readLine()) != null) {
                 String[] split = line.split("\\|");
@@ -350,6 +357,32 @@ public class TaxiService {
 
                 TaxiServiceInfo taxiServiceInfo = new TaxiServiceInfo(PIB, TaxiServiceName, TaxiServiceAddress, TaxiServiceStartingPrice, TaxiServicePricePerKM, deleted);
                 serviceInfos.add(taxiServiceInfo);
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadStatistics(String fileName) {
+        try {
+            File statisticsFile = new File("src/txtFiles/" + fileName);
+            BufferedReader br = new BufferedReader(new FileReader(statisticsFile));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                String[] split = line.split("\\|");
+                int ridesInTotal = Integer.parseInt(split[0]);
+                int phoneRidesInTotal = Integer.parseInt(split[1]);
+                int appRidesInTotal = Integer.parseInt(split[2]);
+                int activeDrivers = Integer.parseInt(split[3]);
+                double averageRideDuration = Double.parseDouble(split[4]);
+                double averageKMPassed = Double.parseDouble(split[5]);
+                double payForAllRides = Double.parseDouble(split[6]);
+                double averagePayPerRide = Double.parseDouble(split[7]);
+                boolean deleted = Boolean.parseBoolean(split[8]);
+
+                Statistics statistics = new Statistics(ridesInTotal, phoneRidesInTotal, appRidesInTotal, activeDrivers, averageRideDuration, averageKMPassed, payForAllRides, averagePayPerRide, deleted);
+                yearlyStatistics.add(statistics);
             }
             br.close();
         } catch (Exception e) {
@@ -397,6 +430,16 @@ public class TaxiService {
         return notDeleted;
     }
 
+    public ArrayList<Statistics> allNotDeletedStatistics() {
+        ArrayList<Statistics> notDeleted = new ArrayList<Statistics>();
+        for (Statistics statistics : yearlyStatistics) {
+            if(!statistics.isDeleted()) {
+                notDeleted.add(statistics);
+            }
+        }
+        return notDeleted;
+    }
+
     public ArrayList<Ride> RidesByApplication() {
         ArrayList<Ride> byApp = new ArrayList<Ride>();
         for (Ride ride: rides) {
@@ -405,6 +448,58 @@ public class TaxiService {
             }
         }
         return byApp;
+    }
+
+    public int RidesInTotal() {
+        return rides.size();
+    }
+
+    public int ActiveDrivers() {
+        return drivers.size();
+    }
+
+    public int RidesByPhoneNumber() {
+        int ridesByPhone = 0;
+        for (Ride ride: rides) {
+            if(ride.getRideOrderType().equals(RideOrderType.Phone)) {
+                ridesByPhone++;
+            }
+        }
+        return ridesByPhone;
+    }
+
+    public double AverageRideDuration() {
+        double totalDuration = 0;
+        for (Ride ride: rides) {
+            totalDuration += ride.getRideDuration();
+        }
+        return totalDuration/rides.size();
+    }
+
+    public double payForAllRides(double startPrice, double pricePerKM) {
+        double totalPay = 0;
+        for (Ride ride: rides) {
+            totalPay += startPrice + ride.getKmPassed() * pricePerKM;
+        }
+        return totalPay;
+    }
+
+    public double AverageKMPassed() {
+        double totalKM = 0;
+        for (Ride ride: rides) {
+            totalKM += ride.getKmPassed();
+        }
+        return totalKM/rides.size();
+    }
+
+    public int RidesByAppNumber() {
+        int ridesByApp = 0;
+        for (Ride ride: rides) {
+            if(ride.getRideOrderType().equals(RideOrderType.Application)) {
+                ridesByApp++;
+            }
+        }
+        return ridesByApp;
     }
 
     public ArrayList<Ride> RidesByPhone() {
@@ -481,6 +576,21 @@ public class TaxiService {
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void saveStatistics(String fileName) {
+        try {
+            File file = new File("src/txtFiles/" + fileName);
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            String content = "";
+            for (Statistics statistics : yearlyStatistics) {
+                content += statistics.getRidesInTotal() + "|" + statistics.getPhoneRidesInTotal() + "|" + statistics.getAppRidesInTotal() + "|" + statistics.getActiveDrivers() + "|" + statistics.getAverageRideDuration() + "|" + statistics.getAverageKMPassed() + "|" + statistics.getPayForAllRides() + "|" + statistics.getAveragePayPerRide() + "|" + statistics.isDeleted() + "\n";
+            }
+            br.write(content);
+            br.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

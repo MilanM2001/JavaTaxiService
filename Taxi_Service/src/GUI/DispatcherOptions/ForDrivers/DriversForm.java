@@ -77,7 +77,7 @@ public class DriversForm extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         initGUI();
-        this.initActions();
+        initActions();
         setResizable(false);
         pack();
     }

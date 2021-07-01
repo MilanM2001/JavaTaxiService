@@ -7,9 +7,11 @@ import GUI.DispatcherOptions.ForDrivers.DriversDisplay;
 import GUI.DispatcherOptions.ForInfo.InfoDisplay;
 import GUI.DispatcherOptions.ForRides.RidesByPhoneToDriversDisplay;
 import GUI.DispatcherOptions.ForRides.RidesDisplay;
+import GUI.DispatcherOptions.ReportStatistics.Statistics;
 import GUI.DispatcherOptions.ReportStatistics.StatisticsDisplay;
 import Main.LoginWindow;
 import ServiceData.TaxiService;
+import ServiceData.TaxiServiceInfo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,6 +41,8 @@ public class DispatcherMenu extends JFrame {
 
     private TaxiService taxiService;
     private Dispatcher loggedIn;
+    private TaxiServiceInfo taxiServiceInfo;
+    private Statistics statistics;
 
     public DispatcherMenu(TaxiService taxiService, Dispatcher loggedIn) {
         this.taxiService = taxiService;
