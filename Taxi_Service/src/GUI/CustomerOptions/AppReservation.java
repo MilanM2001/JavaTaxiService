@@ -87,7 +87,7 @@ public class AppReservation extends JFrame {
         add(lblCustomerOrder);
         add(txtCustomerOrder);
 
-        txtDriverOrder.setText("None");
+        txtDriverOrder.setText("0");
 
         txtKmPassed.setText("0");
 
