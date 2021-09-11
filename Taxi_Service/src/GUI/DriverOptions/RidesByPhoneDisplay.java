@@ -119,7 +119,7 @@ public class RidesByPhoneDisplay extends JFrame {
                     Ride ride = taxiService.findRide(rideID);
 
                     int choice = JOptionPane.showConfirmDialog(null,
-                            "Are you sure you want to delete this Ride??",
+                            "Are you sure you want to CANCEL this Ride?",
                             rideID + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         ride.setDeleted(true);
