@@ -1,2 +1,1 @@
-1|07-09-2021/21:36|Vrsac|Novi Sad|Kristi|0|0.0|0.0|1|Fast|1|false
-2|07-09-2021/21:42|Sokolac|Plandiste|KristiX|1|0.0|0.0|2|None|0|false
+1|11-09-2021/21:24|sdasd|asdasda|sdas|3|21323.0|2312.0|4|None|0|false

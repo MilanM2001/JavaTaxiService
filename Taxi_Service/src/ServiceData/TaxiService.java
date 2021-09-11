@@ -23,6 +23,8 @@ public class TaxiService {
     private ArrayList<Ride> rides;
     private ArrayList<TaxiServiceInfo> serviceInfos;
     private ArrayList<Statistics> yearlyStatistics;
+    private ArrayList<Statistics> monthlyStatistics;
+    private ArrayList<Statistics> weeklyStatistics;
 
     public TaxiService() {
         this.drivers = new ArrayList<Driver>();
@@ -32,6 +34,8 @@ public class TaxiService {
         this.rides = new ArrayList<Ride>();
         this.serviceInfos = new ArrayList<TaxiServiceInfo>();
         this.yearlyStatistics = new ArrayList<Statistics>();
+        this.monthlyStatistics = new ArrayList<Statistics>();
+        this.weeklyStatistics = new ArrayList<Statistics>();
     }
 
     public ArrayList<Driver> getDrivers() {return drivers;}
@@ -58,9 +62,17 @@ public class TaxiService {
     public void addInfo(TaxiServiceInfo taxiServiceInfo) { this.serviceInfos.add(taxiServiceInfo); }
     public void removeInfo(TaxiServiceInfo taxiServiceInfo) {this.serviceInfos.remove(taxiServiceInfo);}
 
-    public ArrayList<Statistics> getStatistics() {return yearlyStatistics; }
-    public void addStatistics(Statistics statistics) {this.yearlyStatistics.add(statistics); }
-    public void removeStatistics(Statistics statistics) {this.yearlyStatistics.remove(statistics); }
+    public ArrayList<Statistics> getStatisticsYearly() {return yearlyStatistics; }
+    public void addStatisticsYearly(Statistics statistics) {this.yearlyStatistics.add(statistics); }
+    public void removeStatisticsYearly(Statistics statistics) {this.yearlyStatistics.remove(statistics); }
+
+    public ArrayList<Statistics> getStatisticsMonthly() {return monthlyStatistics; }
+    public void addStatisticsMonthly(Statistics statisticsMonthly) {this.monthlyStatistics.add(statisticsMonthly); }
+    public void removeStatisticsMonthly(Statistics statisticsMonthly) {this.monthlyStatistics.remove(statisticsMonthly); }
+
+    public ArrayList<Statistics> getStatisticsWeekly() {return weeklyStatistics; }
+    public void addStatisticsWeekly(Statistics statisticsWeekly) {this.weeklyStatistics.add(statisticsWeekly); }
+    public void removeStatisticsWeekly(Statistics statisticsWeekly) {this.weeklyStatistics.remove(statisticsWeekly); }
 
     public Driver driverLogin(String username, String password) {
         for(Driver driver : drivers) {
@@ -443,7 +455,7 @@ public class TaxiService {
     public ArrayList<Ride> RidesByApplication() {
         ArrayList<Ride> byApp = new ArrayList<Ride>();
         for (Ride ride: rides) {
-            if(ride.getRideOrderType().equals(RideOrderType.Application) && !ride.isDeleted()) {
+            if(ride.getRideOrderType().equals(RideOrderType.Application) && !ride.isDeleted() && !ride.getRideStatus().equals(RideStatus.Denied) && !ride.getRideStatus().equals(RideStatus.Finished)) {
                 byApp.add(ride);
             }
         }
@@ -505,7 +517,7 @@ public class TaxiService {
     public ArrayList<Ride> RidesByPhone() {
         ArrayList<Ride> byPhone = new ArrayList<Ride>();
         for (Ride ride: rides) {
-            if(ride.getRideOrderType().equals(RideOrderType.Phone) && !ride.isDeleted()) {
+            if(ride.getRideOrderType().equals(RideOrderType.Phone) && !ride.isDeleted() && !ride.getRideStatus().equals(RideStatus.Denied) && !ride.getRideStatus().equals(RideStatus.Finished) && !ride.getRideStatus().equals(RideStatus.Accepted)) {
                 byPhone.add(ride);
             }
         }
@@ -515,7 +527,7 @@ public class TaxiService {
     public ArrayList<Ride> RidesByPhoneForDriver() {
         ArrayList<Ride> byPhone = new ArrayList<Ride>();
         for (Ride ride: rides) {
-            if(ride.getRideOrderType().equals(RideOrderType.Phone) && !ride.isDeleted() && ride.getRideStatus().equals(RideStatus.Created_On_Wait)) { //Dodam za prikaz samo njegovom ID-u
+            if(ride.getRideOrderType().equals(RideOrderType.Phone) && !ride.isDeleted() && !ride.getRideStatus().equals(RideStatus.Denied) && !ride.getRideStatus().equals(RideStatus.Finished) && !ride.getRideStatus().equals(RideStatus.Created)) {
                 byPhone.add(ride);
             }
         }

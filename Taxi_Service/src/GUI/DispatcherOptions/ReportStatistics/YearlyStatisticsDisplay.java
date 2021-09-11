@@ -15,10 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class StatisticsDisplay extends JFrame {
-
-    private JToolBar mainToolbar = new JToolBar();
-    private JButton btnAdd = new JButton();
+public class YearlyStatisticsDisplay extends JFrame {
     private JTextField jtfFilter = new JTextField();
 
     private DefaultTableModel tableModel;
@@ -27,7 +24,7 @@ public class StatisticsDisplay extends JFrame {
     private Statistics statistics;
     private TaxiService taxiService;
 
-    public StatisticsDisplay(TaxiService taxiService) {
+    public YearlyStatisticsDisplay(TaxiService taxiService) {
         this.taxiService = taxiService;
         setTitle("Yearly Report");
         setSize(500, 300);
@@ -48,19 +45,13 @@ public class StatisticsDisplay extends JFrame {
         double payForAllRides = taxiService.payForAllRides(taxiService.getServiceInfos().get(0).getTaxiServiceStartingPrice(), taxiService.getServiceInfos().get(0).getTaxiServicePricePerKM());
         double averagePayPerRide = payForAllRides/ridesInTotal;
 
-
         statistics = new Statistics(ridesInTotal, phoneRidesInTotal, appRidesInTotal, activeDrivers, averageRideDuration, averageKMPassed, payForAllRides, averagePayPerRide, false);
-        taxiService.addStatistics(statistics);
+        taxiService.addStatisticsYearly(statistics);
 
-        taxiService.saveStatistics(TaxiServiceMain.Statistics_File);
+        taxiService.saveStatistics(TaxiServiceMain.YearlyStatistics_File);
     }
 
-
     private void initGUI() {
-        ImageIcon addIcon = new ImageIcon(getClass().getResource("/images/add.gif"));
-        btnAdd.setIcon(addIcon);
-        mainToolbar.add(btnAdd);
-
         String[] headings = new String[] {"Total Rides", "Phone Rides", "App Rides", "Active Drivers", "Average Ride Duration", "Average KM Passed", "Total Pay", "Average Pay per Ride"};
         Object[][] content = new Object[1][headings.length];
 

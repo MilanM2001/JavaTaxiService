@@ -28,7 +28,7 @@ public class RidesByApplicationForm extends JFrame {
     private JLabel lblCustomerOrder = new JLabel("Customer");
     private JTextField txtCustomerOrder = new JTextField(20);
 
-    private JLabel lblDriverOrder = new JLabel("Your Name");
+    private JLabel lblDriverOrder = new JLabel("Your ID");
     private JTextField txtDriverOrder = new JTextField(20);
 
     private JLabel lblKmPassed = new JLabel("KM Passed");

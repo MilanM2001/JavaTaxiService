@@ -53,10 +53,10 @@ public class RidesByPhoneDisplay extends JFrame {
         add(mainToolbar, BorderLayout.NORTH);
 
         String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By"};
-        Object[][] content = new Object[taxiService.RidesByPhone().size()][headings.length];
+        Object[][] content = new Object[taxiService.RidesByPhoneForDriver().size()][headings.length];
 
-        for(int i=0; i<taxiService.RidesByPhone().size(); i++) {
-            Ride ride = taxiService.RidesByPhone().get(i);
+        for(int i=0; i<taxiService.RidesByPhoneForDriver().size(); i++) {
+            Ride ride = taxiService.RidesByPhoneForDriver().get(i);
             content[i][0] = ride.getRideID();
             content[i][1] = ride.getOrderDate();
             content[i][2] = ride.getStartAddress();

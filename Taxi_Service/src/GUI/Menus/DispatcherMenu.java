@@ -7,8 +7,10 @@ import GUI.DispatcherOptions.ForDrivers.DriversDisplay;
 import GUI.DispatcherOptions.ForInfo.InfoDisplay;
 import GUI.DispatcherOptions.ForRides.RidesByPhoneToDriversDisplay;
 import GUI.DispatcherOptions.ForRides.RidesDisplay;
+import GUI.DispatcherOptions.ReportStatistics.MonthlyStatisticsDisplay;
 import GUI.DispatcherOptions.ReportStatistics.Statistics;
-import GUI.DispatcherOptions.ReportStatistics.StatisticsDisplay;
+import GUI.DispatcherOptions.ReportStatistics.WeeklyStatisticsDisplay;
+import GUI.DispatcherOptions.ReportStatistics.YearlyStatisticsDisplay;
 import Main.LoginWindow;
 import ServiceData.TaxiService;
 import ServiceData.TaxiServiceInfo;
@@ -36,6 +38,8 @@ public class DispatcherMenu extends JFrame {
 
     private JMenu reportStatistics = new JMenu("Statistics");
     private JMenuItem reportYearlyStatistics = new JMenuItem("Yearly Report");
+    private JMenuItem reportMonthlyStatistics = new JMenuItem("Monthly Report");
+    private JMenuItem reportWeeklyStatistics = new JMenuItem("Weekly Report");
 
     private JButton logOff = new JButton("LogOut");
 
@@ -70,6 +74,8 @@ public class DispatcherMenu extends JFrame {
         taxiServiceInfoMenu.add(showServiceInfo);
         mainMenu.add(reportStatistics);
         reportStatistics.add(reportYearlyStatistics);
+        reportStatistics.add(reportMonthlyStatistics);
+        reportStatistics.add(reportWeeklyStatistics);
         mainMenu.add(logOff);
     }
 
@@ -135,7 +141,23 @@ public class DispatcherMenu extends JFrame {
         reportYearlyStatistics.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StatisticsDisplay sp = new StatisticsDisplay(taxiService);
+                YearlyStatisticsDisplay sp = new YearlyStatisticsDisplay(taxiService);
+                sp.setVisible(true);
+            }
+        });
+
+        reportMonthlyStatistics.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MonthlyStatisticsDisplay sp = new MonthlyStatisticsDisplay(taxiService);
+                sp.setVisible(true);
+            }
+        });
+
+        reportWeeklyStatistics.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WeeklyStatisticsDisplay sp = new WeeklyStatisticsDisplay(taxiService);
                 sp.setVisible(true);
             }
         });

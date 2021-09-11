@@ -1,3 +1,4 @@
 milan01|miki2001|Milan|Miljus|06486|Skolska 14|6520|0|false|4|1|45000.0|6532|1
 petar05|pera999|Petar|Petrovic|06495|Dunavska|6550|0|false|2|1|50000.0|6213|1
 katarina96|kaca1996|Katarina|Miljus|89874|Skolska 14|6589|1|false|3|1|45000.0|8738|0
+disp|disp12|Tester|Test|89874|Skolska 14|6589|1|false|3|1|45000.0|8738|0

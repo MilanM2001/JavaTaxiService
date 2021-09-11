@@ -89,6 +89,7 @@ public class RidesByPhoneForm extends JFrame {
 
         add(lblDriverOrder);
         add(txtDriverOrder);
+        txtDriverOrder.setEnabled(false);
 
         add(lblKmPassed);
         add(txtKmPassed);

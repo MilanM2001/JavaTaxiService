@@ -1,3 +1,4 @@
 KristiX|12345|Kristian|Krstic|132|Gradska 13|653541|0|false|1|0
 David1987|david87|David|Davidovic|312|Lipova 26|655643|0|false|2|0
 Sofija02|sofi2|Sofija|Stankovic|432|Gredska 15|654523|1|false|3|0
+Cust|cust12|Tester|Test|432|Gredska 15|654523|1|false|3|0
