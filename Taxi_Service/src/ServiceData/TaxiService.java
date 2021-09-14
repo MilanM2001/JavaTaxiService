@@ -284,8 +284,9 @@ public class TaxiService {
                 double driverPay = Double.parseDouble(split[11]);
                 int membershipCard = Integer.parseInt(split[12]);
                 int carID = Integer.parseInt(split[13]);
+                int driverRating = Integer.parseInt(split[14]);
 
-                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles, driverPay, membershipCard, carID);
+                Driver driver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, deleted, id, roles, driverPay, membershipCard, carID, driverRating);
                 drivers.add(driver);
             }
             br.close();
@@ -312,8 +313,11 @@ public class TaxiService {
                 boolean deleted = Boolean.parseBoolean(split[7]);
                 int availableInt = Integer.parseInt(split[8]);
                 VehicleAvailable vehicleAvailable = VehicleAvailable.values()[availableInt];
+                int carAge = Integer.parseInt(split[9]);
+                int petFriendlyInt = Integer.parseInt(split[10]);
+                PetFriendly petFriendly = PetFriendly.values()[petFriendlyInt];
 
-                Car car = new Car(carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted, vehicleAvailable);
+                Car car = new Car(carId, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicletype, deleted, vehicleAvailable, carAge, petFriendly);
                 cars.add(car);
             }
             br.close();
@@ -560,7 +564,7 @@ public class TaxiService {
             String content = "";
             for (Driver driver: drivers) {
                 content += driver.getUsername() + "|" + driver.getPassword() + "|" + driver.getName() + "|"
-                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.isDeleted() + "|" + driver.getId() + "|" + driver.getRoles().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "|" + driver.getCarID() + "\n";
+                        + driver.getLastName() + "|" + driver.getJmbg() + "|" + driver.getAddress() + "|" + driver.getPhoneNumber() + "|" + driver.getGender().ordinal() + "|" + driver.isDeleted() + "|" + driver.getId() + "|" + driver.getRoles().ordinal() + "|" + driver.getDriverPay() + "|" + driver.getMembershipCard() + "|" + driver.getCarID() + "|" + driver.getDriverRating() + "\n";
             }
             br.write(content);
             br.close();
@@ -623,7 +627,7 @@ public class TaxiService {
             String content = "";
             for (Car car: cars) {
                 content += car.getCarID() + "|" + car.getModel() + "|" + car.getManufacturer() + "|" + car.getYearProduced() + "|"
-                        + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "|" + car.getVehicleAvailable().ordinal() + "\n";
+                        + car.getRegistrationNumber() + "|" + car.getTaxiNumber() + "|" + car.getVehicletype().ordinal() + "|" + car.isDeleted() + "|" + car.getVehicleAvailable().ordinal() + "|" + car.getCarAge() + "|" + car.getPetFriendly().ordinal() + "\n";
             }
             br.write(content);
             br.close();

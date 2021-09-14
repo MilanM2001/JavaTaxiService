@@ -1,6 +1,7 @@
 package GUI.DispatcherOptions.ForCars;
 
 import Cars.Car;
+import Enums.PetFriendly;
 import Enums.VehicleAvailable;
 import Enums.VehicleType;
 import ServiceData.TaxiService;
@@ -35,6 +36,12 @@ public class CarsForm extends JFrame {
 
     private JLabel lblVehicleAvailable = new JLabel("Vehicle Available");
     private JComboBox<VehicleAvailable> cbVehicleAvailable = new JComboBox<VehicleAvailable>(VehicleAvailable.values());
+
+    private JLabel lblCarAge = new JLabel("Car Age");
+    private JTextField txtCarAge = new JTextField(20);
+
+    private JLabel lblPetFriendly = new JLabel("Pet Friendly");
+    private JComboBox<PetFriendly> cbPetFriendly = new JComboBox<PetFriendly>(PetFriendly.values());
 
     private JButton btnOk = new JButton("OK");
     private JButton btnCancel = new JButton("Cancel");
@@ -85,6 +92,12 @@ public class CarsForm extends JFrame {
 
         cbVehicleAvailable.setSelectedItem(VehicleAvailable.Available);
 
+        add(lblCarAge);
+        add(txtCarAge);
+
+        add(lblPetFriendly);
+        add(txtCarAge);
+
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
@@ -103,9 +116,11 @@ public class CarsForm extends JFrame {
                     int taxiNumber = Integer.parseInt(txtTaxiNumber.getText().trim());
                     VehicleType vehicleType = (VehicleType) cbVehicleType.getSelectedItem();
                     VehicleAvailable vehicleAvailable = (VehicleAvailable) cbVehicleAvailable.getSelectedItem();
+                    int carAge = Integer.parseInt(txtCarAge.getText().trim());
+                    PetFriendly petFriendly = (PetFriendly) cbPetFriendly.getSelectedItem();
 
                     if(car == null) {
-                        Car newCar = new Car(carID, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicleType, false, vehicleAvailable);
+                        Car newCar = new Car(carID, model, manufacturer, yearProduced, registrationNumber, taxiNumber, vehicleType, false, vehicleAvailable, carAge, petFriendly);
                         taxiService.addCar(newCar);
                     }else {
                         car.setCarID(carID);
@@ -116,6 +131,8 @@ public class CarsForm extends JFrame {
                         car.setTaxiNumber(taxiNumber);
                         car.setVehicletype(vehicleType);
                         car.setVehicleAvailable(vehicleAvailable);
+                        car.setCarAge(carAge);
+                        car.setPetFriendly(petFriendly);
                     }
                     taxiService.saveCars(TaxiServiceMain.Cars_File);
                     CarsForm.this.dispose();
@@ -142,6 +159,8 @@ public class CarsForm extends JFrame {
         txtTaxiNumber.setText(String.valueOf(car.getTaxiNumber()));
         cbVehicleType.setSelectedItem(car.getVehicletype());
         cbVehicleAvailable.setSelectedItem(car.getVehicleAvailable());
+        txtCarAge.setText(String.valueOf(car.getCarAge()));
+        cbPetFriendly.setSelectedItem(car.getPetFriendly());
     }
 
     private boolean CarsValidation() {
@@ -163,8 +182,10 @@ public class CarsForm extends JFrame {
         }if(txtTaxiNumber.getText().trim().equals("")) {
             message += "- Taxi Number\n";
             ok = false;
-        }
-        if(ok == false) {
+        }if(txtCarAge.getText().trim().equals("")) {
+            message += "- Car Age\n";
+            ok = false;
+        }if(ok == false) {
             JOptionPane.showMessageDialog(null, message, "Incorrect Info", JOptionPane.WARNING_MESSAGE);
         }
 

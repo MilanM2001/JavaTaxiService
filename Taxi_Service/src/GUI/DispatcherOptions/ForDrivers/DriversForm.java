@@ -56,6 +56,9 @@ public class DriversForm extends JFrame {
     private JLabel lblCar = new JLabel("Car");
     private JComboBox<Car> cbCar = new JComboBox<Car>();
 
+    private JLabel lblDriverRating = new JLabel("Rating");
+    private JTextField txtDriverRating = new JTextField(20);
+
     private JButton btnOk = new JButton("OK");
     private JButton btnCancel = new JButton("Cancel");
 
@@ -127,6 +130,11 @@ public class DriversForm extends JFrame {
         add(lblCar);
         add(cbCar);
 
+        add(lblDriverRating);
+        add(txtDriverRating);
+        txtDriverRating.setText("0");
+        txtDriverRating.setEnabled(false);
+
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
@@ -150,9 +158,10 @@ public class DriversForm extends JFrame {
                     double driverPay = Double.parseDouble(txtDriverPay.getText().trim());
                     int membershipCard = Integer.parseInt(txtMembershipCard.getText().trim());
                     int carID = ((Car) cbCar.getSelectedItem()).getCarID();
+                    int driverRating = Integer.parseInt(txtDriverRating.getText().trim());
 
                     if(driver == null) {
-                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard, carID);
+                        Driver newDriver = new Driver(username, password, name, lastName, jmbg, address, phoneNumber, gender, false, id, roles, driverPay, membershipCard, carID, driverRating);
                         taxiService.addDriver(newDriver);
                     }else {
                         driver.setUsername(username);
@@ -168,6 +177,7 @@ public class DriversForm extends JFrame {
                         driver.setDriverPay(driverPay);
                         driver.setMembershipCard(membershipCard);
                         driver.setCarID(carID);
+                        driver.setDriverRating(driverRating);
                     }
                     taxiService.saveDrivers(TaxiServiceMain.Drivers_File);
                     DriversForm.this.dispose();
@@ -199,6 +209,7 @@ public class DriversForm extends JFrame {
         txtDriverPay.setText(String.valueOf(driver.getDriverPay()));
         txtMembershipCard.setText(String.valueOf(driver.getMembershipCard()));
         cbCar.setSelectedItem(driver.getCarID());
+        txtDriverRating.setText(String.valueOf(driver.getDriverRating()));
     }
 
     private boolean Validation() {
