@@ -49,12 +49,12 @@ public class RidesByApplicationDisplay extends JFrame {
         ImageIcon acceptIcon = new ImageIcon(getClass().getResource("/images/accept.gif"));
         btnAccept.setIcon(acceptIcon);
 
-        mainToolbar.add(btnEdit);
+        //mainToolbar.add(btnEdit);
         mainToolbar.add(btnDelete);
         mainToolbar.add(btnAccept);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By"};
+        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By", "Car Age", "Pet Friendly"};
         Object[][] content = new Object[taxiService.RidesByApplication().size()][headings.length];
 
         for(int i=0; i<taxiService.RidesByApplication().size(); i++) {
@@ -70,6 +70,8 @@ public class RidesByApplicationDisplay extends JFrame {
             content[i][8] = ride.getRideStatus();
             content[i][9] = ride.getCustomerNote();
             content[i][10] = ride.getRideOrderType();
+            content[i][11] = ride.getCarAgeOrder();
+            content[i][12] = ride.getPetFriendly();
         }
 
         tableModel = new DefaultTableModel(content, headings);
@@ -100,6 +102,8 @@ public class RidesByApplicationDisplay extends JFrame {
             ApplicationRidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(115);
             ApplicationRidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
             ApplicationRidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(12).setPreferredWidth(100);
         }
         JScrollPane scrollPane = new JScrollPane(ApplicationRidesDisplay);
         add(scrollPane, BorderLayout.CENTER);
@@ -124,31 +128,30 @@ public class RidesByApplicationDisplay extends JFrame {
                             rideID + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         ride.setRideStatus(RideStatus.Denied);
-//                        tableModel.removeRow(row);
                         taxiService.saveRides(TaxiServiceMain.Rides_File);
                     }
                 }
             }
         });
 
-        btnEdit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int row = ApplicationRidesDisplay.getSelectedRow();
-                if(row == -1) {
-                    JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
-                }else {
-                    int rideID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
-                    Ride ride = taxiService.findRide(rideID);
-                    if(ride == null) {
-                        JOptionPane.showMessageDialog(null, "Couldn't find a Ride with that ID", "Error", JOptionPane.WARNING_MESSAGE);
-                    }else {
-                        RidesByApplicationForm rf = new RidesByApplicationForm(taxiService, ride);
-                        rf.setVisible(true);
-                    }
-                }
-            }
-        });
+//        btnEdit.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                int row = ApplicationRidesDisplay.getSelectedRow();
+//                if(row == -1) {
+//                    JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
+//                }else {
+//                    int rideID = Integer.parseInt(tableModel.getValueAt(row, 0).toString());
+//                    Ride ride = taxiService.findRide(rideID);
+//                    if(ride == null) {
+//                        JOptionPane.showMessageDialog(null, "Couldn't find a Ride with that ID", "Error", JOptionPane.WARNING_MESSAGE);
+//                    }else {
+//                        RidesByApplicationForm rf = new RidesByApplicationForm(taxiService, ride);
+//                        rf.setVisible(true);
+//                    }
+//                }
+//            }
+//        });
 
         btnAccept.addActionListener(new ActionListener() {
             @Override
@@ -165,7 +168,8 @@ public class RidesByApplicationDisplay extends JFrame {
                             rideID + " - Confirm Choice", JOptionPane.YES_NO_OPTION);
                     if(choice == JOptionPane.YES_OPTION) {
                         ride.setRideStatus(RideStatus.Accepted);
-//                        tableModel.removeRow(row);
+                        RidesByApplicationForm rf = new RidesByApplicationForm(taxiService, ride);
+                        rf.setVisible(true);
                         taxiService.saveRides(TaxiServiceMain.Rides_File);
                     }
                 }

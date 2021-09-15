@@ -1,6 +1,7 @@
 package GUI.CustomerOptions;
 
 import AllUsers.Customer;
+import Enums.PetFriendly;
 import Enums.RideOrderType;
 import Enums.RideStatus;
 import Main.TaxiServiceMain;
@@ -48,6 +49,12 @@ public class PhoneReservation extends JFrame {
 
     private JLabel lblRideOrderType = new JLabel("Order Type");
     private JComboBox<RideOrderType> cbRideOrderType = new JComboBox<RideOrderType>(RideOrderType.values());
+
+    private JLabel lblCarAgeOrder = new JLabel("Car Age");
+    private JTextField txtCarAgeOrder = new JTextField(20);
+
+    private JLabel lblPetFriendly = new JLabel("Pet Friendly");
+    private JComboBox<PetFriendly> cbPetFriendly = new JComboBox<PetFriendly>(PetFriendly.values());
 
     private JButton btnOk = new JButton("Order");
     private JButton btnCancel = new JButton("Cancel");
@@ -98,6 +105,12 @@ public class PhoneReservation extends JFrame {
 
         cbRideOrderType.setSelectedItem(RideOrderType.Phone);
 
+        add(lblPetFriendly);
+        add(cbPetFriendly);
+
+        add(lblCarAgeOrder);
+        add(txtCarAgeOrder);
+
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
@@ -120,9 +133,11 @@ public class PhoneReservation extends JFrame {
                     RideStatus rideStatus = (RideStatus) cbRideStatus.getSelectedItem();
                     String customerNote = txtCustomerNote.getText().trim();
                     RideOrderType rideOrderType = (RideOrderType) cbRideOrderType.getSelectedItem();
+                    int carAgeOrder = Integer.parseInt(txtCarAgeOrder.getText().trim());
+                    PetFriendly petFriendly = (PetFriendly) cbPetFriendly.getSelectedItem();
 
                     if(ride == null) {
-                        Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, false);
+                        Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, false, carAgeOrder, petFriendly);
                         taxiService.addRide(newRide);
                     }else {
                         ride.setRideID(rideID);
@@ -136,6 +151,8 @@ public class PhoneReservation extends JFrame {
                         ride.setRideStatus(rideStatus);
                         ride.setCustomerNote(customerNote);
                         ride.setRideOrderType(rideOrderType);
+                        ride.setCarAgeOrder(carAgeOrder);
+                        ride.setPetFriendly(petFriendly);
                     }
                     taxiService.saveRides(TaxiServiceMain.Rides_File);
                     PhoneReservation.this.dispose();
@@ -165,6 +182,8 @@ public class PhoneReservation extends JFrame {
         cbRideStatus.setSelectedItem(ride.getRideStatus());
         txtCustomerNote.setText(ride.getCustomerNote());
         cbRideOrderType.setSelectedItem(ride.getRideOrderType());
+        txtCarAgeOrder.setText(String.valueOf(ride.getCarAgeOrder()));
+        cbPetFriendly.setSelectedItem(ride.getPetFriendly());
     }
 
     private boolean RidesValidation() {

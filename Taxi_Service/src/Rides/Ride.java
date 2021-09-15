@@ -1,5 +1,6 @@
 package Rides;
 
+import Enums.PetFriendly;
 import Enums.RideOrderType;
 import Enums.RideStatus;
 
@@ -17,6 +18,8 @@ public class Ride {
     private String customerNote;
     private RideOrderType rideOrderType;
     private boolean deleted;
+    private int carAgeOrder;
+    private PetFriendly petFriendly;
 
     public Ride() {
         this.rideID = 0;
@@ -31,9 +34,11 @@ public class Ride {
         this.rideOrderType = RideOrderType.Phone;
         this.customerNote = "";
         this.deleted = false;
+        this.carAgeOrder = 0;
+        this.petFriendly = PetFriendly.Yes;
     }
 
-    public Ride(int rideID, String orderDate, String startAddress, String destinationAddress, String customerOrder, int driverOrder, double kmPassed, double rideDuration, RideStatus rideStatus, String customerNote, RideOrderType rideOrderType, boolean deleted) {
+    public Ride(int rideID, String orderDate, String startAddress, String destinationAddress, String customerOrder, int driverOrder, double kmPassed, double rideDuration, RideStatus rideStatus, String customerNote, RideOrderType rideOrderType, boolean deleted, int carAgeOrder, PetFriendly petFriendly) {
         super();
         this.rideID = rideID;
         this.orderDate = orderDate;
@@ -47,6 +52,8 @@ public class Ride {
         this.customerNote = customerNote;
         this.rideOrderType = rideOrderType;
         this.deleted = deleted;
+        this.carAgeOrder = carAgeOrder;
+        this.petFriendly = petFriendly;
     }
 
     public int getRideID() {return rideID;}
@@ -89,6 +96,22 @@ public class Ride {
         this.deleted = deleted;
     }
 
+    public int getCarAgeOrder() {
+        return carAgeOrder;
+    }
+
+    public void setCarAgeOrder(int carAgeOrder) {
+        this.carAgeOrder = carAgeOrder;
+    }
+
+    public PetFriendly getPetFriendly() {
+        return petFriendly;
+    }
+
+    public void setPetFriendly(PetFriendly petFriendly) {
+        this.petFriendly = petFriendly;
+    }
+
     @Override
     public String toString() {
         return "Ride \nRide ID: " + rideID +
@@ -102,7 +125,9 @@ public class Ride {
                 "\nRide Status: " + rideStatus +
                 "\nCustomer Note: " + customerNote +
                 "\nOrder Type: " + rideOrderType +
-                "\nDeleted: " + deleted;
+                "\nDeleted: " + deleted +
+                "\nCar Age Order: " + carAgeOrder +
+                "\nPet Friendly: " + petFriendly;
     }
 
 }

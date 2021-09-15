@@ -46,7 +46,7 @@ public class RidesByPhoneToDriversDisplay extends JFrame {
         mainToolbar.add(btnDelete);
         add(mainToolbar, BorderLayout.NORTH);
 
-        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By"};
+        String[] headings = new String[] {"Ride ID", "Order Date", "Start Address", "Destination Address", "Customer", "Driver", "KM Passed", "Duration", "Status", "Note", "Ordered By", "Car Age", "Pet Friendly"};
         Object[][] content = new Object[taxiService.RidesByPhone().size()][headings.length];
 
         for(int i=0; i<taxiService.RidesByPhone().size(); i++) {
@@ -62,6 +62,8 @@ public class RidesByPhoneToDriversDisplay extends JFrame {
             content[i][8] = ride.getRideStatus();
             content[i][9] = ride.getCustomerNote();
             content[i][10] = ride.getRideOrderType();
+            content[i][11] = ride.getCarAgeOrder();
+            content[i][12] = ride.getPetFriendly();
         }
 
         tableModel = new DefaultTableModel(content, headings);
@@ -92,6 +94,8 @@ public class RidesByPhoneToDriversDisplay extends JFrame {
             ApplicationRidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(115);
             ApplicationRidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
             ApplicationRidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
+            ApplicationRidesDisplay.getColumnModel().getColumn(12).setPreferredWidth(100);
         }
         JScrollPane scrollPane = new JScrollPane(ApplicationRidesDisplay);
         add(scrollPane, BorderLayout.CENTER);

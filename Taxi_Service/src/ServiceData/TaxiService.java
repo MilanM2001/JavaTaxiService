@@ -3,16 +3,13 @@ package ServiceData;
 import AllUsers.Customer;
 import AllUsers.Dispatcher;
 import AllUsers.Driver;
-import AllUsers.Users;
 import Enums.*;
 import Cars.Car;
-import GUI.DispatcherOptions.ForDrivers.DriversDisplay;
 import GUI.DispatcherOptions.ReportStatistics.Statistics;
 import Rides.Ride;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class TaxiService {
 
@@ -347,8 +344,11 @@ public class TaxiService {
                 int rideOrderTypeInt = Integer.parseInt(split[10]);
                 RideOrderType rideOrderType = RideOrderType.values()[rideOrderTypeInt];
                 boolean deleted = Boolean.parseBoolean(split[11]);
+                int carAgeOrder = Integer.parseInt(split[12]);
+                int petFriendlyInt = Integer.parseInt(split[13]);
+                PetFriendly petFriendly = PetFriendly.values()[petFriendlyInt];
 
-                Ride ride = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, deleted);
+                Ride ride = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, deleted, carAgeOrder, petFriendly);
                 rides.add(ride);
             }
             br.close();
@@ -643,7 +643,7 @@ public class TaxiService {
             String content = "";
             for (Ride ride: rides) {
                 content += ride.getRideID() + "|" + ride.getOrderDate() + "|" + ride.getStartAddress() + "|" + ride.getDestinationAddress() + "|"
-                        + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.getCustomerNote() + "|" + ride.getRideOrderType().ordinal()+ "|" + ride.isDeleted() +  "\n";
+                        + ride.getCustomerOrder() + "|" + ride.getDriverOrder() + "|" + ride.getKmPassed() + "|" + ride.getRideDuration() + "|" + ride.getRideStatus().ordinal() + "|" + ride.getCustomerNote() + "|" + ride.getRideOrderType().ordinal()+ "|" + ride.isDeleted() + "|" + ride.getCarAgeOrder() + "|" + ride.getPetFriendly().ordinal() + "\n";
             }
             br.write(content);
             br.close();
