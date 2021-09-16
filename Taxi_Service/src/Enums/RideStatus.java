@@ -6,5 +6,6 @@ public enum RideStatus {
     Given,
     Accepted,
     Finished,
-    Denied
+    Denied,
+    Auctioned
 }

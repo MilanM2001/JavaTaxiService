@@ -14,6 +14,8 @@ public class TaxiServiceMain {
     public static String YearlyStatistics_File = "yearlyStatistics.txt";
     public static String MonthlyStatistics_File = "monthlyStatistics.txt";
     public static String WeeklyStatistics_File = "weeklyStatistics.txt";
+    public static String DailyStatistics_File = "dailyStatistics.txt";
+    public static String Offers_File = "offersList.txt";
 
     public static void main(String[] args) {
         TaxiService taxiService = new TaxiService();
@@ -26,6 +28,8 @@ public class TaxiServiceMain {
         taxiService.loadStatistics(YearlyStatistics_File);
         taxiService.loadStatistics(MonthlyStatistics_File);
         taxiService.loadStatistics(WeeklyStatistics_File);
+        taxiService.loadStatistics(DailyStatistics_File);
+        taxiService.loadOffers(Offers_File);
 
         LoginWindow lw = new LoginWindow(taxiService);
         lw.setVisible(true);

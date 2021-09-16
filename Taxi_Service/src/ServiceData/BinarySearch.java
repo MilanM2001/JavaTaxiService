@@ -4,6 +4,7 @@ import AllUsers.Dispatcher;
 import AllUsers.Driver;
 import AllUsers.Users;
 import Cars.Car;
+import Rides.Offer;
 import Rides.Ride;
 
 import java.util.ArrayList;
@@ -91,6 +92,26 @@ public class BinarySearch {
     }
 
     private static int binarySearchRidesById(long id, ArrayList<Ride> rides) {
+        int firstElement = 0;
+        int lastElement = rides.size() - 1;
+
+        while (firstElement <= lastElement) {
+            int middleElement = firstElement + (lastElement - firstElement) / 2;
+
+            if (rides.get(middleElement).getRideID() == id)
+                return middleElement;
+
+            if (rides.get(middleElement).getRideID() < id)
+                firstElement = middleElement + 1;
+
+            if (rides.get(middleElement).getRideID() > id)
+                lastElement = middleElement - 1;
+        }
+
+        return -1;
+    }
+
+    private static int binarySearchOffersById(long id, ArrayList<Offer> rides) {
         int firstElement = 0;
         int lastElement = rides.size() - 1;
 

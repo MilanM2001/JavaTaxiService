@@ -1,6 +1,7 @@
 package GUI.Menus;
 
 import AllUsers.Driver;
+import GUI.DriverOptions.DriverAuction.DisplayOffers;
 import GUI.DriverOptions.OrderedRides.RidesByApplicationDisplay;
 import GUI.DriverOptions.OrderedRides.RidesByPhoneDisplay;
 import Main.LoginWindow;
@@ -16,6 +17,8 @@ public class DriverMenu extends JFrame {
     private JMenu ridesMenu = new JMenu("Rides");
     private JMenuItem ridesByApplication = new JMenuItem("Application");
     private JMenuItem ridesByPhone = new JMenuItem("Phone");
+    private JMenu driverAuction = new JMenu("Auction");
+    private JMenuItem enterAuction = new JMenuItem("Show Auctions");
     private JButton logOff = new JButton("Log Out");
 
     private TaxiService taxiService;
@@ -38,6 +41,8 @@ public class DriverMenu extends JFrame {
         mainMenu.add(ridesMenu);
         ridesMenu.add(ridesByApplication);
         ridesMenu.add(ridesByPhone);
+        mainMenu.add(driverAuction);
+        driverAuction.add(enterAuction);
         mainMenu.add(logOff);
     }
 
@@ -65,6 +70,14 @@ public class DriverMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 RidesByPhoneDisplay pd = new RidesByPhoneDisplay(taxiService);
                 pd.setVisible(true);
+            }
+        });
+
+        enterAuction.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DisplayOffers dso = new DisplayOffers(taxiService);
+                dso.setVisible(true);
             }
         });
 

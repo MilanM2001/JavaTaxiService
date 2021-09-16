@@ -24,7 +24,7 @@ public class RidesByPhoneDisplay extends JFrame {
     private JTextField jtfFilter = new JTextField();
 
     private DefaultTableModel tableModel;
-    private JTable ApplicationRidesDisplay;
+    private JTable PhoneRidesDisplay;
 
     private TaxiService taxiService;
 
@@ -71,49 +71,49 @@ public class RidesByPhoneDisplay extends JFrame {
         }
 
         tableModel = new DefaultTableModel(content, headings);
-        ApplicationRidesDisplay = new JTable(tableModel);
+        PhoneRidesDisplay = new JTable(tableModel);
 
-        ApplicationRidesDisplay.setRowSelectionAllowed(true);
-        ApplicationRidesDisplay.setColumnSelectionAllowed(false);
-        ApplicationRidesDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        ApplicationRidesDisplay.setDefaultEditor(Object.class, null);
-        ApplicationRidesDisplay.getTableHeader().setReorderingAllowed(false);
+        PhoneRidesDisplay.setRowSelectionAllowed(true);
+        PhoneRidesDisplay.setColumnSelectionAllowed(false);
+        PhoneRidesDisplay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        PhoneRidesDisplay.setDefaultEditor(Object.class, null);
+        PhoneRidesDisplay.getTableHeader().setReorderingAllowed(false);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JLabel("Specify a word to match:"), BorderLayout.WEST);
         panel.add(jtfFilter, BorderLayout.CENTER);
         add(panel, BorderLayout.SOUTH);
-        add(new JScrollPane(ApplicationRidesDisplay), BorderLayout.CENTER);
+        add(new JScrollPane(PhoneRidesDisplay), BorderLayout.CENTER);
 
-        ApplicationRidesDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        PhoneRidesDisplay.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for(int i=0; i< headings.length; i++) {
-            ApplicationRidesDisplay.getColumnModel().getColumn(0).setPreferredWidth(50);
-            ApplicationRidesDisplay.getColumnModel().getColumn(1).setPreferredWidth(110);
-            ApplicationRidesDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(115);
-            ApplicationRidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
-            ApplicationRidesDisplay.getColumnModel().getColumn(12).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(0).setPreferredWidth(50);
+            PhoneRidesDisplay.getColumnModel().getColumn(1).setPreferredWidth(110);
+            PhoneRidesDisplay.getColumnModel().getColumn(2).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(3).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(4).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(5).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(6).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(7).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(8).setPreferredWidth(115);
+            PhoneRidesDisplay.getColumnModel().getColumn(9).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(10).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(11).setPreferredWidth(100);
+            PhoneRidesDisplay.getColumnModel().getColumn(12).setPreferredWidth(100);
         }
-        JScrollPane scrollPane = new JScrollPane(ApplicationRidesDisplay);
+        JScrollPane scrollPane = new JScrollPane(PhoneRidesDisplay);
         add(scrollPane, BorderLayout.CENTER);
     }
 
     private void initActions() {
         TableRowSorter<TableModel> rowSorter
-                = new TableRowSorter<>(ApplicationRidesDisplay.getModel());
-        ApplicationRidesDisplay.setRowSorter(rowSorter);
+                = new TableRowSorter<>(PhoneRidesDisplay.getModel());
+        PhoneRidesDisplay.setRowSorter(rowSorter);
 
         btnDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = ApplicationRidesDisplay.getSelectedRow();
+                int row = PhoneRidesDisplay.getSelectedRow();
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {
@@ -134,7 +134,7 @@ public class RidesByPhoneDisplay extends JFrame {
         btnAccept.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int row = ApplicationRidesDisplay.getSelectedRow();
+                int row = PhoneRidesDisplay.getSelectedRow();
                 if(row == -1) {
                     JOptionPane.showMessageDialog(null, "Please select a row.", "Error", JOptionPane.WARNING_MESSAGE);
                 }else {

@@ -17,8 +17,6 @@ public class Dispatcher extends Users {
         this.department = department;
     }
 
-
-
     public double getDispatcherPay() {return dispatcherPay;}
     public void setDispatcherPay(double dispatcherPay) {this.dispatcherPay = dispatcherPay;}
 

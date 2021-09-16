@@ -7,58 +7,40 @@ import java.time.LocalDateTime;
 
 public class Offer {
 
-    public Offer() {
-    }
-
-    private long id;
-
+    private int orderId;
     private int minutes;
-    private LocalDateTime dateOfCreation;
-
-    private long orderId;
-    private long driverId;
-
+    private String dateOfCreation;
     private boolean deleted;
-
+    private int rideID;
+    private int driverID;
     private Ride ride;
     private Driver driver;
 
-    public Offer(int minutes, Ride ride, Driver driver) {
+    public Offer() {
+        this.orderId = 0;
+        this.minutes = 0;
+        this.dateOfCreation = "";
+        this.deleted = false;
+        this.rideID = ride.getRideID();
+        this.driverID = driver.getId();
+    }
+
+    public Offer(int orderId, int minutes, String dateOfCreation, boolean deleted, int rideID, int driverID) {
+        this.orderId = orderId;
         this.minutes = minutes;
-        this.ride = ride;
-        this.driver = driver;
-        this.orderId = ride.getRideID();
-        this.driverId = driver.getId();
-        this.dateOfCreation = LocalDateTime.now();
+        this.dateOfCreation = dateOfCreation;
+        this.deleted = deleted;
+        this.rideID = rideID;
+        this.driverID = driverID;
+
     }
 
-    public String serialize() {
-        return getId() + "|" + getMinutes() + "|" +
-                DateUtils.serializeLocalDateTime(getDateOfCreation()) + "|"
-                + getOrderId() + "|" + getDriverId() + "|" + isDeleted();
+    public int getOrderId() {
+        return orderId;
     }
 
-    public static Offer deserialize(String offerString) {
-        String[] fields = offerString.replaceAll("\n", "").split("[|]");
-
-        Offer offer = new Offer();
-
-        offer.setId(Long.parseLong(fields[0]));
-        offer.setMinutes(Integer.parseInt(fields[1]));
-        offer.setDateOfCreation(DateUtils.deserializeLocalDateTime(fields[2]));
-        offer.setOrderId(Long.parseLong(fields[3]));
-        offer.setDriverId(Long.parseLong(fields[4]));
-        offer.setDeleted(Boolean.parseBoolean(fields[5]));
-
-        return offer;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getMinutes() {
@@ -69,28 +51,12 @@ public class Offer {
         this.minutes = minutes;
     }
 
-    public LocalDateTime getDateOfCreation() {
+    public String getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
+    public void setDateOfCreation(String dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-    public long getDriverId() {
-        return driverId;
-    }
-
-    public void setDriverId(long driverId) {
-        this.driverId = driverId;
     }
 
     public boolean isDeleted() {
@@ -99,6 +65,22 @@ public class Offer {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public int getRideID() {
+        return rideID;
+    }
+
+    public void setRideID(int rideID) {
+        this.rideID = rideID;
+    }
+
+    public int getDriverID() {
+        return driverID;
+    }
+
+    public void setDriverID(int driverID) {
+        this.driverID = driverID;
     }
 
     public Ride getRide() {
@@ -115,5 +97,15 @@ public class Offer {
 
     public void setDriver(Driver driver) {
         this.driver = driver;
+    }
+
+    @Override
+    public String toString() {
+        return "Offer \nOffer ID: " + orderId +
+                "\nMinutes: " + minutes +
+                "\nDate of Creation: " + dateOfCreation +
+                "\nDeleted: " + deleted +
+                "\nRide ID: " + rideID +
+                "\nDriver ID: " + driverID;
     }
 }

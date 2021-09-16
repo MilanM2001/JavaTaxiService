@@ -1,16 +1,15 @@
 package GUI.Menus;
 
 import AllUsers.Dispatcher;
+import GUI.DispatcherOptions.DispatcherAuction.ShowOffersDisplay;
 import GUI.DispatcherOptions.ForCars.CarsDisplay;
 import GUI.DispatcherOptions.ForDispatchers.DispatchersDisplay;
 import GUI.DispatcherOptions.ForDrivers.DriversDisplay;
 import GUI.DispatcherOptions.ForInfo.InfoDisplay;
 import GUI.DispatcherOptions.ForRides.RidesByPhoneToDriversDisplay;
 import GUI.DispatcherOptions.ForRides.RidesDisplay;
-import GUI.DispatcherOptions.ReportStatistics.MonthlyStatisticsDisplay;
-import GUI.DispatcherOptions.ReportStatistics.Statistics;
-import GUI.DispatcherOptions.ReportStatistics.WeeklyStatisticsDisplay;
-import GUI.DispatcherOptions.ReportStatistics.YearlyStatisticsDisplay;
+import GUI.DispatcherOptions.ReportStatistics.*;
+import GUI.DriverOptions.DriverAuction.DisplayOffers;
 import Main.LoginWindow;
 import ServiceData.TaxiService;
 import ServiceData.TaxiServiceInfo;
@@ -40,6 +39,10 @@ public class DispatcherMenu extends JFrame {
     private JMenuItem reportYearlyStatistics = new JMenuItem("Yearly Report");
     private JMenuItem reportMonthlyStatistics = new JMenuItem("Monthly Report");
     private JMenuItem reportWeeklyStatistics = new JMenuItem("Weekly Report");
+    private JMenuItem reportDailyStatistics = new JMenuItem("Daily Report");
+
+    private JMenu dispatcherAuctions = new JMenu("Auction");
+    private JMenuItem showAuctions = new JMenuItem("Show Auctions");
 
     private JButton logOff = new JButton("LogOut");
 
@@ -76,6 +79,9 @@ public class DispatcherMenu extends JFrame {
         reportStatistics.add(reportYearlyStatistics);
         reportStatistics.add(reportMonthlyStatistics);
         reportStatistics.add(reportWeeklyStatistics);
+        reportStatistics.add(reportDailyStatistics);
+        mainMenu.add(dispatcherAuctions);
+        dispatcherAuctions.add(showAuctions);
         mainMenu.add(logOff);
     }
 
@@ -158,6 +164,22 @@ public class DispatcherMenu extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 WeeklyStatisticsDisplay sp = new WeeklyStatisticsDisplay(taxiService);
+                sp.setVisible(true);
+            }
+        });
+
+        reportDailyStatistics.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DailyStatisticsDisplay sp = new DailyStatisticsDisplay(taxiService);
+                sp.setVisible(true);
+            }
+        });
+
+        showAuctions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ShowOffersDisplay sp = new ShowOffersDisplay(taxiService);
                 sp.setVisible(true);
             }
         });

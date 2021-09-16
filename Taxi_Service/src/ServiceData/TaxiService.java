@@ -10,6 +10,7 @@ import Rides.Offer;
 import Rides.Ride;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TaxiService {
@@ -23,6 +24,7 @@ public class TaxiService {
     private ArrayList<Statistics> yearlyStatistics;
     private ArrayList<Statistics> monthlyStatistics;
     private ArrayList<Statistics> weeklyStatistics;
+    private ArrayList<Statistics> dailyStatistics;
     private ArrayList<Offer> offers;
 
     public TaxiService() {
@@ -35,6 +37,7 @@ public class TaxiService {
         this.yearlyStatistics = new ArrayList<Statistics>();
         this.monthlyStatistics = new ArrayList<Statistics>();
         this.weeklyStatistics = new ArrayList<Statistics>();
+        this.dailyStatistics = new ArrayList<Statistics>();
         this.offers = new ArrayList<Offer>();
     }
 
@@ -74,9 +77,13 @@ public class TaxiService {
     public void addStatisticsWeekly(Statistics statisticsWeekly) {this.weeklyStatistics.add(statisticsWeekly); }
     public void removeStatisticsWeekly(Statistics statisticsWeekly) {this.weeklyStatistics.remove(statisticsWeekly); }
 
-    public ArrayList<Statistics> getOffers() {return weeklyStatistics; }
-    public void addOffers(Statistics statisticsWeekly) {this.weeklyStatistics.add(statisticsWeekly); }
-    public void removeOffers(Statistics statisticsWeekly) {this.weeklyStatistics.remove(statisticsWeekly); }
+    public ArrayList<Statistics> getStatisticsDaily() {return dailyStatistics; }
+    public void addStatisticsDaily(Statistics statisticsDaily) {this.dailyStatistics.add(statisticsDaily); }
+    public void removeStatisticsDaily(Statistics statisticsDaily) {this.dailyStatistics.remove(statisticsDaily); }
+
+    public ArrayList<Offer> getOffers() {return offers; }
+    public void addOffers(Offer offer) {this.offers.add(offer); }
+    public void removeOffers(Offer offer) {this.offers.remove(offer); }
 
     public Driver driverLogin(String username, String password) {
         for(Driver driver : drivers) {
@@ -153,6 +160,15 @@ public class TaxiService {
         return null;
     }
 
+    public Driver findDriverID(int driverID) {
+        for (Driver driver : drivers) {
+            if (driver.getId() == driverID) {
+                return driver;
+            }
+        }
+        return null;
+    }
+
     public TaxiServiceInfo findInfo(String TaxiServiceName) {
         for (TaxiServiceInfo taxiServiceInfo : serviceInfos) {
             if (taxiServiceInfo.getTaxiServiceName().equals(TaxiServiceName)) {
@@ -189,6 +205,14 @@ public class TaxiService {
     public int generateIDRide() {
         int counter = 1;
         for (Ride ride : rides) {
+            counter++;
+        }
+        return counter;
+    }
+
+    public int generateIDOffer() {
+        int counter = 1;
+        for (Offer offer : offers) {
             counter++;
         }
         return counter;
@@ -413,6 +437,29 @@ public class TaxiService {
         }
     }
 
+    public void loadOffers(String fileName) {
+        try {
+            File statisticsFile = new File("src/txtFiles/" + fileName);
+            BufferedReader br = new BufferedReader(new FileReader(statisticsFile));
+            String line = null;
+            while ((line = br.readLine()) != null) {
+                String[] split = line.split("\\|");
+                int orderId = Integer.parseInt(split[0]);
+                int minutes = Integer.parseInt(split[1]);
+                String dateOfCreation = split[2];
+                boolean deleted = Boolean.parseBoolean(split[3]);
+                int rideID = Integer.parseInt(split[4]);
+                int driverID = Integer.parseInt(split[5]);
+
+                Offer offer = new Offer(orderId, minutes, dateOfCreation, deleted, rideID, driverID);
+                offers.add(offer);
+            }
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<Driver> allNotDeletedDrivers() {
         ArrayList<Driver> notDeleted = new ArrayList<Driver>();
         for (Driver driver : drivers) {
@@ -451,6 +498,26 @@ public class TaxiService {
             }
         }
         return notDeleted;
+    }
+
+    public ArrayList<Offer> allNotDeletedOffers() {
+        ArrayList<Offer> notDeleted = new ArrayList<Offer>();
+        for (Offer offer : offers) {
+            if(!offer.isDeleted()) {
+                notDeleted.add(offer);
+            }
+        }
+        return notDeleted;
+    }
+
+    public ArrayList<Ride> allNotAuctionedRides() {
+        ArrayList<Ride> notAuctioned = new ArrayList<Ride>();
+        for (Ride ride : rides) {
+            if(!ride.isDeleted() && !ride.getRideStatus().equals(RideStatus.Auctioned) && !ride.getRideStatus().equals(RideStatus.Finished) && !ride.getRideStatus().equals(RideStatus.Denied)) {
+                notAuctioned.add(ride);
+            }
+        }
+        return notAuctioned;
     }
 
     public ArrayList<Statistics> allNotDeletedStatistics() {
@@ -667,6 +734,21 @@ public class TaxiService {
             for (TaxiServiceInfo taxiServiceInfo: serviceInfos) {
                 content += taxiServiceInfo.getPIB() + "|" + taxiServiceInfo.getTaxiServiceName() + "|" + taxiServiceInfo.getTaxiServiceAddress() + "|"
                         + taxiServiceInfo.getTaxiServiceStartingPrice() + "|" + taxiServiceInfo.getTaxiServicePricePerKM() + "|" + taxiServiceInfo.isDeleted() + "\n";
+            }
+            br.write(content);
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveOffers(String fileName) {
+        try {
+            File file = new File("src/txtFiles/" + fileName);
+            BufferedWriter br = new BufferedWriter(new FileWriter(file));
+            String content = "";
+            for (Offer offer: offers) {
+                content += offer.getOrderId() + "|" + offer.getMinutes() + "|" + offer.getDateOfCreation() + "|" + offer.isDeleted() + "|" + offer.getRideID() + "|" + offer.getDriverID() + "\n";
             }
             br.write(content);
             br.close();

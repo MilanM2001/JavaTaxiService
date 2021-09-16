@@ -1,6 +1,1 @@
-0|0|0|4|NaN|NaN|0.0|NaN|false
-0|0|0|4|NaN|NaN|0.0|NaN|false
-0|0|0|4|NaN|NaN|0.0|NaN|false
-1|1|0|4|2312.0|21323.0|1.066165E7|1.066165E7|false
-0|0|0|4|NaN|NaN|0.0|NaN|false
-0|0|0|4|NaN|NaN|0.0|NaN|false
+4|2|2|4|15.5|8.0|16600.0|4150.0|false

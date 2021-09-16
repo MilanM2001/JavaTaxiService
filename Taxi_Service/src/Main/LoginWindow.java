@@ -46,8 +46,8 @@ public class LoginWindow extends JFrame {
         add(new JLabel());
         add(btnOk, "split 2");
         add(btnCancel);
-        txtUsername.setText("KristiX");
-        pfPassword.setText("12345");
+        txtUsername.setText("driv");
+        pfPassword.setText("driv12");
         getRootPane().setDefaultButton(btnOk);
     }
 
