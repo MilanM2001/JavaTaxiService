@@ -1,4 +1,4 @@
-package GUI.DriverOptions;
+package GUI.DriverOptions.OrderedRides;
 
 import Enums.PetFriendly;
 import Enums.RideOrderType;
@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RidesByApplicationForm extends JFrame {
+public class RidesByPhoneForm extends JFrame {
 
     private JLabel lblRideID = new JLabel("Ride ID");
     private JTextField txtRideID = new JTextField(20);
@@ -29,7 +29,7 @@ public class RidesByApplicationForm extends JFrame {
     private JLabel lblCustomerOrder = new JLabel("Customer");
     private JTextField txtCustomerOrder = new JTextField(20);
 
-    private JLabel lblDriverOrder = new JLabel("Your ID");
+    private JLabel lblDriverOrder = new JLabel("Driver");
     private JTextField txtDriverOrder = new JTextField(20);
 
     private JLabel lblKmPassed = new JLabel("KM Passed");
@@ -59,13 +59,13 @@ public class RidesByApplicationForm extends JFrame {
     private TaxiService taxiService;
     private Ride ride;
 
-    public RidesByApplicationForm(TaxiService taxiService, Ride ride) {
+    public RidesByPhoneForm(TaxiService taxiService, Ride ride) {
         this.taxiService = taxiService;
         this.ride = ride;
         if(ride == null) {
             setTitle("Adding Ride");
         }else {
-            setTitle("Finishing Ride - " + ride.getRideID());
+            setTitle("Change Information - " + ride.getRideID());
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -96,6 +96,7 @@ public class RidesByApplicationForm extends JFrame {
 
         add(lblDriverOrder);
         add(txtDriverOrder);
+        txtDriverOrder.setEnabled(false);
 
         add(lblKmPassed);
         add(txtKmPassed);
@@ -139,6 +140,7 @@ public class RidesByApplicationForm extends JFrame {
                     RideOrderType rideOrderType = (RideOrderType) cbRideOrderType.getSelectedItem();
                     int carAgeOrder = Integer.parseInt(txtCarAgeOrder.getText().trim());
                     PetFriendly petFriendly = (PetFriendly) cbPetFriendly.getSelectedItem();
+
                     if(ride == null) {
                         Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, false, carAgeOrder, petFriendly);
                         taxiService.addRide(newRide);
@@ -157,8 +159,8 @@ public class RidesByApplicationForm extends JFrame {
                         ride.setPetFriendly(petFriendly);
                     }
                     taxiService.saveRides(TaxiServiceMain.Rides_File);
-                    RidesByApplicationForm.this.dispose();
-                    RidesByApplicationForm.this.setVisible(false);
+                    RidesByPhoneForm.this.dispose();
+                    RidesByPhoneForm.this.setVisible(false);
                 }
             }
         });
@@ -166,8 +168,8 @@ public class RidesByApplicationForm extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RidesByApplicationForm.this.dispose();
-                RidesByApplicationForm.this.setVisible(false);
+                RidesByPhoneForm.this.dispose();
+                RidesByPhoneForm.this.setVisible(false);
             }
         });
     }
@@ -215,6 +217,7 @@ public class RidesByApplicationForm extends JFrame {
         }
 
         return ok;
+
     }
 
 }

@@ -6,6 +6,7 @@ import AllUsers.Driver;
 import Enums.*;
 import Cars.Car;
 import GUI.DispatcherOptions.ReportStatistics.Statistics;
+import Rides.Offer;
 import Rides.Ride;
 
 import java.io.*;
@@ -22,6 +23,7 @@ public class TaxiService {
     private ArrayList<Statistics> yearlyStatistics;
     private ArrayList<Statistics> monthlyStatistics;
     private ArrayList<Statistics> weeklyStatistics;
+    private ArrayList<Offer> offers;
 
     public TaxiService() {
         this.drivers = new ArrayList<Driver>();
@@ -33,6 +35,7 @@ public class TaxiService {
         this.yearlyStatistics = new ArrayList<Statistics>();
         this.monthlyStatistics = new ArrayList<Statistics>();
         this.weeklyStatistics = new ArrayList<Statistics>();
+        this.offers = new ArrayList<Offer>();
     }
 
     public ArrayList<Driver> getDrivers() {return drivers;}
@@ -70,6 +73,10 @@ public class TaxiService {
     public ArrayList<Statistics> getStatisticsWeekly() {return weeklyStatistics; }
     public void addStatisticsWeekly(Statistics statisticsWeekly) {this.weeklyStatistics.add(statisticsWeekly); }
     public void removeStatisticsWeekly(Statistics statisticsWeekly) {this.weeklyStatistics.remove(statisticsWeekly); }
+
+    public ArrayList<Statistics> getOffers() {return weeklyStatistics; }
+    public void addOffers(Statistics statisticsWeekly) {this.weeklyStatistics.add(statisticsWeekly); }
+    public void removeOffers(Statistics statisticsWeekly) {this.weeklyStatistics.remove(statisticsWeekly); }
 
     public Driver driverLogin(String username, String password) {
         for(Driver driver : drivers) {

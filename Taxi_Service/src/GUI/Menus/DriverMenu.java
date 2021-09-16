@@ -1,8 +1,8 @@
 package GUI.Menus;
 
 import AllUsers.Driver;
-import GUI.DriverOptions.RidesByApplicationDisplay;
-import GUI.DriverOptions.RidesByPhoneDisplay;
+import GUI.DriverOptions.OrderedRides.RidesByApplicationDisplay;
+import GUI.DriverOptions.OrderedRides.RidesByPhoneDisplay;
 import Main.LoginWindow;
 import ServiceData.TaxiService;
 

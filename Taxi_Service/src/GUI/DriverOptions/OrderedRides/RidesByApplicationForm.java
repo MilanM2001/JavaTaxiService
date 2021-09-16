@@ -1,4 +1,4 @@
-package GUI.DriverOptions;
+package GUI.DriverOptions.OrderedRides;
 
 import Enums.PetFriendly;
 import Enums.RideOrderType;
@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RidesByPhoneForm extends JFrame {
+public class RidesByApplicationForm extends JFrame {
 
     private JLabel lblRideID = new JLabel("Ride ID");
     private JTextField txtRideID = new JTextField(20);
@@ -59,13 +59,13 @@ public class RidesByPhoneForm extends JFrame {
     private TaxiService taxiService;
     private Ride ride;
 
-    public RidesByPhoneForm(TaxiService taxiService, Ride ride) {
+    public RidesByApplicationForm(TaxiService taxiService, Ride ride) {
         this.taxiService = taxiService;
         this.ride = ride;
         if(ride == null) {
             setTitle("Adding Ride");
         }else {
-            setTitle("Change Information - " + ride.getRideID());
+            setTitle("Finishing Ride - " + ride.getRideID());
         }
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -140,7 +140,6 @@ public class RidesByPhoneForm extends JFrame {
                     RideOrderType rideOrderType = (RideOrderType) cbRideOrderType.getSelectedItem();
                     int carAgeOrder = Integer.parseInt(txtCarAgeOrder.getText().trim());
                     PetFriendly petFriendly = (PetFriendly) cbPetFriendly.getSelectedItem();
-
                     if(ride == null) {
                         Ride newRide = new Ride(rideID, orderDate, startAddress, destinationAddress, customerOrder, driverOrder, kmPassed, rideDuration, rideStatus, customerNote, rideOrderType, false, carAgeOrder, petFriendly);
                         taxiService.addRide(newRide);
@@ -159,8 +158,8 @@ public class RidesByPhoneForm extends JFrame {
                         ride.setPetFriendly(petFriendly);
                     }
                     taxiService.saveRides(TaxiServiceMain.Rides_File);
-                    RidesByPhoneForm.this.dispose();
-                    RidesByPhoneForm.this.setVisible(false);
+                    RidesByApplicationForm.this.dispose();
+                    RidesByApplicationForm.this.setVisible(false);
                 }
             }
         });
@@ -168,8 +167,8 @@ public class RidesByPhoneForm extends JFrame {
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RidesByPhoneForm.this.dispose();
-                RidesByPhoneForm.this.setVisible(false);
+                RidesByApplicationForm.this.dispose();
+                RidesByApplicationForm.this.setVisible(false);
             }
         });
     }
@@ -217,7 +216,6 @@ public class RidesByPhoneForm extends JFrame {
         }
 
         return ok;
-
     }
 
 }

@@ -1,11 +1,9 @@
 package GUI.DispatcherOptions.ForRides;
 
 import AllUsers.Driver;
-import Cars.Car;
 import Enums.PetFriendly;
 import Enums.RideOrderType;
 import Enums.RideStatus;
-import GUI.DriverOptions.RidesByApplicationForm;
 import Main.TaxiServiceMain;
 import Rides.Ride;
 import ServiceData.TaxiService;
