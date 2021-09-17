@@ -1,4 +1,2 @@
-1|15-09-2021/20:52|Novi Sad|Vrsac|Kristi|1|12.0|32.0|4|None|0|false|7|0
-2|15-09-2021/20:52|Sokolac|Plandiste|Kristi|2|20.0|30.0|4|Fast|1|false|3|0
-3|16-09-2021/22:44|sads|asdasd|asdasd|0|0.0|0.0|0|None|0|false|23|0
-4|16-09-2021/22:44|sdas|asdasd|sdasd|0|0.0|0.0|1|sdasd|1|false|42|0
+1|17-09-2021/10:19|Vrsac|Beograd|KristiX|1|30.0|14.0|4|None|0|false|8|0
+2|17-09-2021/10:20|Novi Sad|Sokolac|KristiX|0|50.0|20.0|4|Fast Ride|1|false|5|0

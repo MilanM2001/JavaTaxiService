@@ -96,7 +96,7 @@ public class CarsForm extends JFrame {
         add(txtCarAge);
 
         add(lblPetFriendly);
-        add(txtCarAge);
+        add(cbPetFriendly);
 
         add(new JLabel());
         add(btnOk, "split 2");
